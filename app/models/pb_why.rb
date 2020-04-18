@@ -1,0 +1,2 @@
+class PbWhy < ApplicationRecord
+end
