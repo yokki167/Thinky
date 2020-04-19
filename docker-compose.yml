@@ -23,7 +23,7 @@ services:
       context: .
       dockerfile: Dockerfile_node
     volumes:
-      - ./:/usr/src/app
+      - ./:/usr/src/app/thinky_front
     command: sh -c "cd thinky_front && npm start --host 0.0.0.0 --port 3000"
     ports:
       - "3000:3000"
