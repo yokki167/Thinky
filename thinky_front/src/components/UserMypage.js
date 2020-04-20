@@ -8,8 +8,8 @@ const UserMypage = () => {
     <>
       <div className="mypage">
         <div className="top">
-          <div classNmae="userName">Taro</div>
-          <div classNmae="editBtn">
+          <div className="userName">Taro</div>
+          <div className="editBtn">
             <SettingsIcon />
           </div>
         </div>
@@ -17,36 +17,36 @@ const UserMypage = () => {
           <Tabs>
             <TabList>
               <Tab>
-                <div classNmae="myWhy">
-                  <div classNmae="leftWhy">自分の考えたWHY</div>
-                  <div classNmae="count">
-                    <div classNmae="tabIcon"></div>
-                    <div classNmae="number">34</div>
+                <div className="myWhy">
+                  <div className="leftWhy">自分の考えたWHY</div>
+                  <div className="count">
+                    <div className="tabIcon"></div>
+                    <div className="number">34</div>
                   </div>
                 </div>
               </Tab>
               <Tab>
-                <div classNmae="likeWhy">
-                  <div classNmae="leftWhy">いいねしたWHY</div>
-                  <div classNmae="count">
-                    <div classNmae="tabIcon"></div>
-                    <div classNmae="number">20</div>
+                <div className="likeWhy">
+                  <div className="leftWhy">いいねしたWHY</div>
+                  <div className="count">
+                    <div className="tabIcon"></div>
+                    <div className="number">20</div>
                   </div>
                 </div>
               </Tab>
             </TabList>
             <TabPanel>
               <div className="whyLists">
-                <div classNmae="list">空はなぜ青いのか？</div>
-                <div classNmae="list">眠いのはなぜ？</div>
-                <div classNmae="list">ナゼーー</div>
+                <div className="list">空はなぜ青いのか？</div>
+                <div className="list">眠いのはなぜ？</div>
+                <div className="list">ナゼーー</div>
               </div>
             </TabPanel>
             <TabPanel>
               <div className="whyLists">
-                <div classNmae="list">海はなぜ青いのか？</div>
-                <div classNmae="list">のはなぜ？</div>
-                <div classNmae="list">ああああ</div>
+                <div className="list">海はなぜ青いのか？</div>
+                <div className="list">のはなぜ？</div>
+                <div className="list">ああああ</div>
               </div>
             </TabPanel>
           </Tabs>
