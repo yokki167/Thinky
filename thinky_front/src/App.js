@@ -1,7 +1,7 @@
 import React from "react";
 import logo from "./logo.svg";
-import Home from './components/Home.js'
-import './App.css';
+import Home from "./components/Home.js";
+import "./App.css";
 
 import Layout from "./components/Layout";
 import WhyModal from "./components/WhyModal";
@@ -26,7 +26,6 @@ import WhyModal from "./components/WhyModal";
 //     </div>
 //   );
 // }
-
 
 function App() {
   return (
