@@ -50,7 +50,6 @@ const useStyles = makeStyles({
   },
 
   btn: {
-    // width: "75%",
     display: "block",
     marginTop: "60px",
     marginLeft: "auto",
@@ -66,56 +65,43 @@ const useStyles = makeStyles({
 const Home = () => {
   const home = useStyles();
   return (
-    <Router>
-      <div className={home.home}>
-        <h2 className={home.head}>What do you want to think?</h2>
-        <div className={home.container}>
-          <div className={home.btnWrapper}>
-            <Link to="/why" className={home.link}>
-              <Button
-                fullWidth
-                variant="contained"
-                color="primary"
-                className={home.btn}
-              >
-                "Why"を考える
-              </Button>
-            </Link>
-            <Link to="/share" className={home.link}>
-              <Button
-                variant="contained"
-                fullWidth
-                color="primary"
-                className={home.btn}
-              >
-                みんなの"Y"を考える
-              </Button>
-            </Link>
-            <Link to="/mypage" className={home.link}>
-              <Button
-                variant="contained"
-                fullWidth
-                color="primary"
-                className={home.btn}
-              >
-                マイページ
-              </Button>
-            </Link>
-          </div>
+    <div className={home.home}>
+      <h2 className={home.head}>What do you want to think?</h2>
+      <div className={home.container}>
+        <div className={home.btnWrapper}>
+          <Link to="/why" className={home.link}>
+            <Button
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={home.btn}
+            >
+              "Why"を考える
+            </Button>
+          </Link>
+          <Link to="/share" className={home.link}>
+            <Button
+              variant="contained"
+              fullWidth
+              color="primary"
+              className={home.btn}
+            >
+              みんなの"Y"を考える
+            </Button>
+          </Link>
+          <Link to="/mypage" className={home.link}>
+            <Button
+              variant="contained"
+              fullWidth
+              color="primary"
+              className={home.btn}
+            >
+              マイページ
+            </Button>
+          </Link>
         </div>
-        <Switch>
-          <Route path="/mine">
-            <Why />
-          </Route>
-          <Route path="/share">
-            <Share />
-          </Route>
-          <Route path="/mypage">
-            <Mypage />
-          </Route>
-        </Switch>
       </div>
-    </Router>
+    </div>
   );
 };
 
