@@ -2,6 +2,7 @@ import React from "react";
 import SettingsIcon from "@material-ui/icons/Settings";
 import Grid from "@material-ui/core/Grid";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import { Route, Switch, Link } from "react-router-dom";
 
 const UserMypage = () => {
   return (
