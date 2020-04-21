@@ -3,11 +3,10 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-import EveryoneWhy from "./components/EveryoneWhy";
 
 ReactDOM.render(
   <React.StrictMode>
-    <EveryoneWhy />
+    <App />
   </React.StrictMode>,
   document.getElementById("root")
 );
