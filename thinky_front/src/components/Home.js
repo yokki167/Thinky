@@ -3,7 +3,7 @@ import Button from "@material-ui/core/Button";
 import HomeCss from "../styles/Home.module.scss";
 import { makeStyles } from "@material-ui/core/styles";
 import { createMuiTheme } from "@material-ui/core/styles";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 
 // const theme = createMuiTheme({
 //   palette: {
@@ -71,7 +71,7 @@ const Home = () => {
         <h2 className={home.head}>What do you want to think?</h2>
         <div className={home.container}>
           <div className={home.btnWrapper}>
-            <Link to="/mine" className={home.link}>
+            <Link to="/why" className={home.link}>
               <Button
                 fullWidth
                 variant="contained"
@@ -103,6 +103,17 @@ const Home = () => {
             </Link>
           </div>
         </div>
+        <Switch>
+          <Route path="/mine">
+            <Why />
+          </Route>
+          <Route path="/share">
+            <Share />
+          </Route>
+          <Route path="/mypage">
+            <Mypage />
+          </Route>
+        </Switch>
       </div>
     </Router>
   );
