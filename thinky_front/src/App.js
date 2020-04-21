@@ -7,6 +7,8 @@ import SignIn from "./components/SignIn";
 import WhyModal from "./components/WhyModal";
 import UserMypage from "./components/UserMypage";
 import EveryoneWhy from "./components/EveryoneWhy";
+import ChatPage from "./components/ChatPage";
+// import UserEdit from "./components/UserEdit";
 
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 
