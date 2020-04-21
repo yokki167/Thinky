@@ -1,0 +1,45 @@
+.mypage {
+  width: 100vw;
+  // text-align: center;
+  .top {
+    display: flex;
+    width: 100%;
+    // margin-top: 40px;
+    // margin-bottom: 40px;
+    justify-content: space-between;
+    .userName {
+      font-size: 40px;
+    }
+  }
+  .middle {
+    .myWhy {
+      display: flex;
+      justify-content: space-between;
+      .leftWhy {
+      }
+      .count {
+        .tabIcon {
+        }
+        .number {
+        }
+      }
+    }
+    .likeWhy {
+      display: flex;
+      justify-content: space-between;
+
+      .leftWhy {
+      }
+      .count {
+        .tabIcon {
+        }
+        .number {
+        }
+      }
+    }
+  }
+  .whyListsLeft {
+  }
+  .whyListsRight {
+  }
+}
