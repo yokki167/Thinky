@@ -1,18 +1,45 @@
-.chatBox {
-  margin: 0 auto;
-  width: 90vw;
-  height: 90vh;
-  background-color: rgb(242, 250, 247);
-}
-.topicSpace {
-  margin: 0;
-  background-color: bisque;
-}
-.communication {
-  margin: 0;
-  background-color: blueviolet;
-}
-.formBox {
-  margin: 0;
-  background-color: cornflowerblue;
+.chatContainer {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  position: relative;
+  .chatBox {
+    width: 90vw;
+    height: 90vh;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #747574;
+    box-shadow: 0 0 10px;
+    .topicSpace {
+      height: 10%;
+      box-shadow: 0 2px 5px #747574;
+      .topic {
+        font-size: 1.5rem;
+        margin: 0;
+        padding: 0.8rem 4rem;
+      }
+    }
+    .communication {
+      width: 100%;
+      min-height: 70%;
+      background-color: white;
+      flex-grow: 1;
+    }
+    .formBox {
+      width: 100%;
+      height: 20%;
+      display: flex;
+      position: relative;
+      .button {
+        position: absolute;
+        top: 28%;
+        right: 8%;
+        font-size: 2rem;
+        border-radius: 3rem;
+        padding: 0.5rem 1rem;
+      }
+    }
+  }
 }

@@ -19,11 +19,11 @@ function Copyright() {
 }
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-    flexDirection: "column",
-    minHeight: "100vh",
-  },
+  // root: {
+  //   display: "flex",
+  //   flexDirection: "column",
+  //   minHeight: "100vh",
+  // },
   footer: {
     padding: theme.spacing(3, 2),
     marginTop: "auto",
@@ -38,7 +38,7 @@ export default function StickyFooter() {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
+    <div>
       <CssBaseline />
       <footer className={classes.footer}>
         <Container maxWidth="sm">
