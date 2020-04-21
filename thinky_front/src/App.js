@@ -3,7 +3,8 @@ import React from "react";
 import "./App.css";
 
 import Layout from "./components/Layout";
-import WhyModal from "./components/WhyModal";
+import SignUp from "./components/SignUp";
+import SignIn from "./components/SignIn";
 
 // function App() {
 //   return (
@@ -29,7 +30,7 @@ import WhyModal from "./components/WhyModal";
 function App() {
   return (
     <Layout>
-      <WhyModal />
+      <App />
     </Layout>
   );
 }
