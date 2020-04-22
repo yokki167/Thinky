@@ -35,7 +35,7 @@ export default function EveryoneWhy() {
   return (
     <>
       <div className={EveryoneWhyStyle.top}>
-        <div className={EveryoneWhyStyle.category}>
+        <div>
           <FormControl variant="outlined" className={classes.formControl}>
             <InputLabel id="demo-simple-select-outlined-label">
               ジャンルを選択

@@ -14,10 +14,11 @@
     box-shadow: 0 0 10px;
     .topicSpace {
       height: 10%;
-      box-shadow: 0 2px 5px #747574;
+      display: flex;
       .topic {
         font-size: 1.5rem;
-        margin-left: 5rem;
+        margin-left: 3rem;
+        line-height: 10%;
       }
     }
     .communication {
