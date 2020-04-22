@@ -12,10 +12,6 @@ import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 
 function App() {
   return (
-    <Layout>
-      <App />
-    </Layout>
-
     <Router>
       <Layout>
         <Link to="/home">ホーム画面へ</Link>
