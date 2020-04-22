@@ -1,5 +1,7 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
+import Modal from "@material-ui/core/Modal";
+import WhyModal from "./WhyModal";
 import HomeCss from "../styles/Home.module.scss";
 import { makeStyles } from "@material-ui/core/styles";
 import { createMuiTheme } from "@material-ui/core/styles";
@@ -62,23 +64,41 @@ const useStyles = makeStyles({
   },
 });
 
-const Home = () => {
+function Home() {
   const home = useStyles();
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
     <div className={home.home}>
       <h2 className={home.head}>What do you want to think?</h2>
       <div className={home.container}>
         <div className={home.btnWrapper}>
-          <Link to="/why" className={home.link}>
-            <Button
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={home.btn}
-            >
-              "Why"を考える
-            </Button>
-          </Link>
+          <Button
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={home.btn}
+            onClick={handleOpen}
+          >
+            "Why"を考える
+          </Button>
+          <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="simple-modal-title"
+            aria-describedby="simple-modal-description"
+          >
+            {WhyModal()}
+          </Modal>
           <Link to="/share" className={home.link}>
             <Button
               variant="contained"
@@ -103,6 +123,6 @@ const Home = () => {
       </div>
     </div>
   );
-};
+}
 
 export default Home;

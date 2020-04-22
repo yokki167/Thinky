@@ -2,8 +2,9 @@ import React from "react";
 import chatStyles from "../styles/ChatPage.module.scss";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
-import Icon from "@material-ui/core/Icon";
 import SendIcon from "@material-ui/icons/Send";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 
 const useStyles = makeStyles((theme) => ({
@@ -18,6 +19,9 @@ const useStyles = makeStyles((theme) => ({
       fontSize: "2rem",
     },
   },
+  shareCheck: {
+    margin: "0 0 0 2rem",
+  },
   button: {
     position: "absolute",
     top: "28%",
@@ -28,6 +32,17 @@ const useStyles = makeStyles((theme) => ({
 export default function WhyModal() {
   const classes = useStyles();
 
+  const [state, setState] = React.useState({
+    checkedA: true,
+    checkedB: true,
+    checkedF: true,
+    checkedG: true,
+  });
+
+  const handleChange = (event) => {
+    setState({ ...state, [event.target.name]: event.target.checked });
+  };
+
   return (
     <div className={chatStyles.chatContainer}>
       <div className={chatStyles.chatBox}>
@@ -35,6 +50,18 @@ export default function WhyModal() {
           <p className={chatStyles.topic}>
             Why：「Why」の内容が入ります「Why」の内容が入りますWhy」の内容が入ります
           </p>
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={state.checkedB}
+                onChange={handleChange}
+                name="checkedB"
+                color="primary"
+              />
+            }
+            label="この「Why」をみんなに共有する"
+            className={classes.shareCheck}
+          />
         </div>
 
         <div className={chatStyles.communication}>
