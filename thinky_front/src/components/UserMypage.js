@@ -2,51 +2,73 @@ import React from "react";
 import SettingsIcon from "@material-ui/icons/Settings";
 import Grid from "@material-ui/core/Grid";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import { Route, Switch, Link } from "react-router-dom";
+import "react-tabs/style/react-tabs.css";
+import UserMypageStyle from "../styles/UserMypage.module.scss";
+import { makeStyles } from "@material-ui/styles";
+import ThumbUpIcon from "@material-ui/icons/ThumbUp";
+import SentimentVerySatisfiedIcon from "@material-ui/icons/SentimentVerySatisfied";
+
+const useStyles = makeStyles({
+  EditIcon: {
+    color: "black",
+    fontSize: "40px",
+  },
+  Tab: {
+    width: "48%",
+  },
+});
+
+const TabStyle = {
+  width: "48%",
+  // height: "30px",
+};
 
 const UserMypage = () => {
+  const classes = useStyles();
+
   return (
     <>
-      <div className="mypage">
-        <div className="top">
-          <div className="userName">Taro</div>
-          <div className="editBtn">
-            <SettingsIcon />
-          </div>
+      <div className={UserMypageStyle.mypage}>
+        <div className={UserMypageStyle.top}>
+          <div className={UserMypageStyle.userName}>Taro</div>
+          <SettingsIcon className={classes.EditIcon} />
         </div>
-        <div className="middle">
+        <div className={UserMypageStyle.middle}>
           <Tabs>
             <TabList>
-              <Tab>
-                <div className="myWhy">
-                  <div className="leftWhy">自分の考えたWHY</div>
-                  <div className="count">
-                    <div className="tabIcon"></div>
-                    <div className="number">34</div>
+              <Tab style={TabStyle}>
+                <div className={UserMypageStyle.myWhy}>
+                  <div className={UserMypageStyle.leftWhy}>自分の考えたWHY</div>
+                  <div className={UserMypageStyle.count}>
+                    <SentimentVerySatisfiedIcon />
+                    <div className={UserMypageStyle.number}>34</div>
                   </div>
                 </div>
               </Tab>
-              <Tab>
-                <div className="likeWhy">
-                  <div className="leftWhy">いいねしたWHY</div>
-                  <div className="count">
-                    <div className="tabIcon"></div>
-                    <div className="number">20</div>
+              <Tab style={TabStyle}>
+                <div className={UserMypageStyle.likeWhy}>
+                  <div className={UserMypageStyle.leftWhy}>いいねしたWHY</div>
+                  <div className={UserMypageStyle.count}>
+                    <ThumbUpIcon />
+
+                    <div className={UserMypageStyle.number}>20</div>
                   </div>
                 </div>
               </Tab>
             </TabList>
             <TabPanel>
-              <div className="whyLists">
-                <div className="list">空はなぜ青いのか？</div>
-                <div className="list">眠いのはなぜ？</div>
-                <div className="list">ナゼーー</div>
+              <div className={UserMypageStyle.whyListsLeft}>
+                <div className={UserMypageStyle.list}>空はなぜ青いのか？</div>
+                <div className={UserMypageStyle.list}>眠いのはなぜ？</div>
+                <div className={UserMypageStyle.list}>ナゼーー</div>
               </div>
             </TabPanel>
             <TabPanel>
-              <div className="whyLists">
-                <div className="list">海はなぜ青いのか？</div>
-                <div className="list">のはなぜ？</div>
-                <div className="list">ああああ</div>
+              <div className={UserMypageStyle.whyListsRight}>
+                <div className={UserMypageStyle.list}>海はなぜ青いのか？</div>
+                <div className={UserMypageStyle.list}>のはなぜ？</div>
+                <div className={UserMypageStyle.list}>ああああ</div>
               </div>
             </TabPanel>
           </Tabs>

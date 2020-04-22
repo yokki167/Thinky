@@ -1,0 +1,49 @@
+.top {
+  display: flex;
+  justify-content: space-between;
+  width: 70vw;
+  margin: 0 auto;
+
+  padding: 40px 0px;
+  border-bottom: solid;
+
+  .category {
+  }
+  .search {
+    display: flex;
+
+    .box {
+      height: 50px;
+      width: 70vh;
+      margin: 8px;
+    }
+    .btn {
+      margin: 8px;
+    }
+  }
+}
+.main {
+  width: 70vw;
+  margin: 0 auto;
+
+  .list {
+    background-color: rgb(184, 184, 184);
+    margin-top: 40px;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    .title {
+      margin: 20px;
+      font-size: 2em;
+    }
+    .answer {
+      margin: 20px;
+      display: flex;
+      padding-top: 25px;
+      .index {
+      }
+      .count {
+      }
+    }
+  }
+}

@@ -1,0 +1,27 @@
+.home {
+  background-color: white;
+  height: 600px;
+  padding: 100px;
+}
+
+.container {
+  background-color: blanchedalmond;
+  height: 100%;
+  align-items: center;
+  padding: 10px 50px;
+  display: block;
+}
+
+.btnWrapper {
+  display: block;
+  height: 50%;
+  align-items: center;
+  background-color: red;
+  margin: auto;
+}
+
+.btn {
+  width: 75%;
+  display: block;
+  margin-top: 30px;
+}
