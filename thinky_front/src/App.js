@@ -14,17 +14,25 @@ import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 
 function App() {
   return (
-    <Router>
-      <Layout>
-        <Switch>
-          <Route path="/home" component={Home} />
-          <Route path="/why" component={WhyModal} />
-          <Route path="/share" component={EveryoneWhy} />
-          <Route path="/mypage" component={UserMypage} />
-        </Switch>
-      </Layout>
-    </Router>
+    <Layout>
+      <ChatPage />
+    </Layout>
   );
 }
+
+// function App() {
+//   return (
+//     <Router>
+//       <Layout>
+//         <Switch>
+//           <Route path="/home" component={Home} />
+//           <Route path="/why" component={WhyModal} />
+//           <Route path="/share" component={EveryoneWhy} />
+//           <Route path="/mypage" component={UserMypage} />
+//         </Switch>
+//       </Layout>
+//     </Router>
+//   );
+// }
 
 export default App;
