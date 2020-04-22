@@ -12,7 +12,6 @@ function App() {
   return (
     <Router>
       <Layout>
-        <Link to="/home">ホーム画面へ</Link>
         <Switch>
           <Route path="/home" component={Home} />
           <Route path="/why" component={WhyModal} />
