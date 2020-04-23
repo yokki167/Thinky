@@ -1,0 +1,2 @@
+class PbAnswer < ApplicationRecord
+end

@@ -1,0 +1,2 @@
+class PvAnswer < ApplicationRecord
+end

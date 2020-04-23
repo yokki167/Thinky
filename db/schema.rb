@@ -10,12 +10,63 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_23_044443) do
+ActiveRecord::Schema.define(version: 2020_04_23_140724) do
 
-  create_table "whies", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
-    t.text "question"
+  create_table "genres", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  create_table "pb_answers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.text "content", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.bigint "why_id"
+    t.index ["user_id"], name: "index_pb_answers_on_user_id"
+    t.index ["why_id"], name: "index_pb_answers_on_why_id"
+  end
+
+  create_table "pv_answers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.text "content", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.bigint "why_id"
+    t.index ["user_id"], name: "index_pv_answers_on_user_id"
+    t.index ["why_id"], name: "index_pv_answers_on_why_id"
+  end
+
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "access_token"
+    t.string "username"
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  create_table "whies", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.text "question"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.bigint "genre_id"
+    t.boolean "share"
+    t.index ["genre_id"], name: "index_whies_on_genre_id"
+    t.index ["user_id"], name: "index_whies_on_user_id"
+  end
+
+  add_foreign_key "pb_answers", "users"
+  add_foreign_key "pb_answers", "whies"
+  add_foreign_key "pv_answers", "users"
+  add_foreign_key "pv_answers", "whies"
+  add_foreign_key "whies", "genres"
+  add_foreign_key "whies", "users"
 end
