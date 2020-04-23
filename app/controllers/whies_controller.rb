@@ -1,6 +1,6 @@
 class WhiesController < ApplicationController
   def index
-    @pb_whies = PbWhy.all
-    render json: @pb_whies
+    @whies = Why.all
+    render json: @whies
   end
 end

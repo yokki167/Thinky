@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class PbWhyTest < ActiveSupport::TestCase
+class WhyTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
