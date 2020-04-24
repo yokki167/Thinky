@@ -9,6 +9,7 @@ import React from "react"
 import ReactDOM from "react-dom"
 import * as serviceWorker from "./serviceWorker"
 
+// Render ./Component/App.js
 ReactDOM.render(
   <React.StrictMode>
     <App />

@@ -1,11 +1,16 @@
-import React from "react"
+// Import Packages
+import React, { useState } from "react"
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom"
+
+// Import Styles
 import Button from "@material-ui/core/Button"
 import Modal from "@material-ui/core/Modal"
-import WhyModal from "./WhyModal"
 import HomeCss from "../styles/Home.module.scss"
 import { makeStyles } from "@material-ui/core/styles"
 import { createMuiTheme } from "@material-ui/core/styles"
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom"
+
+// Import Components
+import WhyModal from "./WhyModal"
 
 // const theme = createMuiTheme({
 //   palette: {
@@ -67,23 +72,7 @@ const useStyles = makeStyles({
 function Home() {
   const home = useStyles()
 
-  const [open, setOpen] = React.useState(false)
-
-  const handleOpen = () => {
-    setOpen(true)
-  }
-
-  const handleClose = () => {
-    setOpen(false)
-  }
-
-  // Homeをclassコンポーネントにする際のメモ
-  // constructor(props){
-  //   super(props)
-  //   this.typeWhy = this.typeWhy.bind(this)
-  //   this.decideWhy = this.decideWhy.bind(this)
-  //   this.state ={whies: []}
-  // }
+  const [isOpen, setIsOpen] = useState(false)
 
   return (
     <div className={home.home}>
@@ -95,20 +84,21 @@ function Home() {
             variant="contained"
             color="primary"
             className={home.btn}
-            onClick={handleOpen}
+            onClick={() => {
+              setIsOpen(true)
+            }}
           >
             "Why"を考える
           </Button>
           <Modal
-            open={open}
-            onClose={handleClose}
+            open={isOpen}
+            onClose={() => {
+              setIsOpen(false)
+            }}
             aria-labelledby="simple-modal-title"
             aria-describedby="simple-modal-description"
           >
-            <WhyModal
-            // typeWhy={this.typeWhy}
-            // decideWhy={this.decideWhy}
-            />
+            {WhyModal()}
           </Modal>
           <Link to="/share" className={home.link}>
             <Button

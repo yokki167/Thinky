@@ -1,3 +1,10 @@
+// Import Pacakages
+import React from "react"
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
+
+// Import Styles
+import "../styles/App.css"
+
 // Import Components
 import Home from "./Home.js"
 import Layout from "./Layout"
@@ -7,13 +14,6 @@ import UserMypage from "./UserMypage"
 import EveryoneWhy from "./EveryoneWhy"
 import ChatPage from "./ChatPage"
 // import UserEdit from "./components/UserEdit";
-
-// Import Styles
-import "../styles/App.css"
-
-// Import Pacakages
-import React from "react"
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 
 function App() {
   return (

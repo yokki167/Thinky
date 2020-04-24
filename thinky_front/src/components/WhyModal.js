@@ -1,6 +1,9 @@
+// Import Packages
 import React from "react"
 import axios from "axios"
 import update from "immutability-helper"
+
+// Import Styles
 import InputLabel from "@material-ui/core/InputLabel"
 import { makeStyles } from "@material-ui/core/styles"
 import MenuItem from "@material-ui/core/MenuItem"
@@ -9,24 +12,9 @@ import FormControlLabel from "@material-ui/core/FormControlLabel"
 import Checkbox from "@material-ui/core/Checkbox"
 import Select from "@material-ui/core/Select"
 import modalStyles from "../styles/WhyModal.module.scss"
+
+// Import Components
 import WhyForm from "./WhyForm"
-
-// const [age, setAge] = React.useState("");
-
-// const handleChange = (event) => {
-//   setAge(event.target.value);
-// };
-
-// const [state, setState] = React.useState({
-//   checkedA: true,
-//   checkedB: true,
-//   checkedF: true,
-//   checkedG: true,
-// })
-
-// const handleChange = (event) => {
-//   setState({ ...state, [event.target.name]: event.target.checked })
-// }
 
 export default class WhyModal extends React.Component {
   constructor(props) {

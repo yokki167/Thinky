@@ -19,6 +19,7 @@ Comming soon
 - create-react-app
 - material-ui
 - node-sass
+- axios
 
 ## Liscense
 

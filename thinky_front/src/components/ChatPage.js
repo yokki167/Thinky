@@ -1,10 +1,15 @@
+// Import Packages
 import React from "react"
+
+// Import Styles
 import chatStyles from "../styles/ChatPage.module.scss"
 import Button from "@material-ui/core/Button"
 import SendIcon from "@material-ui/icons/Send"
 import FormControlLabel from "@material-ui/core/FormControlLabel"
 import Checkbox from "@material-ui/core/Checkbox"
 import TextareaAutosize from "@material-ui/core/TextareaAutosize"
+
+// Import Components
 
 export default class ChatPage extends React.Component {
   constructor(props) {
