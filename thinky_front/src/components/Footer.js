@@ -3,25 +3,11 @@ import React from "react"
 
 // Import Styles
 import CssBaseline from "@material-ui/core/CssBaseline"
-import Typography from "@material-ui/core/Typography"
 import { makeStyles } from "@material-ui/core/styles"
 import Container from "@material-ui/core/Container"
-import Link from "@material-ui/core/Link"
 
 // Import Components
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="./home">
-        Thinky
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  )
-}
+import Copyright from "./Copyright"
 
 const useStyles = makeStyles((theme) => ({
   // root: {
