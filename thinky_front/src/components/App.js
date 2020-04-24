@@ -20,10 +20,10 @@ function App() {
     <Router>
       <Layout>
         <Switch>
-          <Route path="/home" component={Home} />
-          <Route path="/why" component={ChatPage} />
-          <Route path="/share" component={EveryoneWhy} />
-          <Route path="/mypage" component={UserMypage} />
+          <Route exact={true} path="/home" component={Home} />
+          <Route exact={true} path="/why" component={ChatPage} />
+          <Route exact={true} path="/share" component={EveryoneWhy} />
+          <Route exact={true} path="/mypage" component={UserMypage} />
         </Switch>
       </Layout>
     </Router>
