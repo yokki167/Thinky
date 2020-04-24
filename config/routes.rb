@@ -7,4 +7,5 @@ Rails.application.routes.draw do
   end
 
   get 'whies/index'
+  post 'whies/post'
 end

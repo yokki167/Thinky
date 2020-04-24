@@ -1,14 +1,14 @@
 import React from "react"
 import TextareaAutosize from "@material-ui/core/TextareaAutosize"
 import Button from "@material-ui/core/Button"
-import { Link } from "react-router-dom"
-
-export default class WhyForm extends React.Component {
+import { withRouter } from "react-router-dom"
+class WhyForm extends React.Component {
   constructor(props) {
     super(props)
     this.typeWhy = this.typeWhy.bind(this)
     this.decideWhy = this.decideWhy.bind(this)
-    this.state = { why: "" }
+    this.handleClick = this.handleClick.bind(this)
+    this.state = { why1: "" }
   }
 
   formStyle = {
@@ -25,46 +25,48 @@ export default class WhyForm extends React.Component {
   }
 
   typeWhy(e) {
-    this.setState({ why: e.target.value })
+    this.setState({ why1: e.target.value })
   }
 
-  decideWhy() {
-    // const why = e.target.elements.why.value.trim()
-    // this.setState({ why: why })
-    // console.log("success!")
+  decideWhy(e) {
+    e.preventDefault()
+    const why = e.target.elements.why1.value.trim()
+    this.setState({ why1: why })
+    this.props.createWhy(this.state.why1)
+  }
 
-    this.props.createWhy(this.state.why)
-    this.setState({ why: "" })
+  handleClick() {
+    this.props.history.push({
+      pathname: "/why",
+      state: { why3: this.state.why1 },
+    })
   }
 
   render() {
     return (
-      <form
-        className={this.formStyle}
-        noValidate
-        autoComplete="off"
-        onSubmit={this.decideWhy}
-      >
+      <form noValidate autoComplete="off" onSubmit={this.decideWhy}>
         <TextareaAutosize
           rowsMax={1}
           aria-label="maximum height"
           placeholder="「Why」を入力する"
-          name="why"
+          name="why1"
           value={this.state.why}
           style={this.formStyle}
           onChange={this.typeWhy}
         />
-        <Link to="/why">
-          <Button
-            variant="contained"
-            color="primary"
-            href="#contained-buttons"
-            style={this.btnStyle}
-          >
-            決定
-          </Button>
-        </Link>
+        <Button
+          variant="contained"
+          color="primary"
+          style={this.btnStyle}
+          type="submit"
+          value="submit"
+          onClick={this.handleClick}
+        >
+          決定
+        </Button>
       </form>
     )
   }
 }
+
+export default withRouter(WhyForm)

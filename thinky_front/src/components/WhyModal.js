@@ -1,4 +1,6 @@
 import React from "react"
+import axios from "axios"
+import update from "immutability-helper"
 import InputLabel from "@material-ui/core/InputLabel"
 import { makeStyles } from "@material-ui/core/styles"
 import MenuItem from "@material-ui/core/MenuItem"
@@ -30,7 +32,7 @@ export default class WhyModal extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      why: "",
+      why2: "",
       checkedA: true,
       checkedB: true,
       checkedF: true,
@@ -42,8 +44,9 @@ export default class WhyModal extends React.Component {
     axios
       .post("http://localhost:3001/whies/post", { why: why })
       .then((response) => {
-        const newWhy = update(this.state.whies, { $push: [response.data] })
-        this.setState({ why: newWhy })
+        console.log(response.data)
+        const newWhy = update(this.state.why2, { $set: [response.data] })
+        this.setState({ why2: newWhy })
       })
       .catch((data) => {
         console.log(data)
