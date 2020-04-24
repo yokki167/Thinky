@@ -98,7 +98,7 @@ function Home() {
             aria-labelledby="simple-modal-title"
             aria-describedby="simple-modal-description"
           >
-            {WhyModal()}
+            <WhyModal />
           </Modal>
           <Link to="/share" className={home.link}>
             <Button
