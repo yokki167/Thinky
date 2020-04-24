@@ -30,6 +30,8 @@ export default class ChatPage extends React.Component {
     },
     shareCheck: {
       margin: "0 0 0 2rem",
+      position: "absolute",
+      right: "2rem",
     },
     button: {
       position: "absolute",
@@ -60,7 +62,7 @@ export default class ChatPage extends React.Component {
                 />
               }
               label="この「Why」をみんなに共有する"
-              className={this.useStyles.shareCheck}
+              style={this.useStyles.shareCheck}
             />
           </div>
 
@@ -79,17 +81,18 @@ export default class ChatPage extends React.Component {
             </div>
           </div>
           <div className={chatStyles.formBox}>
-            <form className={this.useStyles.form} noValidate autoComplete="off">
+            <form noValidate autoComplete="off">
               <TextareaAutosize
                 rowsMax={1}
                 aria-label="maximum height"
                 placeholder="Answerを入力してください。"
+                style={this.useStyles.form}
               />
             </form>
             <Button
               variant="contained"
               color="primary"
-              className={this.useStyles.button}
+              style={this.useStyles.button}
               endIcon={<SendIcon />}
             >
               Send
