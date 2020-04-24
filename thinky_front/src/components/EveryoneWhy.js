@@ -1,4 +1,8 @@
+// Import Packages
 import React from "react"
+import axios from "axios"
+
+// Import Styles
 import { makeStyles } from "@material-ui/core/styles"
 import InputLabel from "@material-ui/core/InputLabel"
 import MenuItem from "@material-ui/core/MenuItem"
@@ -7,7 +11,8 @@ import FormControl from "@material-ui/core/FormControl"
 import Select from "@material-ui/core/Select"
 import Button from "@material-ui/core/Button"
 import EveryoneWhyStyle from "../styles/EveryoneWhy.module.scss"
-import axios from "axios"
+
+// Import Components
 import WhiesList from "./WhiesList"
 
 // const useStyles = makeStyles((theme) => ({
@@ -44,12 +49,12 @@ export default class EveryoneWhy extends React.Component {
   componentDidMount() {
     axios
       .get("http://localhost:3001/whies/index")
-      .then((results) => {
-        console.log(results)
-        this.setState({ whies: results.data })
+      .then((response) => {
+        console.log(response)
+        this.setState({ whies: response.data })
       })
-      .catch((data) => {
-        console.log(data)
+      .catch((error) => {
+        console.log(error)
       })
   }
 
