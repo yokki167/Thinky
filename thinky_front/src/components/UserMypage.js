@@ -1,16 +1,14 @@
 // Import Packages
 import React from "react"
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs"
-import { Route, Switch, Link } from "react-router-dom"
 
 // Import Styles
 import SettingsIcon from "@material-ui/icons/Settings"
-import Grid from "@material-ui/core/Grid"
-import "react-tabs/style/react-tabs.css"
 import UserMypageStyle from "../styles/UserMypage.module.scss"
 import { makeStyles } from "@material-ui/styles"
 import ThumbUpIcon from "@material-ui/icons/ThumbUp"
 import SentimentVerySatisfiedIcon from "@material-ui/icons/SentimentVerySatisfied"
+import "react-tabs/style/react-tabs.css"
 
 // Import Components
 

@@ -8,9 +8,6 @@ import EveryoneWhyStyle from "../styles/EveryoneWhy.module.scss"
 
 export default function Question(props) {
   return (
-    // <div>
-    //   <span>{this.props.data.question}</span>
-    // </div>
     <div className={EveryoneWhyStyle.list}>
       <div className={EveryoneWhyStyle.title}>{props.data.question}</div>
       <div className={EveryoneWhyStyle.answer}>

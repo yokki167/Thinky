@@ -5,9 +5,7 @@ import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom"
 // Import Styles
 import Button from "@material-ui/core/Button"
 import Modal from "@material-ui/core/Modal"
-import HomeCss from "../styles/Home.module.scss"
 import { makeStyles } from "@material-ui/core/styles"
-import { createMuiTheme } from "@material-ui/core/styles"
 
 // Import Components
 import WhyModal from "./WhyModal"

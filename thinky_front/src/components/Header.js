@@ -1,6 +1,6 @@
 // Import Packages
 import React from "react"
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom"
+import { BrowserRouter as Router, Link } from "react-router-dom"
 
 // Import Styles
 import { makeStyles } from "@material-ui/core/styles"

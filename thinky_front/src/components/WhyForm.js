@@ -1,7 +1,13 @@
+// Import Packages
 import React from "react"
+
+// Import Styles
 import TextareaAutosize from "@material-ui/core/TextareaAutosize"
 import Button from "@material-ui/core/Button"
 import { withRouter } from "react-router-dom"
+
+// Import Components
+
 class WhyForm extends React.Component {
   constructor(props) {
     super(props)

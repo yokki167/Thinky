@@ -3,17 +3,16 @@ import React from "react"
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 
 // Import Styles
-import "../styles/App.css"
 
 // Import Components
 import Home from "./Home.js"
 import Layout from "./Layout"
-// import SignUp from "./components/SignUp";
-// import SignIn from "./components/SignIn";
+// import SignUp from "./SignUp";
+// import SignIn from "./SignIn";
+// import UserEdit from "./UserEdit";
 import UserMypage from "./UserMypage"
 import EveryoneWhy from "./EveryoneWhy"
 import ChatPage from "./ChatPage"
-// import UserEdit from "./components/UserEdit";
 
 function App() {
   return (

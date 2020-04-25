@@ -3,11 +3,11 @@ import React from "react"
 
 // Import Styles
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles"
-import layoutStyles from "../styles/Layout.module.scss"
 import { grey } from "@material-ui/core/colors"
+import layoutStyles from "../styles/Layout.module.scss"
 
 // Import Components
-import Footer from "../components/Footer"
+import Footer from "./Footer"
 import Header from "./Header"
 
 const theme = createMuiTheme({

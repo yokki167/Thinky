@@ -2,7 +2,6 @@
 import App from "./components/App"
 
 // Import Styles
-import "./styles/index.css"
 
 // Import Pacakages
 import React from "react"
