@@ -33,11 +33,11 @@ const btnStyle = {
 
 export default function EveryoneWhy() {
   const classes = useStyles()
-  const [age, setAge] = React.useState("")
+  const [age, setAge] = useState(0)
 
-  const handleChange = (event) => {
-    setAge(event.target.value)
-  }
+  // const handleChange = (event) => {
+  //   setAge(event.target.value)
+  // }
 
   // constructor(props) {
   //   super(props)
@@ -86,7 +86,9 @@ export default function EveryoneWhy() {
               labelId="demo-simple-select-outlined-label"
               id="demo-simple-select-outlined"
               value={age}
-              onChange={handleChange}
+              onChange={(event) => {
+                setAge(event.target.value)
+              }}
               label="ジャンルを選択"
               style={selectStyle}
             >
