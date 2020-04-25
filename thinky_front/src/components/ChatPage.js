@@ -114,11 +114,6 @@ export default class ChatPage extends React.Component {
           </div>
 
           <div className={chatStyles.communication}>
-            <div className={chatStyles.chatSpace}>
-              <div className={chatStyles.chatLeft}>
-                <p className={chatStyles.chatText}>Why???</p>
-              </div>
-            </div>
             <Answer answers={this.state.answers} />
           </div>
           <div className={chatStyles.formBox}>
