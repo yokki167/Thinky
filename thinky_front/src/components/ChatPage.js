@@ -58,7 +58,7 @@ export default class ChatPage extends React.Component {
 
   createAnswer = (answer) => {
     axios
-      .post("http://localhost:3001/answers/post_pb", { answer: answer })
+      .post("http://localhost:3001/answers/post_pv", { answer: answer })
       .then((response) => {
         console.log(response.data)
         const newAnswers = update(this.state.answers, {
