@@ -9,6 +9,7 @@ import { makeStyles } from "@material-ui/core/styles"
 
 // Import Components
 import WhyModal from "./WhyModal"
+import DialogContent from "@material-ui/core/DialogContent"
 
 // const theme = createMuiTheme({
 //   palette: {
@@ -96,7 +97,9 @@ function Home() {
             aria-labelledby="simple-modal-title"
             aria-describedby="simple-modal-description"
           >
-            <WhyModal />
+            <DialogContent>
+              <WhyModal />
+            </DialogContent>
           </Modal>
           <Link to="/share" className={home.link}>
             <Button

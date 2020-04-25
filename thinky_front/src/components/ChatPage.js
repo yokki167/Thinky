@@ -21,7 +21,7 @@ export default class ChatPage extends React.Component {
       whyContent: "",
       answer: "",
       answers: [],
-      checkedB: true,
+      checkShare: true,
     }
     this.handleChange = this.handleChange.bind(this)
     this.typeAnswer = this.typeAnswer.bind(this)
@@ -96,9 +96,9 @@ export default class ChatPage extends React.Component {
             <FormControlLabel
               control={
                 <Checkbox
-                  checked={this.state.checkedB}
+                  checked={this.state.checkShare}
                   onChange={this.handleChange}
-                  name="checkedB"
+                  name="checkShare"
                   color="primary"
                 />
               }

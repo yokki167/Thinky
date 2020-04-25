@@ -21,9 +21,11 @@ export default class WhyModal extends React.Component {
     super(props)
     this.state = {
       why2: "",
-      checkedB: true,
+      checkShare: true,
+      genreId: "",
     }
     this.handleChange = this.handleChange.bind(this)
+    this.chooseGenre = this.chooseGenre.bind(this)
   }
 
   createWhy = (why) => {
@@ -33,6 +35,7 @@ export default class WhyModal extends React.Component {
         console.log(response.data)
         const newWhy = update(this.state.why2, { $set: [response.data] })
         this.setState({ why2: newWhy })
+        console.log(newWhy)
       })
       .catch((data) => {
         console.log(data)
@@ -48,9 +51,9 @@ export default class WhyModal extends React.Component {
     minWidth: "120px",
   }
 
-  // handleChange = (event) => {
-  //     setState({ ...state, [event.target.name]: event.target.checked });
-  //   };
+  chooseGenre(e) {
+    this.setState({ genreId: e.target.value })
+  }
 
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.checked })
@@ -69,33 +72,34 @@ export default class WhyModal extends React.Component {
               <Select
                 labelId="demo-simple-select-outlined-label"
                 id="demo-simple-select-outlined"
-                // value={age}
-                onChange={this.handleChange}
+                value={this.state.genreId}
+                onChange={this.chooseGenre}
                 label="ジャンルを選択"
                 style={this.genreStyle}
               >
                 <MenuItem value="">
                   <em>None</em>
                 </MenuItem>
-                <MenuItem value={10}>科学</MenuItem>
-                <MenuItem value={20}>自然</MenuItem>
-                <MenuItem value={30}>自己</MenuItem>
+                <MenuItem value={1}>自然</MenuItem>
+                <MenuItem value={2}>科学</MenuItem>
+                <MenuItem value={3}>自己</MenuItem>
+                <MenuItem value={4}>食物</MenuItem>
               </Select>
             </FormControl>
           </div>
           <FormControlLabel
             control={
               <Checkbox
-                checked={this.state.checkedB}
+                checked={this.state.checkShare}
                 onChange={this.handleChange}
-                name="checkedB"
+                name="checkShare"
                 color="primary"
               />
             }
             label="この「Why」をみんなに共有する"
           />
         </div>
-        <WhyForm createWhy={this.createWhy} />
+        <WhyForm createWhy={this.createWhy} tabindex="-1" />
       </div>
     )
   }

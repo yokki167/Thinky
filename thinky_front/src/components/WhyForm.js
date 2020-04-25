@@ -34,11 +34,11 @@ class WhyForm extends React.Component {
     this.setState({ why1: e.target.value })
   }
 
-  decideWhy(e) {
-    e.preventDefault()
-    const why = e.target.elements.why1.value.trim()
+  decideWhy(callback) {
+    const why = this.state.why1
     this.setState({ why1: why })
     this.props.createWhy(this.state.why1)
+    callback()
   }
 
   handleClick() {
@@ -50,7 +50,13 @@ class WhyForm extends React.Component {
 
   render() {
     return (
-      <form noValidate autoComplete="off" onSubmit={this.decideWhy}>
+      <form
+        noValidate
+        autoComplete="off"
+        onSubmit={() => {
+          this.decideWhy(this.handleClick)
+        }}
+      >
         <TextareaAutosize
           rowsMax={1}
           aria-label="maximum height"
@@ -65,8 +71,9 @@ class WhyForm extends React.Component {
           color="primary"
           style={this.btnStyle}
           type="submit"
-          value="submit"
-          onClick={this.handleClick}
+          // onClick={() => {
+          //   console.log("sucsjogf")
+          // }}
         >
           決定
         </Button>
