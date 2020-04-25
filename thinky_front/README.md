@@ -20,6 +20,7 @@ Comming soon
 - material-ui
 - node-sass
 - axios
+- immutability-helper
 
 ## Liscense
 

@@ -1,5 +1,11 @@
 # Thinky（Think "WHY". => 「think Y」 => 「Thinky」）
 
+<p align="center">
+    <img src='./thinky_front/assets/images/thinky-demo.svg' alt='thinky demo page'>
+    <br>
+    （デモ画像）
+</p>
+
 コンセプト：「Why (なぜ)をとことん考える」
 
 あらゆるものに対して「Why?」をぶつけて思考することで、考える力を養うことが目的のアプリ。
