@@ -34,12 +34,6 @@ export default class ChatPage extends React.Component {
     this.setState({ whyContent: question })
   }
 
-  componentWillUnmount() {
-    let question = this.props.location.state.why3
-    this.setState({ whyContent: question })
-    console.log("componentWillUnmount")
-  }
-
   useStyles = {
     form: {
       margin: "24px 0",
