@@ -108,7 +108,9 @@ export default class ChatPage extends React.Component {
           </div>
 
           <div className={chatStyles.communication}>
-            <Answer answers={this.state.answers} />
+            {this.state.answers.map((answer) => {
+              return <Answer answer={answer} key={answer.id} />
+            })}
           </div>
           <div className={chatStyles.formBox}>
             <form noValidate autoComplete="off" onSubmit={this.sendAnswer}>
