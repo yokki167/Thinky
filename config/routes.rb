@@ -8,4 +8,7 @@ Rails.application.routes.draw do
 
   get 'whies/index'
   post 'whies/post'
+
+  post 'answers/post_pv'
+  post 'answers/post_pb'
 end

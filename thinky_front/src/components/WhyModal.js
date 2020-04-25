@@ -21,11 +21,9 @@ export default class WhyModal extends React.Component {
     super(props)
     this.state = {
       why2: "",
-      checkedA: true,
       checkedB: true,
-      checkedF: true,
-      checkedG: true,
     }
+    this.handleChange = this.handleChange.bind(this)
   }
 
   createWhy = (why) => {
@@ -41,20 +39,22 @@ export default class WhyModal extends React.Component {
       })
   }
 
-  selectStyle = {
-    width: "35vh",
+  genreStyle = {
+    width: "24vw",
   }
 
-  useStyles = makeStyles((theme) => ({
-    formControl: {
-      margin: theme.spacing(1),
-      minWidth: 120,
-    },
-  }))
+  formStyle = {
+    margin: "8px",
+    minWidth: "120px",
+  }
 
-  // handleChange(e) {
-  //   this.setState({ [e.target.name]: e.target.checked })
-  // }
+  // handleChange = (event) => {
+  //     setState({ ...state, [event.target.name]: event.target.checked });
+  //   };
+
+  handleChange(e) {
+    this.setState({ [e.target.name]: e.target.checked })
+  }
 
   render() {
     return (
@@ -62,10 +62,7 @@ export default class WhyModal extends React.Component {
         <div className={modalStyles.title}>「Why?」を深掘りしよう！</div>
         <div className={modalStyles.subBox}>
           <div>
-            <FormControl
-              variant="outlined"
-              className={this.useStyles.formControl}
-            >
+            <FormControl variant="outlined">
               <InputLabel id="demo-simple-select-outlined-label">
                 ジャンルを選択
               </InputLabel>
@@ -75,7 +72,7 @@ export default class WhyModal extends React.Component {
                 // value={age}
                 onChange={this.handleChange}
                 label="ジャンルを選択"
-                style={this.selectStyle}
+                style={this.genreStyle}
               >
                 <MenuItem value="">
                   <em>None</em>
