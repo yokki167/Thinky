@@ -1,5 +1,7 @@
 // Import Packages
 import React from "react"
+import axios from "axios"
+import update from "immutability-helper"
 
 // Import Styles
 import chatStyles from "../styles/ChatPage.module.scss"
@@ -10,17 +12,32 @@ import Checkbox from "@material-ui/core/Checkbox"
 import TextareaAutosize from "@material-ui/core/TextareaAutosize"
 
 // Import Components
+import Answer from "./Answer"
 
 export default class ChatPage extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       whyContent: "",
-      checkedA: true,
+      answer: "",
+      answers: [],
       checkedB: true,
-      checkedF: true,
-      checkedG: true,
     }
+    this.handleChange = this.handleChange.bind(this)
+    this.typeAnswer = this.typeAnswer.bind(this)
+    this.sendAnswer = this.sendAnswer.bind(this)
+    this.createAnswer = this.createAnswer.bind(this)
+  }
+
+  componentDidMount() {
+    let question = this.props.location.state.why3
+    this.setState({ whyContent: question })
+  }
+
+  componentWillUnmount() {
+    let question = this.props.location.state.why3
+    this.setState({ whyContent: question })
+    console.log("componentWillUnmount")
   }
 
   useStyles = {
@@ -45,18 +62,43 @@ export default class ChatPage extends React.Component {
     },
   }
 
-  // const handleChange = (event) => {
-  //   setState({ ...state, [event.target.name]: event.target.checked })
-  // }
+  createAnswer = (answer) => {
+    axios
+      .post("http://localhost:3001/answers/post_pb", { answer: answer })
+      .then((response) => {
+        console.log(response.data)
+        const newAnswers = update(this.state.answers, {
+          $push: [response.data],
+        })
+        this.setState({ answers: newAnswers })
+      })
+      .catch((data) => {
+        console.log(data)
+      })
+  }
+
+  handleChange(e) {
+    this.setState({ [e.target.name]: e.target.checked })
+  }
+
+  typeAnswer(e) {
+    this.setState({ answer: e.target.value })
+  }
+
+  sendAnswer(e) {
+    e.preventDefault()
+    const newAnswer = this.state.answer
+    this.createAnswer(newAnswer)
+    this.setState({ answer: "" })
+    e.target.elements.textarea.value = ""
+  }
 
   render() {
     return (
       <div className={chatStyles.chatContainer}>
         <div className={chatStyles.chatBox}>
           <div className={chatStyles.topicSpace}>
-            <p className={chatStyles.topic}>
-              Why：{this.props.location.state.why3}
-            </p>
+            <p className={chatStyles.topic}>Why：{this.state.whyContent}</p>
             <FormControlLabel
               control={
                 <Checkbox
@@ -77,31 +119,28 @@ export default class ChatPage extends React.Component {
                 <p className={chatStyles.chatText}>Why???</p>
               </div>
             </div>
-            <div className={chatStyles.chatSpace}>
-              <div className={chatStyles.chatRight}>
-                <p className={chatStyles.chatText}>
-                  送信された「Answer」が入ります送信された「Answer」が入ります
-                </p>
-              </div>
-            </div>
+            <Answer answers={this.state.answers} />
           </div>
           <div className={chatStyles.formBox}>
-            <form noValidate autoComplete="off">
+            <form noValidate autoComplete="off" onSubmit={this.sendAnswer}>
               <TextareaAutosize
                 rowsMax={1}
                 aria-label="maximum height"
                 placeholder="Answerを入力してください。"
                 style={this.useStyles.form}
+                name="textarea"
+                onChange={this.typeAnswer}
               />
+              <Button
+                variant="contained"
+                color="primary"
+                style={this.useStyles.button}
+                endIcon={<SendIcon />}
+                type="submit"
+              >
+                Send
+              </Button>
             </form>
-            <Button
-              variant="contained"
-              color="primary"
-              style={this.useStyles.button}
-              endIcon={<SendIcon />}
-            >
-              Send
-            </Button>
           </div>
         </div>
       </div>
