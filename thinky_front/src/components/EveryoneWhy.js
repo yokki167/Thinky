@@ -46,6 +46,8 @@ export default function EveryoneWhy() {
   //   }
   // }
 
+  const [text, setText] = useState("")
+
   const [whies, setWhies] = useState([])
   useEffect(() => {
     getPostsData()
@@ -102,7 +104,15 @@ export default function EveryoneWhy() {
           </FormControl>
         </div>
         <div className={EveryoneWhyStyle.search}>
-          <input className={EveryoneWhyStyle.box}></input>
+          <input
+            className={EveryoneWhyStyle.box}
+            onChange={(event) => {
+              setText(event.target.value)
+              console.log(whies[0].question)
+              console.log(whies[0].question)
+            }}
+            value={text}
+          ></input>
           <div className={EveryoneWhyStyle.btn}>
             <Button
               variant="contained"
@@ -116,7 +126,7 @@ export default function EveryoneWhy() {
         </div>
       </div>
       <div className={EveryoneWhyStyle.main}>
-        <WhiesList whiesData={whies} />
+        <WhiesList whiesData={whies} text={text} />
       </div>
     </>
   )
