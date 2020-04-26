@@ -33,7 +33,7 @@ const btnStyle = {
 
 export default function EveryoneWhy() {
   const classes = useStyles()
-  const [age, setAge] = useState(0)
+  const [genreId, setGenreId] = useState(0)
 
   // const handleChange = (event) => {
   //   setAge(event.target.value)
@@ -87,9 +87,9 @@ export default function EveryoneWhy() {
             <Select
               labelId="demo-simple-select-outlined-label"
               id="demo-simple-select-outlined"
-              value={age}
+              value={genreId}
               onChange={(event) => {
-                setAge(event.target.value)
+                setGenreId(event.target.value)
               }}
               label="ジャンルを選択"
               style={selectStyle}
@@ -97,9 +97,10 @@ export default function EveryoneWhy() {
               <MenuItem value="">
                 <em>None</em>
               </MenuItem>
-              <MenuItem value={10}>科学</MenuItem>
-              <MenuItem value={20}>自然</MenuItem>
-              <MenuItem value={30}>自己</MenuItem>
+              <MenuItem value={1}>自然</MenuItem>
+              <MenuItem value={2}>科学</MenuItem>
+              <MenuItem value={3}>自己</MenuItem>
+              <MenuItem value={4}>食物</MenuItem>
             </Select>
           </FormControl>
         </div>
@@ -108,8 +109,9 @@ export default function EveryoneWhy() {
             className={EveryoneWhyStyle.box}
             onChange={(event) => {
               setText(event.target.value)
-              console.log(whies[0].question)
-              console.log(whies[0].question)
+              console.log(whies)
+              console.log(whies[3].genre_id)
+              console.log(whies[1].id)
             }}
             value={text}
           ></input>
@@ -126,7 +128,7 @@ export default function EveryoneWhy() {
         </div>
       </div>
       <div className={EveryoneWhyStyle.main}>
-        <WhiesList whiesData={whies} text={text} />
+        <WhiesList whiesData={whies} text={text} genreId={genreId} />
       </div>
     </>
   )

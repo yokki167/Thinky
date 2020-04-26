@@ -7,7 +7,20 @@ import EveryoneWhyStyle from "../styles/EveryoneWhy.module.scss"
 // Import Components
 import Question from "./Question"
 
-export default function WhiesList(props) {
+function InGenreId(props) {
+  return (
+    <div className={EveryoneWhyStyle.lists}>
+      {props.whiesData
+        .filter((why) => why.question.includes(props.text))
+        .filter((why) => why.genre_id === props.genreId)
+        .map((why) => (
+          <Question data={why} key={why.id} />
+        ))}
+    </div>
+  )
+}
+
+function OutGenreId(props) {
   return (
     <div className={EveryoneWhyStyle.lists}>
       {props.whiesData
@@ -16,5 +29,11 @@ export default function WhiesList(props) {
           <Question data={why} key={why.id} />
         ))}
     </div>
+  )
+}
+
+export default function WhiesList(props) {
+  return (
+    <>{props.genreId ? <InGenreId {...props} /> : <OutGenreId {...props} />}</>
   )
 }
