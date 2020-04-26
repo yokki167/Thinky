@@ -4,7 +4,6 @@ import axios from "axios"
 import update from "immutability-helper"
 
 // Import Styles
-import { makeStyles } from "@material-ui/core/styles"
 import InputLabel from "@material-ui/core/InputLabel"
 import MenuItem from "@material-ui/core/MenuItem"
 import FormControl from "@material-ui/core/FormControl"
@@ -20,43 +19,34 @@ export default class WhyModal extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      why2: "",
+      modalWhy: "",
       checkShare: true,
       genreId: "",
     }
-    this.handleChange = this.handleChange.bind(this)
+
+    this.shareChange = this.shareChange.bind(this)
     this.chooseGenre = this.chooseGenre.bind(this)
   }
 
-  createWhy = (why) => {
+  shareOrNot = (share) => {
     axios
-      .post("http://localhost:3001/whies/post", { why: why })
+      .patch("http://localhost:3001/whies/update", { share: share })
       .then((response) => {
         console.log(response.data)
-        const newWhy = update(this.state.why2, { $set: [response.data] })
-        this.setState({ why2: newWhy })
-        console.log(newWhy)
+        console.log("success!")
       })
       .catch((data) => {
         console.log(data)
       })
   }
 
-  genreStyle = {
-    width: "24vw",
-  }
-
-  formStyle = {
-    margin: "8px",
-    minWidth: "120px",
+  shareChange(e) {
+    this.setState({ [e.target.name]: e.target.checked })
+    // this.shareOrNot(this.state.checkShare)
   }
 
   chooseGenre(e) {
     this.setState({ genreId: e.target.value })
-  }
-
-  handleChange(e) {
-    this.setState({ [e.target.name]: e.target.checked })
   }
 
   render() {
@@ -77,9 +67,6 @@ export default class WhyModal extends React.Component {
                 label="ジャンルを選択"
                 style={this.genreStyle}
               >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
                 <MenuItem value={1}>自然</MenuItem>
                 <MenuItem value={2}>科学</MenuItem>
                 <MenuItem value={3}>自己</MenuItem>
@@ -91,7 +78,7 @@ export default class WhyModal extends React.Component {
             control={
               <Checkbox
                 checked={this.state.checkShare}
-                onChange={this.handleChange}
+                onChange={this.shareChange}
                 name="checkShare"
                 color="primary"
               />
@@ -99,8 +86,21 @@ export default class WhyModal extends React.Component {
             label="この「Why」をみんなに共有する"
           />
         </div>
-        <WhyForm createWhy={this.createWhy} tabindex="-1" />
+        <WhyForm
+          genreId={this.state.genreId}
+          checkShare={this.state.checkShare}
+          tabindex="-1"
+        />
       </div>
     )
+  }
+
+  genreStyle = {
+    width: "24vw",
+  }
+
+  formStyle = {
+    margin: "8px",
+    minWidth: "120px",
   }
 }

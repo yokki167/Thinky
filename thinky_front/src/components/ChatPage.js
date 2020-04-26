@@ -30,30 +30,9 @@ export default class ChatPage extends React.Component {
   }
 
   componentDidMount() {
-    let question = this.props.location.state.why3
+    let question = this.props.location.state.why
     this.setState({ whyContent: question })
-  }
-
-  useStyles = {
-    form: {
-      margin: "24px 0",
-      position: "absolute",
-      top: "8%",
-      left: "8%",
-      width: "70%",
-      minHeight: "3rem",
-      fontSize: "2rem",
-    },
-    shareCheck: {
-      margin: "0 0 0 2rem",
-      position: "absolute",
-      right: "2rem",
-    },
-    button: {
-      position: "absolute",
-      top: "28%",
-      right: "8%",
-    },
+    console.log(this.props.location.state.whyId)
   }
 
   createAnswer = (answer) => {
@@ -136,5 +115,27 @@ export default class ChatPage extends React.Component {
         </div>
       </div>
     )
+  }
+
+  useStyles = {
+    form: {
+      margin: "24px 0",
+      position: "absolute",
+      top: "8%",
+      left: "8%",
+      width: "70%",
+      minHeight: "3rem",
+      fontSize: "2rem",
+    },
+    shareCheck: {
+      margin: "0 0 0 2rem",
+      position: "absolute",
+      right: "2rem",
+    },
+    button: {
+      position: "absolute",
+      top: "28%",
+      right: "8%",
+    },
   }
 }
