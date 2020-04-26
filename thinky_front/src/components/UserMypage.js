@@ -1,6 +1,7 @@
 // Import Packages
 import React from "react"
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs"
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom"
 
 // Import Styles
 import SettingsIcon from "@material-ui/icons/Settings"
@@ -35,7 +36,9 @@ const UserMypage = () => {
       <div className={UserMypageStyle.mypage}>
         <div className={UserMypageStyle.top}>
           <div className={UserMypageStyle.userName}>Taro</div>
-          <SettingsIcon className={classes.EditIcon} />
+          <Link to="/userEdit" className="linkMypage">
+            <SettingsIcon className={classes.EditIcon} />
+          </Link>
         </div>
         <div className={UserMypageStyle.middle}>
           <Tabs>

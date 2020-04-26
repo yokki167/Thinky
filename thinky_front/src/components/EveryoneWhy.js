@@ -53,6 +53,13 @@ export default function EveryoneWhy() {
     getPostsData()
   }, [])
 
+  const [maltitext, maltisearch] = useState([])
+
+  function maltisearches(text) {
+    console.log(text)
+    maltisearch(text)
+  }
+
   function getPostsData() {
     axios
       .get("http://localhost:3001/whies/index")
@@ -109,9 +116,12 @@ export default function EveryoneWhy() {
             className={EveryoneWhyStyle.box}
             onChange={(event) => {
               setText(event.target.value)
+              maltisearch(event.target.value)
               console.log(whies)
-              console.log(whies[3].genre_id)
-              console.log(whies[1].id)
+              // console.log(maltitext)
+              // console.log(whies[3].genre_id)
+              // console.log(whies[1].id)
+              console.log(whies.length)
             }}
             value={text}
           ></input>
