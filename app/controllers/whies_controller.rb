@@ -1,6 +1,6 @@
 class WhiesController < ApplicationController
   def index
-    @whies = Why.all
+    @whies = Why.where(share: true)
     render json: @whies
   end
 
