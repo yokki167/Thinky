@@ -13,6 +13,7 @@ import Layout from "./Layout"
 import UserMypage from "./UserMypage"
 import EveryoneWhy from "./EveryoneWhy"
 import ChatPage from "./ChatPage"
+import UserEdit from "./UserEdit"
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route exact={true} path="/why" component={ChatPage} />
           <Route exact={true} path="/share" component={EveryoneWhy} />
           <Route exact={true} path="/mypage" component={UserMypage} />
+          <Route exact={true} path="/userEdit" component={UserEdit} />
         </Switch>
       </Layout>
     </Router>
