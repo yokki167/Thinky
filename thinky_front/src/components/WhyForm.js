@@ -22,11 +22,11 @@ class WhyForm extends React.Component {
   }
 
   decideWhy(e) {
+    e.preventDefault()
     const why = this.state.formWhy
     const genreId = this.props.genreId
     const checkShare = this.props.checkShare
     this.createWhy(why, genreId, checkShare)
-    e.preventDefault()
   }
 
   createWhy = (why, genreId, checkShare) => {
