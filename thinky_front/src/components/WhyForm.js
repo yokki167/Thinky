@@ -61,7 +61,7 @@ class WhyForm extends React.Component {
             console.log(response.data.id)
             this.props.history.push({
               // Routerを介して<ChatPage/>にstateを渡す
-              pathname: `/why`,
+              pathname: `/whies/${response.data.id}`,
               state: {
                 why: response.data.question,
                 whyId: response.data.id,

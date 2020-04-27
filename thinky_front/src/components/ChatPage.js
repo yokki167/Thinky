@@ -21,8 +21,8 @@ export default class ChatPage extends React.Component {
       whyId: 0,
       whyContent: "",
       answer: "",
-      answers: [],
       checkShare: true,
+      answers: [],
     }
 
     // binding "this"
@@ -31,7 +31,6 @@ export default class ChatPage extends React.Component {
   }
 
   componentDidMount() {
-    // const question = this.props.location.state.why
     const id = this.props.location.state.whyId
     axios
       .get(`http://localhost:3001/whies/${id}`, {
@@ -46,24 +45,24 @@ export default class ChatPage extends React.Component {
       .catch((data) => {
         console.log(data)
       })
-    // answerを保存時に必要なwhy_idを取得するために
-    // 上記のwhies/showのaxios処理を書き足す
-    // console.log(this.props.location.state.whyId)
   }
 
   // whies/showの処理が成功したら、以下でwhyテーブルのshareカラムを更新できるようにする
   // （おそらくshareだけではvalidationに引っかかるのでwhy１つの丸ごと更新？）
-  // shareOrNot = (share) => {
-  //   axios
-  //     .patch("http://localhost:3001/whies/update", { share: share })
-  //     .then((response) => {
-  //       console.log(response.data)
-  //       console.log("success!")
-  //     })
-  //     .catch((data) => {
-  //       console.log(data)
-  //     })
-  // }
+  shareOrNot(e) {
+    e.preventDefault()
+    axios
+      .patch("http://localhost:3001/whies/update", {
+        share: this.state.checkShare,
+      })
+      .then((response) => {
+        console.log(response.data)
+        console.log("success!")
+      })
+      .catch((data) => {
+        console.log(data)
+      })
+  }
 
   sendAnswer(e) {
     e.preventDefault()
@@ -86,6 +85,7 @@ export default class ChatPage extends React.Component {
           $push: [response.data],
         })
         this.setState({ answers: newAnswers })
+        console.log(this.state.answers)
       })
       .catch((data) => {
         console.log(data)
