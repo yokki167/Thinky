@@ -28,7 +28,7 @@ export default class ChatPage extends React.Component {
     // binding "this"
     this.sendAnswer = this.sendAnswer.bind(this)
     this.createAnswer = this.createAnswer.bind(this)
-    this.shareOrNot = this.shareOrNot.bind(this)
+    this.isShare = this.isShare.bind(this)
   }
 
   componentDidMount() {
@@ -43,12 +43,12 @@ export default class ChatPage extends React.Component {
         this.setState({ whyContent: response.data.question })
         this.setState({ checkShare: response.data.share })
       })
-      .catch((data) => {
-        console.log(data)
+      .catch((err) => {
+        console.log(err)
       })
   }
 
-  shareOrNot(e) {
+  isShare(e) {
     // みんなに共有するかのチェックボックス用
     const share = this.state.checkShare ? false : true
     axios
@@ -59,8 +59,8 @@ export default class ChatPage extends React.Component {
       .then((response) => {
         console.log(response.data)
       })
-      .catch((data) => {
-        console.log(data)
+      .catch((err) => {
+        console.log(err)
       })
     this.setState({ [e.target.name]: e.target.checked })
   }
@@ -68,7 +68,7 @@ export default class ChatPage extends React.Component {
   sendAnswer(e) {
     e.preventDefault()
     const newAnswer = this.state.answer
-    const whyId = this.state.whyId
+    const { whyId } = this.state
     this.createAnswer(newAnswer, whyId)
     this.setState({ answer: "" })
     e.target.elements.textarea.value = ""
@@ -88,8 +88,8 @@ export default class ChatPage extends React.Component {
         this.setState({ answers: newAnswers })
         console.log(this.state.answers)
       })
-      .catch((data) => {
-        console.log(data)
+      .catch((err) => {
+        console.log(err)
       })
   }
 
@@ -103,7 +103,7 @@ export default class ChatPage extends React.Component {
               control={
                 <Checkbox
                   checked={this.state.checkShare}
-                  onChange={this.shareOrNot}
+                  onChange={this.isShare}
                   name="checkShare"
                   color="primary"
                 />

@@ -54,12 +54,12 @@ class WhyForm extends React.Component {
               },
             })
           })
-          .catch((data) => {
-            console.log(data)
+          .catch((err) => {
+            console.log(err)
           })
       })
-      .catch((data) => {
-        console.log(data)
+      .catch((err) => {
+        console.log(err)
       })
   }
 
