@@ -1,7 +1,5 @@
 // Import Packages
 import React from "react"
-import axios from "axios"
-import update from "immutability-helper"
 
 // Import Styles
 import InputLabel from "@material-ui/core/InputLabel"
@@ -19,34 +17,9 @@ export default class WhyModal extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      modalWhy: "",
       checkShare: true,
       genreId: "",
     }
-
-    this.shareChange = this.shareChange.bind(this)
-    this.chooseGenre = this.chooseGenre.bind(this)
-  }
-
-  shareOrNot = (share) => {
-    axios
-      .patch("http://localhost:3001/whies/update", { share: share })
-      .then((response) => {
-        console.log(response.data)
-        console.log("success!")
-      })
-      .catch((data) => {
-        console.log(data)
-      })
-  }
-
-  shareChange(e) {
-    this.setState({ [e.target.name]: e.target.checked })
-    // this.shareOrNot(this.state.checkShare)
-  }
-
-  chooseGenre(e) {
-    this.setState({ genreId: e.target.value })
   }
 
   render() {
@@ -63,7 +36,9 @@ export default class WhyModal extends React.Component {
                 labelId="demo-simple-select-outlined-label"
                 id="demo-simple-select-outlined"
                 value={this.state.genreId}
-                onChange={this.chooseGenre}
+                onChange={(e) => {
+                  this.setState({ genreId: e.target.value })
+                }}
                 label="ジャンルを選択"
                 style={this.genreStyle}
               >
@@ -78,7 +53,9 @@ export default class WhyModal extends React.Component {
             control={
               <Checkbox
                 checked={this.state.checkShare}
-                onChange={this.shareChange}
+                onChange={(e) => {
+                  this.setState({ [e.target.name]: e.target.checked })
+                }}
                 name="checkShare"
                 color="primary"
               />

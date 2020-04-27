@@ -23,8 +23,8 @@ export default class ChatPage extends React.Component {
       answers: [],
       checkShare: true,
     }
-    this.handleChange = this.handleChange.bind(this)
-    this.typeAnswer = this.typeAnswer.bind(this)
+
+    // binding "this"
     this.sendAnswer = this.sendAnswer.bind(this)
     this.createAnswer = this.createAnswer.bind(this)
   }
@@ -32,7 +32,43 @@ export default class ChatPage extends React.Component {
   componentDidMount() {
     let question = this.props.location.state.why
     this.setState({ whyContent: question })
-    console.log(this.props.location.state.whyId)
+    // 渡されたwhyの内容をwhyContentに与える
+
+    // axios
+    //   .get(`http://localhost:3001/whies/${whyのid}`, {
+    //     id: whyのid,　(=> this.props.location.state.whyId)?
+    //   })
+    //   .then((response) => {
+    //     console.log(response.data)
+    //   })
+    //   .catch((data) => {
+    //     console.log(data)
+    //   })
+    // answerを保存時に必要なwhy_idを取得するために
+    // 上記のwhies/showのaxios処理を書き足す
+    // console.log(this.props.location.state.whyId)
+  }
+
+  // whies/showの処理が成功したら、以下でwhyテーブルのshareカラムを更新できるようにする
+  // （おそらくshareだけではvalidationに引っかかるのでwhy１つの丸ごと更新？）
+  // shareOrNot = (share) => {
+  //   axios
+  //     .patch("http://localhost:3001/whies/update", { share: share })
+  //     .then((response) => {
+  //       console.log(response.data)
+  //       console.log("success!")
+  //     })
+  //     .catch((data) => {
+  //       console.log(data)
+  //     })
+  // }
+
+  sendAnswer(e) {
+    e.preventDefault()
+    const newAnswer = this.state.answer
+    this.createAnswer(newAnswer)
+    this.setState({ answer: "" })
+    e.target.elements.textarea.value = ""
   }
 
   createAnswer = (answer) => {
@@ -50,22 +86,6 @@ export default class ChatPage extends React.Component {
       })
   }
 
-  handleChange(e) {
-    this.setState({ [e.target.name]: e.target.checked })
-  }
-
-  typeAnswer(e) {
-    this.setState({ answer: e.target.value })
-  }
-
-  sendAnswer(e) {
-    e.preventDefault()
-    const newAnswer = this.state.answer
-    this.createAnswer(newAnswer)
-    this.setState({ answer: "" })
-    e.target.elements.textarea.value = ""
-  }
-
   render() {
     return (
       <div className={chatStyles.chatContainer}>
@@ -76,7 +96,9 @@ export default class ChatPage extends React.Component {
               control={
                 <Checkbox
                   checked={this.state.checkShare}
-                  onChange={this.handleChange}
+                  onChange={(e) => {
+                    this.setState({ [e.target.name]: e.target.checked })
+                  }}
                   name="checkShare"
                   color="primary"
                 />
@@ -99,7 +121,9 @@ export default class ChatPage extends React.Component {
                 placeholder="Answerを入力してください。"
                 style={this.useStyles.form}
                 name="textarea"
-                onChange={this.typeAnswer}
+                onChange={(e) => {
+                  this.setState({ answer: e.target.value })
+                }}
               />
               <Button
                 variant="contained"
