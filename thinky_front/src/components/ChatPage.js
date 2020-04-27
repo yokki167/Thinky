@@ -18,71 +18,78 @@ export default class ChatPage extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      whyId: 0,
       whyContent: "",
       answer: "",
-      answers: [],
       checkShare: true,
+      answers: [],
     }
 
     // binding "this"
     this.sendAnswer = this.sendAnswer.bind(this)
     this.createAnswer = this.createAnswer.bind(this)
+    this.isShare = this.isShare.bind(this)
   }
 
   componentDidMount() {
-    let question = this.props.location.state.why
-    this.setState({ whyContent: question })
-    // 渡されたwhyの内容をwhyContentに与える
-
-    // axios
-    //   .get(`http://localhost:3001/whies/${whyのid}`, {
-    //     id: whyのid,　(=> this.props.location.state.whyId)?
-    //   })
-    //   .then((response) => {
-    //     console.log(response.data)
-    //   })
-    //   .catch((data) => {
-    //     console.log(data)
-    //   })
-    // answerを保存時に必要なwhy_idを取得するために
-    // 上記のwhies/showのaxios処理を書き足す
-    // console.log(this.props.location.state.whyId)
+    const id = this.props.location.state.whyId
+    axios
+      .get(`http://localhost:3001/whies/${id}`, {
+        id: id,
+      })
+      .then((response) => {
+        console.log(response.data)
+        this.setState({ whyId: response.data.id })
+        this.setState({ whyContent: response.data.question })
+        this.setState({ checkShare: response.data.share })
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }
 
-  // whies/showの処理が成功したら、以下でwhyテーブルのshareカラムを更新できるようにする
-  // （おそらくshareだけではvalidationに引っかかるのでwhy１つの丸ごと更新？）
-  // shareOrNot = (share) => {
-  //   axios
-  //     .patch("http://localhost:3001/whies/update", { share: share })
-  //     .then((response) => {
-  //       console.log(response.data)
-  //       console.log("success!")
-  //     })
-  //     .catch((data) => {
-  //       console.log(data)
-  //     })
-  // }
+  isShare(e) {
+    // みんなに共有するかのチェックボックス用
+    const share = this.state.checkShare ? false : true
+    axios
+      .patch(`http://localhost:3001/whies/${this.state.whyId}`, {
+        id: this.state.whyId,
+        share: share,
+      })
+      .then((response) => {
+        console.log(response.data)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    this.setState({ [e.target.name]: e.target.checked })
+  }
 
   sendAnswer(e) {
     e.preventDefault()
     const newAnswer = this.state.answer
-    this.createAnswer(newAnswer)
+    const { whyId } = this.state
+    this.createAnswer(newAnswer, whyId)
     this.setState({ answer: "" })
     e.target.elements.textarea.value = ""
   }
 
-  createAnswer = (answer) => {
+  createAnswer = (answer, whyId) => {
     axios
-      .post("http://localhost:3001/answers/post_pv", { answer: answer })
+      .post("http://localhost:3001/answers/post_pv", {
+        answer: answer,
+        id: whyId,
+      })
       .then((response) => {
         console.log(response.data)
         const newAnswers = update(this.state.answers, {
           $push: [response.data],
         })
         this.setState({ answers: newAnswers })
+        console.log(this.state.answers)
       })
-      .catch((data) => {
-        console.log(data)
+      .catch((err) => {
+        console.log(err)
       })
   }
 
@@ -96,9 +103,7 @@ export default class ChatPage extends React.Component {
               control={
                 <Checkbox
                   checked={this.state.checkShare}
-                  onChange={(e) => {
-                    this.setState({ [e.target.name]: e.target.checked })
-                  }}
+                  onChange={this.isShare}
                   name="checkShare"
                   color="primary"
                 />

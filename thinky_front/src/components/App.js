@@ -21,7 +21,7 @@ function App() {
       <Layout>
         <Switch>
           <Route exact={true} path="/home" component={Home} />
-          <Route exact={true} path="/why" component={ChatPage} />
+          <Route path="/whies/:id" component={ChatPage} />
           <Route exact={true} path="/share" component={EveryoneWhy} />
           <Route exact={true} path="/mypage" component={UserMypage} />
           <Route exact={true} path="/userEdit" component={UserEdit} />
