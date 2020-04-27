@@ -18,7 +18,6 @@ class WhyForm extends React.Component {
     }
 
     // binding "this"
-    // this.createWhy = this.createWhy.bind(this)
     this.decideWhy = this.decideWhy.bind(this)
   }
 
@@ -38,25 +37,12 @@ class WhyForm extends React.Component {
         share: checkShare,
       })
       .then((response) => {
-        // 次のtoChatpage()でwhyの内容を渡すため
-        console.log(response.data.question)
-        // const newWhy = update(this.state.formWhy, {
-        //   $set: response.data.question,
-        // })
-        // this.setState({ formWhy: newWhy })
-        // 次のtoChatpage()でwhyのidを渡すため
-        console.log(response.data.id)
-        // const whyId = update(this.state.whyId, {
-        //   $set: response.data.id,
-        // })
-        // this.setState({ whyId: whyId }) // whyIdをsetStateできていない..
-
+        console.log(response.data)
         axios
           .get(`http://localhost:3001/whies/${response.data.id}`, {
             id: response.data.id,
           })
           .then((response) => {
-            console.log(response.data)
             console.log(response.data.question)
             console.log(response.data.id)
             this.props.history.push({

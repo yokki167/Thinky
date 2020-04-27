@@ -49,6 +49,7 @@ export default class ChatPage extends React.Component {
   }
 
   shareOrNot(e) {
+    // みんなに共有するかのチェックボックス用
     const share = this.state.checkShare ? false : true
     axios
       .patch(`http://localhost:3001/whies/${this.state.whyId}`, {
