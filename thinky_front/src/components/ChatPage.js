@@ -18,6 +18,7 @@ export default class ChatPage extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      whyId: 0,
       whyContent: "",
       answer: "",
       answers: [],
@@ -30,20 +31,21 @@ export default class ChatPage extends React.Component {
   }
 
   componentDidMount() {
-    let question = this.props.location.state.why
-    this.setState({ whyContent: question })
-    // 渡されたwhyの内容をwhyContentに与える
-
-    // axios
-    //   .get(`http://localhost:3001/whies/${whyのid}`, {
-    //     id: whyのid,　(=> this.props.location.state.whyId)?
-    //   })
-    //   .then((response) => {
-    //     console.log(response.data)
-    //   })
-    //   .catch((data) => {
-    //     console.log(data)
-    //   })
+    // const question = this.props.location.state.why
+    const id = this.props.location.state.whyId
+    axios
+      .get(`http://localhost:3001/whies/${id}`, {
+        id: id,
+      })
+      .then((response) => {
+        console.log(response.data)
+        this.setState({ whyId: response.data.id })
+        this.setState({ whyContent: response.data.question })
+        this.setState({ checkShare: response.data.share })
+      })
+      .catch((data) => {
+        console.log(data)
+      })
     // answerを保存時に必要なwhy_idを取得するために
     // 上記のwhies/showのaxios処理を書き足す
     // console.log(this.props.location.state.whyId)
@@ -66,14 +68,18 @@ export default class ChatPage extends React.Component {
   sendAnswer(e) {
     e.preventDefault()
     const newAnswer = this.state.answer
-    this.createAnswer(newAnswer)
+    const whyId = this.state.whyId
+    this.createAnswer(newAnswer, whyId)
     this.setState({ answer: "" })
     e.target.elements.textarea.value = ""
   }
 
-  createAnswer = (answer) => {
+  createAnswer = (answer, whyId) => {
     axios
-      .post("http://localhost:3001/answers/post_pv", { answer: answer })
+      .post("http://localhost:3001/answers/post_pv", {
+        answer: answer,
+        id: whyId,
+      })
       .then((response) => {
         console.log(response.data)
         const newAnswers = update(this.state.answers, {

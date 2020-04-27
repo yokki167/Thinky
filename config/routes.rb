@@ -9,8 +9,8 @@ Rails.application.routes.draw do
   get 'whies/index'
 
   resources :whies
-
-  # get 'whies/id' to: 'whies#show'
+  # get 'whies/find'
+  
   post 'whies/post'
   # patch 'whies/update'
 

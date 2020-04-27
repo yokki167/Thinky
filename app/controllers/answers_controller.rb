@@ -1,6 +1,6 @@
 class AnswersController < ApplicationController
   def post_pv
-    @answer = PvAnswer.create(content: params[:answer])
+    @answer = PvAnswer.create(content: params[:answer], why_id: params[:id])
     render json: @answer
   end
 

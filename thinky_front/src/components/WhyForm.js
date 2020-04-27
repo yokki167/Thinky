@@ -14,24 +14,20 @@ class WhyForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      formWhy: "",
       checkShare: this.props.checkShare,
-      whyId: 0,
     }
 
     // binding "this"
-    this.createWhy = this.createWhy.bind(this)
+    // this.createWhy = this.createWhy.bind(this)
     this.decideWhy = this.decideWhy.bind(this)
-    this.toChatpage = this.toChatpage.bind(this)
   }
 
-  decideWhy(callback) {
+  decideWhy(e) {
     const why = this.state.formWhy
     const genreId = this.props.genreId
     const checkShare = this.props.checkShare
-    this.setState({ formWhy: why }) //無くても動くが念の為
     this.createWhy(why, genreId, checkShare)
-    callback() // 63行目付近のtoChatpage()
+    e.preventDefault()
   }
 
   createWhy = (why, genreId, checkShare) => {
@@ -44,42 +40,46 @@ class WhyForm extends React.Component {
       .then((response) => {
         // 次のtoChatpage()でwhyの内容を渡すため
         console.log(response.data.question)
-        const newWhy = update(this.state.formWhy, {
-          $set: response.data.question,
-        })
-        this.setState({ formWhy: newWhy })
+        // const newWhy = update(this.state.formWhy, {
+        //   $set: response.data.question,
+        // })
+        // this.setState({ formWhy: newWhy })
         // 次のtoChatpage()でwhyのidを渡すため
         console.log(response.data.id)
-        const whyId = update(this.state.whyId, {
-          $set: response.data.id,
-        })
-        this.setState({ whyId: whyId }) // whyIdをsetStateできていない..
+        // const whyId = update(this.state.whyId, {
+        //   $set: response.data.id,
+        // })
+        // this.setState({ whyId: whyId }) // whyIdをsetStateできていない..
+
+        axios
+          .get(`http://localhost:3001/whies/${response.data.id}`, {
+            id: response.data.id,
+          })
+          .then((response) => {
+            console.log(response.data)
+            console.log(response.data.question)
+            console.log(response.data.id)
+            this.props.history.push({
+              // Routerを介して<ChatPage/>にstateを渡す
+              pathname: `/why`,
+              state: {
+                why: response.data.question,
+                whyId: response.data.id,
+              },
+            })
+          })
+          .catch((data) => {
+            console.log(data)
+          })
       })
       .catch((data) => {
         console.log(data)
       })
   }
 
-  toChatpage() {
-    this.props.history.push({
-      // Routerを介して<ChatPage/>にstateを渡す
-      pathname: "/why",
-      state: {
-        why: this.state.formWhy,
-        whyId: this.state.whyId,
-      },
-    })
-  }
-
   render() {
     return (
-      <form
-        noValidate
-        autoComplete="off"
-        onSubmit={() => {
-          this.decideWhy(this.toChatpage)
-        }}
-      >
+      <form noValidate autoComplete="off" onSubmit={this.decideWhy}>
         <TextareaAutosize
           rowsMax={1}
           aria-label="maximum height"
