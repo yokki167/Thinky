@@ -21,17 +21,124 @@ export default class ChatPage extends React.Component {
       whyContent: "",
       answer: "",
       answers: [],
-      checkedB: true,
+      checkShare: true,
     }
-    this.handleChange = this.handleChange.bind(this)
-    this.typeAnswer = this.typeAnswer.bind(this)
+
+    // binding "this"
     this.sendAnswer = this.sendAnswer.bind(this)
     this.createAnswer = this.createAnswer.bind(this)
   }
 
   componentDidMount() {
-    let question = this.props.location.state.why3
+    let question = this.props.location.state.why
     this.setState({ whyContent: question })
+    // 渡されたwhyの内容をwhyContentに与える
+
+    // axios
+    //   .get(`http://localhost:3001/whies/${whyのid}`, {
+    //     id: whyのid,　(=> this.props.location.state.whyId)?
+    //   })
+    //   .then((response) => {
+    //     console.log(response.data)
+    //   })
+    //   .catch((data) => {
+    //     console.log(data)
+    //   })
+    // answerを保存時に必要なwhy_idを取得するために
+    // 上記のwhies/showのaxios処理を書き足す
+    // console.log(this.props.location.state.whyId)
+  }
+
+  // whies/showの処理が成功したら、以下でwhyテーブルのshareカラムを更新できるようにする
+  // （おそらくshareだけではvalidationに引っかかるのでwhy１つの丸ごと更新？）
+  // shareOrNot = (share) => {
+  //   axios
+  //     .patch("http://localhost:3001/whies/update", { share: share })
+  //     .then((response) => {
+  //       console.log(response.data)
+  //       console.log("success!")
+  //     })
+  //     .catch((data) => {
+  //       console.log(data)
+  //     })
+  // }
+
+  sendAnswer(e) {
+    e.preventDefault()
+    const newAnswer = this.state.answer
+    this.createAnswer(newAnswer)
+    this.setState({ answer: "" })
+    e.target.elements.textarea.value = ""
+  }
+
+  createAnswer = (answer) => {
+    axios
+      .post("http://localhost:3001/answers/post_pv", { answer: answer })
+      .then((response) => {
+        console.log(response.data)
+        const newAnswers = update(this.state.answers, {
+          $push: [response.data],
+        })
+        this.setState({ answers: newAnswers })
+      })
+      .catch((data) => {
+        console.log(data)
+      })
+  }
+
+  render() {
+    return (
+      <div className={chatStyles.chatContainer}>
+        <div className={chatStyles.chatBox}>
+          <div className={chatStyles.topicSpace}>
+            <p className={chatStyles.topic}>Why：{this.state.whyContent}</p>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={this.state.checkShare}
+                  onChange={(e) => {
+                    this.setState({ [e.target.name]: e.target.checked })
+                  }}
+                  name="checkShare"
+                  color="primary"
+                />
+              }
+              label="この「Why」をみんなに共有する"
+              style={this.useStyles.shareCheck}
+            />
+          </div>
+
+          <div className={chatStyles.communication}>
+            {this.state.answers.map((answer) => {
+              return <Answer answer={answer} key={answer.id} />
+            })}
+          </div>
+          <div className={chatStyles.formBox}>
+            <form noValidate autoComplete="off" onSubmit={this.sendAnswer}>
+              <TextareaAutosize
+                rowsMax={1}
+                aria-label="maximum height"
+                placeholder="Answerを入力してください。"
+                style={this.useStyles.form}
+                name="textarea"
+                onChange={(e) => {
+                  this.setState({ answer: e.target.value })
+                }}
+              />
+              <Button
+                variant="contained"
+                color="primary"
+                style={this.useStyles.button}
+                endIcon={<SendIcon />}
+                type="submit"
+              >
+                Send
+              </Button>
+            </form>
+          </div>
+        </div>
+      </div>
+    )
   }
 
   useStyles = {
@@ -54,87 +161,5 @@ export default class ChatPage extends React.Component {
       top: "28%",
       right: "8%",
     },
-  }
-
-  createAnswer = (answer) => {
-    axios
-      .post("http://localhost:3001/answers/post_pv", { answer: answer })
-      .then((response) => {
-        console.log(response.data)
-        const newAnswers = update(this.state.answers, {
-          $push: [response.data],
-        })
-        this.setState({ answers: newAnswers })
-      })
-      .catch((data) => {
-        console.log(data)
-      })
-  }
-
-  handleChange(e) {
-    this.setState({ [e.target.name]: e.target.checked })
-  }
-
-  typeAnswer(e) {
-    this.setState({ answer: e.target.value })
-  }
-
-  sendAnswer(e) {
-    e.preventDefault()
-    const newAnswer = this.state.answer
-    this.createAnswer(newAnswer)
-    this.setState({ answer: "" })
-    e.target.elements.textarea.value = ""
-  }
-
-  render() {
-    return (
-      <div className={chatStyles.chatContainer}>
-        <div className={chatStyles.chatBox}>
-          <div className={chatStyles.topicSpace}>
-            <p className={chatStyles.topic}>Why：{this.state.whyContent}</p>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={this.state.checkedB}
-                  onChange={this.handleChange}
-                  name="checkedB"
-                  color="primary"
-                />
-              }
-              label="この「Why」をみんなに共有する"
-              style={this.useStyles.shareCheck}
-            />
-          </div>
-
-          <div className={chatStyles.communication}>
-            {this.state.answers.map((answer) => {
-              return <Answer answer={answer} key={answer.id} />
-            })}
-          </div>
-          <div className={chatStyles.formBox}>
-            <form noValidate autoComplete="off" onSubmit={this.sendAnswer}>
-              <TextareaAutosize
-                rowsMax={1}
-                aria-label="maximum height"
-                placeholder="Answerを入力してください。"
-                style={this.useStyles.form}
-                name="textarea"
-                onChange={this.typeAnswer}
-              />
-              <Button
-                variant="contained"
-                color="primary"
-                style={this.useStyles.button}
-                endIcon={<SendIcon />}
-                type="submit"
-              >
-                Send
-              </Button>
-            </form>
-          </div>
-        </div>
-      </div>
-    )
   }
 }
