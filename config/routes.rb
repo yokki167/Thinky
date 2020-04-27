@@ -10,9 +10,9 @@ Rails.application.routes.draw do
 
   resources :whies
   # get 'whies/find'
-  
+
   post 'whies/post'
-  # patch 'whies/update'
+  patch 'whies/update'
 
   post 'answers/post_pv'
   post 'answers/post_pb'

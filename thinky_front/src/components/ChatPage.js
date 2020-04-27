@@ -28,6 +28,7 @@ export default class ChatPage extends React.Component {
     // binding "this"
     this.sendAnswer = this.sendAnswer.bind(this)
     this.createAnswer = this.createAnswer.bind(this)
+    this.shareOrNot = this.shareOrNot.bind(this)
   }
 
   componentDidMount() {
@@ -47,21 +48,20 @@ export default class ChatPage extends React.Component {
       })
   }
 
-  // whies/showの処理が成功したら、以下でwhyテーブルのshareカラムを更新できるようにする
-  // （おそらくshareだけではvalidationに引っかかるのでwhy１つの丸ごと更新？）
   shareOrNot(e) {
-    e.preventDefault()
+    const share = this.state.checkShare ? false : true
     axios
-      .patch("http://localhost:3001/whies/update", {
-        share: this.state.checkShare,
+      .patch(`http://localhost:3001/whies/${this.state.whyId}`, {
+        id: this.state.whyId,
+        share: share,
       })
       .then((response) => {
         console.log(response.data)
-        console.log("success!")
       })
       .catch((data) => {
         console.log(data)
       })
+    this.setState({ [e.target.name]: e.target.checked })
   }
 
   sendAnswer(e) {
@@ -102,9 +102,7 @@ export default class ChatPage extends React.Component {
               control={
                 <Checkbox
                   checked={this.state.checkShare}
-                  onChange={(e) => {
-                    this.setState({ [e.target.name]: e.target.checked })
-                  }}
+                  onChange={this.shareOrNot}
                   name="checkShare"
                   color="primary"
                 />
