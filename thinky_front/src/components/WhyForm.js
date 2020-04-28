@@ -49,6 +49,7 @@ class WhyForm extends React.Component {
               state: {
                 why: response.data.question,
                 whyId: response.data.id,
+                pv: true,
               },
             })
           })

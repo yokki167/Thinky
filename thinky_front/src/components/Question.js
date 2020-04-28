@@ -23,6 +23,7 @@ function Question(props) {
           state: {
             why: response.data.question,
             whyId: response.data.id,
+            pb: true,
           },
         })
       })

@@ -100,6 +100,11 @@ PbAnswer.create([
     why_id: 4,
     user_id: 2,
   },
+  {
+    content: "納豆は健康にも良いからね〜！",
+    why_id: 4,
+    user_id: 2,
+  },
 ])
 
 

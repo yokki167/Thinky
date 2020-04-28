@@ -49,17 +49,34 @@ export default class PrivateChat extends React.Component {
   }
 
   getAnswers(id) {
-    axios
-      .get(`http://localhost:3001/answers/index_pv`, {
-        params: { id },
-      })
-      .then((response) => {
-        console.log(response.data)
-        this.setState({ answers: response.data })
-      })
-      .catch((err) => {
-        console.error(err)
-      })
+    if (this.props.location.state.pv === true) {
+      console.log("pvだよ！")
+      axios
+        .get(`http://localhost:3001/answers/index_pv`, {
+          params: { id },
+        })
+        .then((response) => {
+          console.log(response.data)
+          this.setState({ answers: response.data })
+        })
+        .catch((err) => {
+          console.error(err)
+        })
+    } else if (this.props.location.state.pb === true) {
+      // elseだけでいいかな？
+      console.log("pbだよ！")
+      axios
+        .get(`http://localhost:3001/answers/index_pb`, {
+          params: { id },
+        })
+        .then((response) => {
+          console.log(response.data)
+          this.setState({ answers: response.data })
+        })
+        .catch((err) => {
+          console.error(err)
+        })
+    }
   }
 
   isShare(e) {
@@ -87,21 +104,42 @@ export default class PrivateChat extends React.Component {
   }
 
   createAnswer = (answer, whyId) => {
-    axios
-      .post("http://localhost:3001/answers/post_pv", {
-        answer: answer,
-        id: whyId,
-      })
-      .then((response) => {
-        console.log(response.data)
-        const newAnswers = update(this.state.answers, {
-          $push: [response.data],
+    if (this.props.location.state.pv === true) {
+      console.log("pvだよ！")
+      axios
+        .post("http://localhost:3001/answers/post_pv", {
+          answer: answer,
+          id: whyId,
         })
-        this.setState({ answers: newAnswers })
-      })
-      .catch((err) => {
-        console.error(err)
-      })
+        .then((response) => {
+          console.log(response.data)
+          const newAnswers = update(this.state.answers, {
+            $push: [response.data],
+          })
+          this.setState({ answers: newAnswers })
+        })
+        .catch((err) => {
+          console.error(err)
+        })
+    } else if (this.props.location.state.pb === true) {
+      // elseだけでいいかな？
+      console.log("pbだよ！")
+      axios
+        .post("http://localhost:3001/answers/post_pb", {
+          answer: answer,
+          id: whyId,
+        })
+        .then((response) => {
+          console.log(response.data)
+          const newAnswers = update(this.state.answers, {
+            $push: [response.data],
+          })
+          this.setState({ answers: newAnswers })
+        })
+        .catch((err) => {
+          console.error(err)
+        })
+    }
   }
 
   render() {
@@ -110,23 +148,31 @@ export default class PrivateChat extends React.Component {
         <div className={chatStyles.chatBox}>
           <div className={chatStyles.topicSpace}>
             <p className={chatStyles.topic}>Why：{this.state.whyContent}</p>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={this.state.checkShare}
-                  onChange={this.isShare}
-                  name="checkShare"
-                  color="primary"
-                />
-              }
-              label="この「Why」をみんなに共有する"
-              style={this.useStyles.shareCheck}
-            />
+            {this.props.location.state.pv && (
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={this.state.checkShare}
+                    onChange={this.isShare}
+                    name="checkShare"
+                    color="primary"
+                  />
+                }
+                label="この「Why」をみんなに共有する"
+                style={this.useStyles.shareCheck}
+              />
+            )}
           </div>
 
           <div className={chatStyles.communication}>
             {this.state.answers.map((answer) => {
-              return <Answer answer={answer} key={answer.id} />
+              return (
+                <Answer
+                  answer={answer}
+                  pv={this.props.location.state.pv && true}
+                  key={answer.id}
+                />
+              )
             })}
           </div>
           <div className={chatStyles.formBox}>
