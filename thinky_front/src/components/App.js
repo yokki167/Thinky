@@ -12,7 +12,7 @@ import Layout from "./Layout"
 // import UserEdit from "./UserEdit";
 import UserMypage from "./UserMypage"
 import EveryoneWhy from "./EveryoneWhy"
-import PrivateChat from "./PrivateChat"
+import ChatPage from "./ChatPage"
 import UserEdit from "./UserEdit"
 
 function App() {
@@ -21,7 +21,7 @@ function App() {
       <Layout>
         <Switch>
           <Route exact={true} path="/home" component={Home} />
-          <Route path="/whies/:id" component={PrivateChat} />
+          <Route path="/whies/:id" component={ChatPage} />
           <Route exact={true} path="/share" component={EveryoneWhy} />
           <Route exact={true} path="/mypage" component={UserMypage} />
           <Route exact={true} path="/userEdit" component={UserEdit} />

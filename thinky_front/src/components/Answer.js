@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react"
 
 // Import Styles
-import chatStyles from "../styles/PrivateChat.module.scss"
+import chatStyles from "../styles/ChatPage.module.scss"
 
 function PvAnswer(props) {
   return (

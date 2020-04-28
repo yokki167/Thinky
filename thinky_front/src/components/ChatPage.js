@@ -4,7 +4,7 @@ import axios from "axios"
 import update from "immutability-helper"
 
 // Import Styles
-import chatStyles from "../styles/PrivateChat.module.scss"
+import chatStyles from "../styles/ChatPage.module.scss"
 import Button from "@material-ui/core/Button"
 import SendIcon from "@material-ui/icons/Send"
 import FormControlLabel from "@material-ui/core/FormControlLabel"
@@ -14,7 +14,7 @@ import TextareaAutosize from "@material-ui/core/TextareaAutosize"
 // Import Components
 import Answer from "./Answer"
 
-export default class PrivateChat extends React.Component {
+export default class ChatPage extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -49,8 +49,7 @@ export default class PrivateChat extends React.Component {
   }
 
   getAnswers(id) {
-    if (this.props.location.state.pv === true) {
-      console.log("pvだよ！")
+    if (this.props.location.state.pv) {
       axios
         .get(`http://localhost:3001/answers/index_pv`, {
           params: { id },
@@ -62,9 +61,7 @@ export default class PrivateChat extends React.Component {
         .catch((err) => {
           console.error(err)
         })
-    } else if (this.props.location.state.pb === true) {
-      // elseだけでいいかな？
-      console.log("pbだよ！")
+    } else if (this.props.location.state.pb) {
       axios
         .get(`http://localhost:3001/answers/index_pb`, {
           params: { id },
@@ -104,8 +101,7 @@ export default class PrivateChat extends React.Component {
   }
 
   createAnswer = (answer, whyId) => {
-    if (this.props.location.state.pv === true) {
-      console.log("pvだよ！")
+    if (this.props.location.state.pv) {
       axios
         .post("http://localhost:3001/answers/post_pv", {
           answer: answer,
@@ -121,9 +117,7 @@ export default class PrivateChat extends React.Component {
         .catch((err) => {
           console.error(err)
         })
-    } else if (this.props.location.state.pb === true) {
-      // elseだけでいいかな？
-      console.log("pbだよ！")
+    } else if (this.props.location.state.pb) {
       axios
         .post("http://localhost:3001/answers/post_pb", {
           answer: answer,
