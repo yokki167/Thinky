@@ -51,7 +51,7 @@ export default class PrivateChat extends React.Component {
   getAnswers(id) {
     axios
       .get(`http://localhost:3001/answers/index_pv`, {
-        params: { id: id },
+        params: { id },
       })
       .then((response) => {
         console.log(response.data)
