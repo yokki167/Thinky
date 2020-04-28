@@ -8,7 +8,11 @@ Rails.application.routes.draw do
   
   get 'whies/index'
 
-  resources :whies
+  resources :whies do
+    member do
+      get 'count'
+    end
+  end
   # get 'whies/find'
 
   post 'whies/post'
