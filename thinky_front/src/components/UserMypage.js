@@ -1,7 +1,7 @@
 // Import Packages
 import React from "react"
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs"
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom"
+import { BrowserRouter as Link } from "react-router-dom"
 
 // Import Styles
 import SettingsIcon from "@material-ui/icons/Settings"
