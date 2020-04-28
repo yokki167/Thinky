@@ -44,7 +44,7 @@ export default class ChatPage extends React.Component {
         this.setState({ checkShare: response.data.share })
       })
       .catch((err) => {
-        console.log(err)
+        console.error(err)
       })
   }
 
@@ -60,16 +60,16 @@ export default class ChatPage extends React.Component {
         console.log(response.data)
       })
       .catch((err) => {
-        console.log(err)
+        console.error(err)
       })
     this.setState({ [e.target.name]: e.target.checked })
   }
 
   sendAnswer(e) {
     e.preventDefault()
-    const newAnswer = this.state.answer
+    const { answer } = this.state
     const { whyId } = this.state
-    this.createAnswer(newAnswer, whyId)
+    this.createAnswer(answer, whyId)
     this.setState({ answer: "" })
     e.target.elements.textarea.value = ""
   }
@@ -89,7 +89,7 @@ export default class ChatPage extends React.Component {
         console.log(this.state.answers)
       })
       .catch((err) => {
-        console.log(err)
+        console.error(err)
       })
   }
 

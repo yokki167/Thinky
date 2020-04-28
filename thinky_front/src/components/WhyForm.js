@@ -22,10 +22,10 @@ class WhyForm extends React.Component {
 
   decideWhy(e) {
     e.preventDefault()
-    const why = this.state.formWhy
+    const { formWhy } = this.state
     const genreId = this.props.genreId
     const checkShare = this.props.checkShare
-    this.createWhy(why, genreId, checkShare)
+    this.createWhy(formWhy, genreId, checkShare)
   }
 
   createWhy = (why, genreId, checkShare) => {
@@ -54,11 +54,11 @@ class WhyForm extends React.Component {
             })
           })
           .catch((err) => {
-            console.log(err)
+            console.error(err)
           })
       })
       .catch((err) => {
-        console.log(err)
+        console.error(err)
       })
   }
 
