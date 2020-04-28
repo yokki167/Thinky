@@ -46,7 +46,6 @@ export default class PrivateChat extends React.Component {
       .catch((err) => {
         console.error(err)
       })
-    // this.getAnswers()
   }
 
   getAnswers(id) {
@@ -57,7 +56,6 @@ export default class PrivateChat extends React.Component {
       .then((response) => {
         console.log(response.data)
         this.setState({ answers: response.data })
-        console.log(this.state.answers)
       })
       .catch((err) => {
         console.error(err)
@@ -100,7 +98,6 @@ export default class PrivateChat extends React.Component {
           $push: [response.data],
         })
         this.setState({ answers: newAnswers })
-        console.log(this.state.answers)
       })
       .catch((err) => {
         console.error(err)
