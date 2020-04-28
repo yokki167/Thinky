@@ -67,8 +67,7 @@ export default class ChatPage extends React.Component {
 
   sendAnswer(e) {
     e.preventDefault()
-    const { answer } = this.state
-    const { whyId } = this.state
+    const { answer, whyId } = this.state
     this.createAnswer(answer, whyId)
     this.setState({ answer: "" })
     e.target.elements.textarea.value = ""
