@@ -1,10 +1,7 @@
 class WhiesController < ApplicationController
   def index
     @whies = Why.where(share: true)
-    # @count = @whies.pb_answers.count
     render json: @whies
-    # render json: @count
-
   end
 
   def show
