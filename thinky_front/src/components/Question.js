@@ -10,7 +10,7 @@ import EveryoneWhyStyle from "../styles/EveryoneWhy.module.scss"
 // Import Components
 
 function Question(props) {
-  const [count, setCount] = useState("")
+  const [count, setCount] = useState(0)
   useEffect(() => {
     getWhyCount(props.why.id)
     console.log(props.why.id)
@@ -19,9 +19,7 @@ function Question(props) {
   function getWhy(id) {
     // const id = props.why.id
     axios
-      .get(`http://localhost:3001/whies/${id}`, {
-        id: id,
-      })
+      .get(`http://localhost:3001/whies/${id}`)
       .then((response) => {
         console.log(response.data)
         props.history.push({
@@ -41,9 +39,7 @@ function Question(props) {
   function getWhyCount(id) {
     console.log(id)
     axios
-      .get(`http://localhost:3001/whies/${id}/count`, {
-        id: id,
-      })
+      .get(`http://localhost:3001/whies/${id}/count`)
       .then((response) => {
         console.log(response.data)
         setCount(response.data)
