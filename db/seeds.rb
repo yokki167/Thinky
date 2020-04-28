@@ -67,6 +67,16 @@ PvAnswer.create([
     why_id: 2,
     user_id: 2,
   },
+  {
+    content: "ネバネバしてるからだよ〜。",
+    why_id: 4,
+    user_id: 2,
+  },
+  {
+    content: "ネバネバしてても美味しいとは限らないぞ。",
+    why_id: 4,
+    user_id: 2,
+  },
 ])
 
 PbAnswer.create([

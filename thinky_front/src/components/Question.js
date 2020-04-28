@@ -18,7 +18,7 @@ function Question(props) {
       .then((response) => {
         console.log(response.data)
         props.history.push({
-          // Routerを介して<ChatPage/>にstateを渡す
+          // Routerを介して<PrivateChat/>にstateを渡す
           pathname: `/whies/${response.data.id}`,
           state: {
             why: response.data.question,

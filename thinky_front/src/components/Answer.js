@@ -2,7 +2,7 @@
 import React from "react"
 
 // Import Styles
-import chatStyles from "../styles/ChatPage.module.scss"
+import chatStyles from "../styles/PrivateChat.module.scss"
 
 export default function Answer(props) {
   return (
