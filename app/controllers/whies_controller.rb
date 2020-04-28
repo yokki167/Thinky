@@ -1,7 +1,12 @@
 class WhiesController < ApplicationController
   def index
     @whies = Why.where(share: true)
+
+    # @count = @whies.pb_answers.count
+
     render json: @whies
+    # render json: @count
+
   end
 
   def show
@@ -12,6 +17,13 @@ class WhiesController < ApplicationController
   def post
     @why = Why.create(question: params[:why], genre_id: params[:genre], share: params[:share])
     render json: @why
+  end
+
+  def count
+    @why = Why.find(params[:id])
+    @count = @why.pb_answers.count 
+    render json: @count
+
   end
 
   def update

@@ -1,7 +1,8 @@
 // Import Packages
-import React from "react"
+// import React from "react"
 import { withRouter } from "react-router-dom"
 import axios from "axios"
+import React, { useState, useEffect } from "react"
 
 // Import Styles
 import EveryoneWhyStyle from "../styles/EveryoneWhy.module.scss"
@@ -9,12 +10,16 @@ import EveryoneWhyStyle from "../styles/EveryoneWhy.module.scss"
 // Import Components
 
 function Question(props) {
+  const [count, setCount] = useState(0)
+  useEffect(() => {
+    getWhyCount(props.why.id)
+    console.log(props.why.id)
+  }, [])
+
   function getWhy(id) {
     // const id = props.why.id
     axios
-      .get(`http://localhost:3001/whies/${id}`, {
-        id: id,
-      })
+      .get(`http://localhost:3001/whies/${id}`)
       .then((response) => {
         console.log(response.data)
         props.history.push({
@@ -30,6 +35,20 @@ function Question(props) {
         console.log(err)
       })
   }
+
+  function getWhyCount(id) {
+    console.log(id)
+    axios
+      .get(`http://localhost:3001/whies/${id}/count`)
+      .then((response) => {
+        console.log(response.data)
+        setCount(response.data)
+      })
+      .catch((err) => {
+        console.error(err)
+      })
+  }
+
   return (
     <div
       className={EveryoneWhyStyle.list}
@@ -41,7 +60,7 @@ function Question(props) {
       <div className={EveryoneWhyStyle.title}>{props.why.question}</div>
       <div className={EveryoneWhyStyle.answer}>
         <div className={EveryoneWhyStyle.index}>Answer:</div>
-        <div className={EveryoneWhyStyle.count}>20</div>
+        <div className={EveryoneWhyStyle.count}>{count}</div>
       </div>
     </div>
   )
