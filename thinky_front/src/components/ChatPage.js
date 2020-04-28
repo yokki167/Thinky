@@ -81,7 +81,7 @@ export default class ChatPage extends React.Component {
     const share = this.state.checkShare ? false : true
     axios
       .patch(`http://localhost:3001/whies/${this.state.whyId}`, {
-        share: share,
+        share,
       })
       .then((response) => {
         console.log(response.data)
@@ -104,7 +104,7 @@ export default class ChatPage extends React.Component {
     if (this.props.location.state.pv) {
       axios
         .post("http://localhost:3001/answers/post_pv", {
-          answer: answer,
+          answer,
           id: whyId,
         })
         .then((response) => {
@@ -120,7 +120,7 @@ export default class ChatPage extends React.Component {
     } else if (this.props.location.state.pb) {
       axios
         .post("http://localhost:3001/answers/post_pb", {
-          answer: answer,
+          answer,
           id: whyId,
         })
         .then((response) => {
