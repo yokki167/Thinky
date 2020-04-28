@@ -4,7 +4,7 @@ import axios from "axios"
 import update from "immutability-helper"
 
 // Import Styles
-import chatStyles from "../styles/ChatPage.module.scss"
+import chatStyles from "../styles/PrivateChat.module.scss"
 import Button from "@material-ui/core/Button"
 import SendIcon from "@material-ui/icons/Send"
 import FormControlLabel from "@material-ui/core/FormControlLabel"
@@ -14,7 +14,7 @@ import TextareaAutosize from "@material-ui/core/TextareaAutosize"
 // Import Components
 import Answer from "./Answer"
 
-export default class ChatPage extends React.Component {
+export default class PrivateChat extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -28,20 +28,34 @@ export default class ChatPage extends React.Component {
     // binding "this"
     this.sendAnswer = this.sendAnswer.bind(this)
     this.createAnswer = this.createAnswer.bind(this)
+    this.getAnswers = this.getAnswers.bind(this)
     this.isShare = this.isShare.bind(this)
   }
 
   componentDidMount() {
     const id = this.props.location.state.whyId
     axios
-      .get(`http://localhost:3001/whies/${id}`, {
-        id: id,
-      })
+      .get(`http://localhost:3001/whies/${id}`)
       .then((response) => {
         console.log(response.data)
         this.setState({ whyId: response.data.id })
         this.setState({ whyContent: response.data.question })
         this.setState({ checkShare: response.data.share })
+        this.getAnswers(response.data.id)
+      })
+      .catch((err) => {
+        console.error(err)
+      })
+  }
+
+  getAnswers(id) {
+    axios
+      .get(`http://localhost:3001/answers/index_pv`, {
+        params: { id },
+      })
+      .then((response) => {
+        console.log(response.data)
+        this.setState({ answers: response.data })
       })
       .catch((err) => {
         console.error(err)
@@ -53,7 +67,6 @@ export default class ChatPage extends React.Component {
     const share = this.state.checkShare ? false : true
     axios
       .patch(`http://localhost:3001/whies/${this.state.whyId}`, {
-        id: this.state.whyId,
         share: share,
       })
       .then((response) => {
@@ -85,7 +98,6 @@ export default class ChatPage extends React.Component {
           $push: [response.data],
         })
         this.setState({ answers: newAnswers })
-        console.log(this.state.answers)
       })
       .catch((err) => {
         console.error(err)

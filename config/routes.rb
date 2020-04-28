@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   post 'whies/post'
   patch 'whies/update'
 
+  get 'answers/index_pv'
+  get 'answers/index_pb'
   post 'answers/post_pv'
   post 'answers/post_pb'
 end
