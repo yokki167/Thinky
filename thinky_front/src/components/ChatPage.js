@@ -4,7 +4,7 @@ import axios from "axios"
 import update from "immutability-helper"
 
 // Import Styles
-import chatStyles from "../styles/PrivateChat.module.scss"
+import chatStyles from "../styles/ChatPage.module.scss"
 import Button from "@material-ui/core/Button"
 import SendIcon from "@material-ui/icons/Send"
 import FormControlLabel from "@material-ui/core/FormControlLabel"
@@ -14,7 +14,7 @@ import TextareaAutosize from "@material-ui/core/TextareaAutosize"
 // Import Components
 import Answer from "./Answer"
 
-export default class PrivateChat extends React.Component {
+export default class ChatPage extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -49,17 +49,31 @@ export default class PrivateChat extends React.Component {
   }
 
   getAnswers(id) {
-    axios
-      .get(`http://localhost:3001/answers/index_pv`, {
-        params: { id },
-      })
-      .then((response) => {
-        console.log(response.data)
-        this.setState({ answers: response.data })
-      })
-      .catch((err) => {
-        console.error(err)
-      })
+    if (this.props.location.state.pv) {
+      axios
+        .get(`http://localhost:3001/answers/index_pv`, {
+          params: { id },
+        })
+        .then((response) => {
+          console.log(response.data)
+          this.setState({ answers: response.data })
+        })
+        .catch((err) => {
+          console.error(err)
+        })
+    } else if (this.props.location.state.pb) {
+      axios
+        .get(`http://localhost:3001/answers/index_pb`, {
+          params: { id },
+        })
+        .then((response) => {
+          console.log(response.data)
+          this.setState({ answers: response.data })
+        })
+        .catch((err) => {
+          console.error(err)
+        })
+    }
   }
 
   isShare(e) {
@@ -67,7 +81,7 @@ export default class PrivateChat extends React.Component {
     const share = this.state.checkShare ? false : true
     axios
       .patch(`http://localhost:3001/whies/${this.state.whyId}`, {
-        share: share,
+        share,
       })
       .then((response) => {
         console.log(response.data)
@@ -87,21 +101,39 @@ export default class PrivateChat extends React.Component {
   }
 
   createAnswer = (answer, whyId) => {
-    axios
-      .post("http://localhost:3001/answers/post_pv", {
-        answer: answer,
-        id: whyId,
-      })
-      .then((response) => {
-        console.log(response.data)
-        const newAnswers = update(this.state.answers, {
-          $push: [response.data],
+    if (this.props.location.state.pv) {
+      axios
+        .post("http://localhost:3001/answers/post_pv", {
+          answer,
+          id: whyId,
         })
-        this.setState({ answers: newAnswers })
-      })
-      .catch((err) => {
-        console.error(err)
-      })
+        .then((response) => {
+          console.log(response.data)
+          const newAnswers = update(this.state.answers, {
+            $push: [response.data],
+          })
+          this.setState({ answers: newAnswers })
+        })
+        .catch((err) => {
+          console.error(err)
+        })
+    } else if (this.props.location.state.pb) {
+      axios
+        .post("http://localhost:3001/answers/post_pb", {
+          answer,
+          id: whyId,
+        })
+        .then((response) => {
+          console.log(response.data)
+          const newAnswers = update(this.state.answers, {
+            $push: [response.data],
+          })
+          this.setState({ answers: newAnswers })
+        })
+        .catch((err) => {
+          console.error(err)
+        })
+    }
   }
 
   render() {
@@ -110,23 +142,31 @@ export default class PrivateChat extends React.Component {
         <div className={chatStyles.chatBox}>
           <div className={chatStyles.topicSpace}>
             <p className={chatStyles.topic}>Why：{this.state.whyContent}</p>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={this.state.checkShare}
-                  onChange={this.isShare}
-                  name="checkShare"
-                  color="primary"
-                />
-              }
-              label="この「Why」をみんなに共有する"
-              style={this.useStyles.shareCheck}
-            />
+            {this.props.location.state.pv && (
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={this.state.checkShare}
+                    onChange={this.isShare}
+                    name="checkShare"
+                    color="primary"
+                  />
+                }
+                label="この「Why」をみんなに共有する"
+                style={this.useStyles.shareCheck}
+              />
+            )}
           </div>
 
           <div className={chatStyles.communication}>
             {this.state.answers.map((answer) => {
-              return <Answer answer={answer} key={answer.id} />
+              return (
+                <Answer
+                  answer={answer}
+                  pv={this.props.location.state.pv && true}
+                  key={answer.id}
+                />
+              )
             })}
           </div>
           <div className={chatStyles.formBox}>
