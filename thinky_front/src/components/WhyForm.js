@@ -13,11 +13,14 @@ class WhyForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      formWhy: null,
       checkShare: this.props.checkShare,
+      errorText: "",
     }
 
     // binding "this"
     this.decideWhy = this.decideWhy.bind(this)
+    this.handleValidation = this.handleValidation.bind(this)
   }
 
   decideWhy(e) {
@@ -27,10 +30,11 @@ class WhyForm extends React.Component {
     this.createWhy(formWhy, genreId, checkShare)
   }
 
-  createWhy = (why, genreId, checkShare) => {
+  createWhy = (formWhy, genreId, checkShare) => {
+    console.log(formWhy)
     axios
       .post("http://localhost:3001/whies/post", {
-        why: why,
+        why: formWhy,
         genre: genreId,
         share: checkShare,
       })
@@ -55,6 +59,9 @@ class WhyForm extends React.Component {
           })
           .catch((err) => {
             console.error(err)
+            this.setState({
+              errorText: "ジャンルと「Why」の両方を入力してください",
+            })
           })
       })
       .catch((err) => {
@@ -62,10 +69,21 @@ class WhyForm extends React.Component {
       })
   }
 
+  // エラーハンドリング
+  handleValidation(e) {
+    const value = e.target.value
+    value
+      ? this.setState({ errorText: "" })
+      : this.setState({ errorText: "「Why」を入力してください" })
+  }
+
   render() {
     return (
       <form noValidate autoComplete="off" onSubmit={this.decideWhy}>
+        <div style={this.errStyle}>{this.state.errorText}</div>
         <TextareaAutosize
+          helperText="Incorrect entry."
+          required
           rowsMax={1}
           aria-label="maximum height"
           placeholder="「Why」を入力する"
@@ -74,6 +92,7 @@ class WhyForm extends React.Component {
           style={this.formStyle}
           onChange={(e) => {
             this.setState({ formWhy: e.target.value })
+            this.handleValidation(e)
           }}
         />
         <Button
@@ -89,7 +108,7 @@ class WhyForm extends React.Component {
   }
 
   formStyle = {
-    margin: "24px 0",
+    marginBottom: "24px",
     width: "70%",
     minHeight: "3rem",
     fontSize: "2rem",
@@ -99,6 +118,14 @@ class WhyForm extends React.Component {
     height: "50px",
     width: "100px",
     transform: "translate(8px, -43px)",
+  }
+
+  errStyle = {
+    height: "20px",
+    textAlign: "left",
+    color: "red",
+    marginBottom: "5px",
+    textIndent: "4rem",
   }
 }
 
