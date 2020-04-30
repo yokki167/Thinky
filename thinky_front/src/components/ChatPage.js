@@ -20,9 +20,10 @@ export default class ChatPage extends React.Component {
     this.state = {
       whyId: 0,
       whyContent: "",
-      answer: "",
+      answer: null,
       checkShare: true,
       answers: [],
+      errorText: "",
     }
 
     // binding "this"
@@ -30,6 +31,7 @@ export default class ChatPage extends React.Component {
     this.createAnswer = this.createAnswer.bind(this)
     this.getAnswers = this.getAnswers.bind(this)
     this.isShare = this.isShare.bind(this)
+    this.handleValidation = this.handleValidation.bind(this)
   }
 
   componentDidMount() {
@@ -102,6 +104,7 @@ export default class ChatPage extends React.Component {
 
   createAnswer = (answer, whyId) => {
     if (this.props.location.state.pv) {
+      console.log(answer)
       axios
         .post("http://localhost:3001/answers/post_pv", {
           answer,
@@ -109,15 +112,30 @@ export default class ChatPage extends React.Component {
         })
         .then((response) => {
           console.log(response.data)
-          const newAnswers = update(this.state.answers, {
-            $push: [response.data],
-          })
-          this.setState({ answers: newAnswers })
+          console.log(response.data.id)
+          axios
+            .get(`http://localhost:3001/answers/find_pv/${response.data.id}`, {
+              id: response.data.id,
+            })
+            .then((response) => {
+              console.log(response)
+              const newAnswers = update(this.state.answers, {
+                $push: [response.data],
+              })
+              this.setState({ answers: newAnswers })
+            })
+            .catch((err) => {
+              console.error(err)
+              this.setState({
+                errorText: "「Answer」を入力してください",
+              })
+            })
         })
         .catch((err) => {
           console.error(err)
         })
     } else if (this.props.location.state.pb) {
+      console.log(answer)
       axios
         .post("http://localhost:3001/answers/post_pb", {
           answer,
@@ -125,15 +143,36 @@ export default class ChatPage extends React.Component {
         })
         .then((response) => {
           console.log(response.data)
-          const newAnswers = update(this.state.answers, {
-            $push: [response.data],
-          })
-          this.setState({ answers: newAnswers })
+          axios
+            .get(`http://localhost:3001/answers/find_pb/${response.data.id}`, {
+              id: response.data.id,
+            })
+            .then((response) => {
+              console.log(response.data)
+              const newAnswers = update(this.state.answers, {
+                $push: [response.data],
+              })
+              this.setState({ answers: newAnswers })
+            })
+            .catch((err) => {
+              console.error(err)
+              this.setState({
+                errorText: "「Answer」を入力してください",
+              })
+            })
         })
         .catch((err) => {
           console.error(err)
         })
     }
+  }
+
+  // エラーハンドリング
+  handleValidation(e) {
+    const value = e.target.value
+    value
+      ? this.setState({ errorText: "" })
+      : this.setState({ errorText: "「Answer」を入力してください" })
   }
 
   render() {
@@ -171,14 +210,17 @@ export default class ChatPage extends React.Component {
           </div>
           <div className={chatStyles.formBox}>
             <form noValidate autoComplete="off" onSubmit={this.sendAnswer}>
+              <div style={this.errStyle}>{this.state.errorText}</div>
               <TextareaAutosize
                 rowsMax={1}
                 aria-label="maximum height"
                 placeholder="Answerを入力してください。"
                 style={this.useStyles.form}
                 name="textarea"
+                value={this.state.answer}
                 onChange={(e) => {
                   this.setState({ answer: e.target.value })
+                  this.handleValidation(e)
                 }}
               />
               <Button
@@ -217,5 +259,12 @@ export default class ChatPage extends React.Component {
       top: "28%",
       right: "8%",
     },
+  }
+  errStyle = {
+    height: "20px",
+    textAlign: "left",
+    color: "red",
+    marginBottom: "5px",
+    textIndent: "4rem",
   }
 }
