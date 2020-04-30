@@ -48,7 +48,7 @@ const useStyles = makeStyles({
   },
 
   btnWrapper: {
-    height: "50%",
+    height: "75%",
     width: "75%",
     alignItems: "center",
     margin: "0 auto",
