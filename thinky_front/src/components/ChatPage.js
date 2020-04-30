@@ -177,40 +177,41 @@ export default class ChatPage extends React.Component {
 
   render() {
     return (
-      <div className={chatStyles.chatContainer}>
-        <div className={chatStyles.chatBox}>
-          <div className={chatStyles.topicSpace}>
-            <p className={chatStyles.topic}>Why：{this.state.whyContent}</p>
-            {this.props.location.state.pv && (
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={this.state.checkShare}
-                    onChange={this.isShare}
-                    name="checkShare"
-                    color="primary"
-                  />
-                }
-                label="この「Why」をみんなに共有する"
-                style={this.useStyles.shareCheck}
-              />
-            )}
-          </div>
-
-          <div className={chatStyles.communication}>
-            {this.state.answers.map((answer) => {
-              return (
-                <Answer
-                  answer={answer}
-                  pv={this.props.location.state.pv && true}
-                  key={answer.id}
+      <div className={chatStyles.chatBox}>
+        <div className={chatStyles.topicSpace}>
+          <p className={chatStyles.topic}>Why：{this.state.whyContent}</p>
+          {this.props.location.state.pv && (
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={this.state.checkShare}
+                  onChange={this.isShare}
+                  name="checkShare"
+                  color="primary"
                 />
-              )
-            })}
-          </div>
+              }
+              label="この「Why」をみんなに共有する"
+              style={this.useStyles.shareCheck}
+            />
+          )}
+        </div>
+
+        <div className={chatStyles.communication}>
+          {this.state.answers.map((answer) => {
+            return (
+              <Answer
+                answer={answer}
+                pv={this.props.location.state.pv && true}
+                key={answer.id}
+              />
+            )
+          })}
+        </div>
+
+        <div style={this.errStyle}>{this.state.errorText}</div>
+        <div className={chatStyles.formContainer}>
           <div className={chatStyles.formBox}>
             <form noValidate autoComplete="off" onSubmit={this.sendAnswer}>
-              <div style={this.errStyle}>{this.state.errorText}</div>
               <TextareaAutosize
                 rowsMax={1}
                 aria-label="maximum height"
@@ -243,7 +244,7 @@ export default class ChatPage extends React.Component {
     form: {
       margin: "24px 0",
       position: "absolute",
-      top: "8%",
+      top: "50%",
       left: "8%",
       width: "70%",
       minHeight: "3rem",
@@ -256,7 +257,7 @@ export default class ChatPage extends React.Component {
     },
     button: {
       position: "absolute",
-      top: "28%",
+      top: "160%",
       right: "8%",
     },
   }
@@ -264,7 +265,7 @@ export default class ChatPage extends React.Component {
     height: "20px",
     textAlign: "left",
     color: "red",
-    marginBottom: "5px",
+    paddingTop: "1rem",
     textIndent: "4rem",
   }
 }
