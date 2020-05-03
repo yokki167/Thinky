@@ -1,34 +1,154 @@
 // Import Pacakages
 import React from "react"
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  withRouter,
+} from "react-router-dom"
+import axios from "axios"
 
 // Import Styles
 
 // Import Components
 import Home from "./Home.js"
 import Layout from "./Layout"
-// import SignUp from "./SignUp";
-// import SignIn from "./SignIn";
-// import UserEdit from "./UserEdit";
+import SignUp from "./SignUp"
+import SignIn from "./SignIn"
 import UserMypage from "./UserMypage"
 import EveryoneWhy from "./EveryoneWhy"
 import ChatPage from "./ChatPage"
 import UserEdit from "./UserEdit"
 
-function App() {
-  return (
-    <Router>
-      <Layout>
-        <Switch>
-          <Route exact={true} path="/home" component={Home} />
-          <Route path="/whies/:id" component={ChatPage} />
-          <Route exact={true} path="/share" component={EveryoneWhy} />
-          <Route exact={true} path="/mypage" component={UserMypage} />
-          <Route exact={true} path="/userEdit" component={UserEdit} />
-        </Switch>
-      </Layout>
-    </Router>
-  )
+class App extends React.Component {
+  constructor() {
+    super()
+
+    this.state = {
+      loggedInStatus: "NOT_LOGGED_IN",
+      user: {},
+    }
+
+    this.handleLogin = this.handleLogin.bind(this)
+    this.handleLogout = this.handleLogout.bind(this)
+    this.handleLogoutClick = this.handleLogoutClick.bind(this)
+    this.chekLoginStatus = this.checkLoginStatus.bind(this)
+  }
+
+  // ログイン状態維持(リロード時・ページrender時に発火？)
+  checkLoginStatus() {
+    console.log("start checkLoginStatus")
+    axios
+      .get("http://localhost:3001/logged_in", { withCredentials: true })
+      .then((response) => {
+        if (
+          response.data.logged_in &&
+          this.state.loggedInStatus === "NOT_LOGGED_IN"
+        ) {
+          console.log("session success", response)
+          this.setState({
+            loggedInStatus: "LOGGED_IN",
+            user: response.data.user,
+          })
+        } else if (
+          !response.data.logged_in &
+          (this.state.loggedInStatus === "LOGGED_IN")
+        ) {
+          console.log("session fail", response)
+          this.setState({
+            loggedInStatus: "NOT_LOGGED_IN",
+            user: {},
+          })
+        }
+      })
+      .catch((error) => {
+        console.log("check login error", error)
+      })
+  }
+
+  componentDidMount() {
+    console.log("didMount")
+    this.checkLoginStatus()
+  }
+
+  // handleSuccessfulAuthの中で発火
+  handleLogin(data) {
+    this.setState({
+      loggedInStatus: "LOGGED_IN",
+      user: data.user,
+    })
+  }
+
+  // ログアウトボタンクリックで発火
+  handleLogoutClick() {
+    console.log("logout btn pushed")
+    axios
+      .delete("http://localhost:3001/logout", { withCredentials: true })
+      .then((response) => {
+        console.log(response)
+        this.handleLogout()
+      })
+      .catch((error) => {
+        console.log("logout error", error)
+      })
+  }
+
+  // ログアウト関数(handleClickLogout)で発火
+  handleLogout() {
+    console.log("logout started")
+    this.setState({
+      loggedInStatus: "NOT_LOGGED_IN",
+      user: {},
+    })
+  }
+
+  render() {
+    return (
+      <Router>
+        <Layout handleLogoutClick={this.handleLogoutClick}>
+          <Switch>
+            <Route
+              exact={true}
+              path="/home"
+              render={(props) => (
+                <Home
+                  {...props}
+                  loggedInStatus={this.state.loggedInStatus}
+                  user={this.state.user}
+                />
+              )}
+            />
+            <Route
+              path="/whies/:id"
+              component={PrivateChat}
+              user={this.state.user}
+            />
+            <Route exact={true} path="/share" component={EveryoneWhy} />
+            <Route exact={true} path="/mypage" component={UserMypage} />
+            <Route exact={true} path="/userEdit" component={UserEdit} />
+            <Route
+              exact={true}
+              path="/signin"
+              render={(props) => (
+                <SignIn
+                  {...props}
+                  handleLogin={this.handleLogin}
+                  loggedInStatus={this.state.loggedInStatus}
+                />
+              )}
+            />
+            <Route
+              exact={true}
+              path="/signup"
+              render={(props) => (
+                <SignUp {...props} handleLogin={this.handleLogin} />
+              )}
+            />
+          </Switch>
+        </Layout>
+      </Router>
+    )
+  }
 }
 
 export default App

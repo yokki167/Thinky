@@ -68,10 +68,13 @@ const useStyles = makeStyles({
   },
 })
 
-function Home() {
+function Home(props) {
   const home = useStyles()
 
   const [isOpen, setIsOpen] = useState(false)
+  // const [user, setUser] = useState((props) => {
+  //   props.location.user
+  // })
 
   return (
     <div className={home.home}>
@@ -98,7 +101,7 @@ function Home() {
             aria-describedby="simple-modal-description"
           >
             <DialogContent>
-              <WhyModal />
+              <WhyModal user={() => props.user} />
             </DialogContent>
           </Modal>
           <Link to="/share" className={home.link}>

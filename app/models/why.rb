@@ -4,4 +4,5 @@ class Why < ApplicationRecord
   belongs_to :genre
 
   validates :question, presence: true
+  belongs_to :user
 end
