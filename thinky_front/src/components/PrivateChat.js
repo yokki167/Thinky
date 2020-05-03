@@ -35,7 +35,7 @@ export default class PrivateChat extends React.Component {
   componentDidMount() {
     const id = this.props.location.state.whyId
     axios
-      .get(`http://localhost:3001/whies/${id}`)
+      .get(`http://localhost:3001/whies/${id}`, { withCredential: true })
       .then((response) => {
         console.log(response.data)
         this.setState({ whyId: response.data.id })
@@ -50,9 +50,13 @@ export default class PrivateChat extends React.Component {
 
   getAnswers(id) {
     axios
-      .get(`http://localhost:3001/answers/index_pv`, {
-        params: { id },
-      })
+      .get(
+        `http://localhost:3001/answers/index_pv`,
+        {
+          params: { id },
+        },
+        { withCredential: true }
+      )
       .then((response) => {
         console.log(response.data)
         this.setState({ answers: response.data })
@@ -66,9 +70,13 @@ export default class PrivateChat extends React.Component {
     // みんなに共有するかのチェックボックス用
     const share = this.state.checkShare ? false : true
     axios
-      .patch(`http://localhost:3001/whies/${this.state.whyId}`, {
-        share: share,
-      })
+      .patch(
+        `http://localhost:3001/whies/${this.state.whyId}`,
+        {
+          share: share,
+        },
+        { withCredential: true }
+      )
       .then((response) => {
         console.log(response.data)
       })
@@ -88,10 +96,14 @@ export default class PrivateChat extends React.Component {
 
   createAnswer = (answer, whyId) => {
     axios
-      .post("http://localhost:3001/answers/post_pv", {
-        answer: answer,
-        id: whyId,
-      })
+      .post(
+        "http://localhost:3001/answers/post_pv",
+        {
+          answer: answer,
+          id: whyId,
+        },
+        { withCredential: true }
+      )
       .then((response) => {
         console.log(response.data)
         const newAnswers = update(this.state.answers, {
