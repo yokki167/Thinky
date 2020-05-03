@@ -59,10 +59,12 @@ class App extends React.Component {
             loggedInStatus: "NOT_LOGGED_IN",
             user: {},
           })
+          this.props.history.push("/")
         }
       })
       .catch((error) => {
         console.log("check login error", error)
+        this.props.history.push("/")
       })
   }
 
@@ -105,7 +107,10 @@ class App extends React.Component {
   render() {
     return (
       <Router>
-        <Layout handleLogoutClick={this.handleLogoutClick}>
+        <Layout
+          handleLogoutClick={this.handleLogoutClick}
+          user={this.state.user}
+        >
           <Switch>
             <Route
               exact={true}
