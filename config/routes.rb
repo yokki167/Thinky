@@ -1,12 +1,11 @@
 Rails.application.routes.draw do
-  devise_for :users, only: []
-
-  namespace :v1, defaults: { format: :json } do
-    resource :login, only: [:create], controller: :sessions
-    resource :users, only: [:create]
-  end
   
   get 'whies/index'
+
+  resources :sessions, only: [:create]
+  resources :registrations, only: [:create]
+  delete :logout, to: "sessions#logout"
+  get :logged_in, to: "sessions#logged_in"
 
   resources :whies do
     member do

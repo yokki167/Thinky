@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-export default function Header() {
+export default function Header(props) {
   const classes = useStyles()
 
   return (
@@ -49,7 +49,15 @@ export default function Header() {
               Thinky
             </Link>
           </Typography>
-          <Button color="inherit">Login</Button>
+          <Button color="inherit">
+            <Link to="/signin">Log in</Link>
+          </Button>
+          <Button color="inherit">
+            <Link to="/signup">Sign up</Link>
+          </Button>
+          <Button color="inherit" onClick={() => props.handleLogoutClick()}>
+            Logout
+          </Button>
         </Toolbar>
       </AppBar>
     </div>

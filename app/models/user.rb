@@ -1,15 +1,15 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+  has_secure_password
+  has_many :whies
+  has_many :pb_answers
+  has_many :pv_answers
 
-  after_create :update_access_token!
+  validates_presence_of :email
+  validates_uniqueness_of :email
 
-  validates :email, presence: true
-
-  def update_access_token!
-    self.access_token = "#{self.id}:#{Devise.friendly_token}"
-    save
+  def set_current_user
+    if session[:user_id]
+      @current_user = User.find(session[:user_id])
+    end
   end
 end
