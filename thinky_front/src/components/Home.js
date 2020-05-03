@@ -1,6 +1,6 @@
 // Import Packages
 import React, { useState } from "react"
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 // Import Styles
 import Button from "@material-ui/core/Button"

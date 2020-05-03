@@ -1,6 +1,6 @@
 // Import Packages
 import React from "react"
-import { BrowserRouter as Router, Link } from "react-router-dom"
+import { Link } from "react-router-dom"
 import { useMediaQuery } from "react-responsive"
 
 // Import Styles
