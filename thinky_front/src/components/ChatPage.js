@@ -109,6 +109,7 @@ export default class ChatPage extends React.Component {
         .post("http://localhost:3001/answers/post_pv", {
           answer,
           id: whyId,
+          user_id: this.props.user.id,
         })
         .then((response) => {
           console.log(response.data)
@@ -140,6 +141,7 @@ export default class ChatPage extends React.Component {
         .post("http://localhost:3001/answers/post_pb", {
           answer,
           id: whyId,
+          user_id: this.props.user.id,
         })
         .then((response) => {
           console.log(response.data)

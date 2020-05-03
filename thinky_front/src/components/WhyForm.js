@@ -32,13 +32,17 @@ class WhyForm extends React.Component {
 
   createWhy = (formWhy, genreId, checkShare) => {
     console.log(formWhy)
+    console.log(this.props.user)
+    console.log(this.props.user.id)
     axios
       .post("http://localhost:3001/whies/post", {
         why: formWhy,
         genre: genreId,
         share: checkShare,
+        user_id: this.props.user.id,
       })
       .then((response) => {
+        console.log(this.props.user.id)
         console.log(response.data)
         axios
           .get(`http://localhost:3001/whies/${response.data.id}`, {

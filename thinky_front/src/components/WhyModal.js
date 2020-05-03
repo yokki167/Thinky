@@ -67,6 +67,7 @@ export default class WhyModal extends React.Component {
           genreId={this.state.genreId}
           checkShare={this.state.checkShare}
           tabindex="-1"
+          user={this.props.user}
         />
       </div>
     )

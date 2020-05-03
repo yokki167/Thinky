@@ -101,7 +101,7 @@ function Home(props) {
             aria-describedby="simple-modal-description"
           >
             <DialogContent>
-              <WhyModal user={() => props.user} />
+              <WhyModal user={props.user} />
             </DialogContent>
           </Modal>
           <Link to="/share" className={home.link}>

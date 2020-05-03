@@ -17,13 +17,14 @@ class WhiesController < ApplicationController
   end
 
   def post
-    # @why = Why.new(question: params[:why], genre_id: params[:genre], share: params[:share], user_id: params[:user_id])
-    @why = Why.new(why_params)
-    if @why.save
+    @why = Why.create(question: params[:why], genre_id: params[:genre], share: params[:share], user_id: params[:user_id])
+    # @why = Why.create(question: params[:why], genre_id: params[:genre], share: params[:share]).merge(user_id: params[:user_id])
+    # @why = Why.new(why_params)
+    # if @why.save
       render json: @why
-    else
-      render json: { message: "could not save"}
-    end
+    # else
+    #   render json: { message: "could not save"}
+    # end
   end
 
   def count
@@ -39,8 +40,8 @@ class WhiesController < ApplicationController
     render json: @why
   end
 
-  private
-  def why_params
-    params.permit(question: params[:why], genre_id: params[:genre], share: params[:share]).merge(user_id: params[:user_id])
-  end
+  # private
+  # def why_params
+  #   params.permit(question: params[:why], genre_id: params[:genre], share: params[:share]).merge(user_id: params[:user_id])
+  # end
 end
