@@ -24,18 +24,19 @@ function PvAnswer(props) {
 function PbAnswer(props) {
   return (
     <div>
-      <div className={chatStyles.chatSpace}>
-        <div className={chatStyles.chatRight}>
-          <p className={chatStyles.chatText}>自分が送信したAnswersが入ります</p>
+      {props.userId === props.answer.user_id ? (
+        <div className={chatStyles.chatSpace}>
+          <div className={chatStyles.chatRight}>
+            <p className={chatStyles.chatText}>{props.answer.content}</p>
+          </div>
         </div>
-      </div>
-      <div className={chatStyles.chatSpace}>
-        <div className={chatStyles.chatLeft}>
-          <p className={chatStyles.chatText}>
-            他ユーザーからのAnswersが入ります
-          </p>
+      ) : (
+        <div className={chatStyles.chatSpace}>
+          <div className={chatStyles.chatLeft}>
+            <p className={chatStyles.chatText}>{props.answer.content}</p>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   )
 }

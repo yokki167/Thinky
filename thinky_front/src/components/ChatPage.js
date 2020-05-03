@@ -23,6 +23,7 @@ export default class ChatPage extends React.Component {
       answer: null,
       checkShare: true,
       answers: [],
+      // answerUserId: 0,
       errorText: "",
     }
 
@@ -71,6 +72,7 @@ export default class ChatPage extends React.Component {
         .then((response) => {
           console.log(response.data)
           this.setState({ answers: response.data })
+          // this.setState({ answerUserId: response.data[0].user_id })
         })
         .catch((err) => {
           console.error(err)
@@ -204,6 +206,8 @@ export default class ChatPage extends React.Component {
               <Answer
                 answer={answer}
                 pv={this.props.location.state.pv && true}
+                // answerUserId={this.state.answerUserId}
+                userId={this.props.user.id}
                 key={answer.id}
               />
             )
