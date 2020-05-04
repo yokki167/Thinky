@@ -128,7 +128,11 @@ class App extends React.Component {
               render={(props) => <ChatPage {...props} user={this.state.user} />}
             />
             <Route exact={true} path="/share" component={EveryoneWhy} />
-            <Route exact={true} path="/mypage" component={UserMypage} />
+            <Route
+              exact={true}
+              path="/mypage"
+              render={() => <UserMypage user={this.state.user} />}
+            />
             <Route exact={true} path="/userEdit" component={UserEdit} />
             <Route
               exact={true}
