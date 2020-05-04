@@ -34,6 +34,12 @@ class WhiesController < ApplicationController
 
   end
 
+  def user
+    @why = Why.where( user_id: params[:id])
+    render json: @why
+
+  end
+
   def update
     @why = Why.find(params[:id])
     @why.update(share: params[:share])

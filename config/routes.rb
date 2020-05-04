@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :whies do
     member do
       get 'count'
+      get 'user'
     end
   end
   # get 'whies/find'
