@@ -30,7 +30,7 @@ function SignUp(props) {
 
   const [username, setName] = useState("")
   const [email, setEmail] = useState("")
-  const [password, setPassword] = useState()
+  const [password, setPassword] = useState("")
 
   useEffect(() => {
     getUserData(props.user.id)
