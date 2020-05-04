@@ -59,12 +59,10 @@ class App extends React.Component {
             loggedInStatus: "NOT_LOGGED_IN",
             user: {},
           })
-          this.props.history.push("/")
         }
       })
       .catch((error) => {
         console.log("check login error", error)
-        this.props.history.push("/")
       })
   }
 

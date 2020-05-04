@@ -12,6 +12,7 @@ import Checkbox from "@material-ui/core/Checkbox"
 import TextareaAutosize from "@material-ui/core/TextareaAutosize"
 
 // Import Components
+import ChatHeader from "./ChatHeader"
 import Answer from "./Answer"
 
 export default class ChatPage extends React.Component {
@@ -20,7 +21,7 @@ export default class ChatPage extends React.Component {
     this.state = {
       whyId: 0,
       whyContent: "",
-      answer: null,
+      answer: "",
       checkShare: true,
       answers: [],
       // answerUserId: 0,
@@ -31,7 +32,6 @@ export default class ChatPage extends React.Component {
     this.sendAnswer = this.sendAnswer.bind(this)
     this.createAnswer = this.createAnswer.bind(this)
     this.getAnswers = this.getAnswers.bind(this)
-    this.isShare = this.isShare.bind(this)
     this.handleValidation = this.handleValidation.bind(this)
   }
 
@@ -80,21 +80,21 @@ export default class ChatPage extends React.Component {
     }
   }
 
-  isShare(e) {
-    // みんなに共有するかのチェックボックス用
-    const share = this.state.checkShare ? false : true
-    axios
-      .patch(`http://localhost:3001/whies/${this.state.whyId}`, {
-        share,
-      })
-      .then((response) => {
-        console.log(response.data)
-      })
-      .catch((err) => {
-        console.error(err)
-      })
-    this.setState({ [e.target.name]: e.target.checked })
-  }
+  // isShare(e) {
+  //   // みんなに共有するかのチェックボックス用
+  //   const share = this.state.checkShare ? false : true
+  //   axios
+  //     .patch(`http://localhost:3001/whies/${this.state.whyId}`, {
+  //       share,
+  //     })
+  //     .then((response) => {
+  //       console.log(response.data)
+  //     })
+  //     .catch((err) => {
+  //       console.error(err)
+  //     })
+  //   this.setState({ [e.target.name]: e.target.checked })
+  // }
 
   sendAnswer(e) {
     e.preventDefault()
@@ -181,68 +181,60 @@ export default class ChatPage extends React.Component {
 
   render() {
     return (
-      <div className={chatStyles.chatBox}>
-        <div className={chatStyles.topicSpace}>
-          <p className={chatStyles.topic}>Why：{this.state.whyContent}</p>
-          {this.props.location.state.pv && (
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={this.state.checkShare}
-                  onChange={this.isShare}
-                  name="checkShare"
-                  color="primary"
+      <>
+        <ChatHeader
+          loggedInStatus={this.state.loggedInStatus}
+          user={this.props.user}
+          whyId={this.state.whyId}
+          whyContent={this.state.whyContent}
+          pv={this.props.location.state.pv}
+          isShare={this.isShare}
+        />
+        <div className={chatStyles.chatBox}>
+          <div className={chatStyles.communication}>
+            {this.state.answers.map((answer) => {
+              return (
+                <Answer
+                  answer={answer}
+                  pv={this.props.location.state.pv && true}
+                  // answerUserId={this.state.answerUserId}
+                  userId={this.props.user.id}
+                  key={answer.id}
                 />
-              }
-              label="この「Why」をみんなに共有する"
-              style={this.useStyles.shareCheck}
-            />
-          )}
-        </div>
+              )
+            })}
+          </div>
 
-        <div className={chatStyles.communication}>
-          {this.state.answers.map((answer) => {
-            return (
-              <Answer
-                answer={answer}
-                pv={this.props.location.state.pv && true}
-                // answerUserId={this.state.answerUserId}
-                userId={this.props.user.id}
-                key={answer.id}
-              />
-            )
-          })}
-        </div>
-
-        <div style={this.errStyle}>{this.state.errorText}</div>
-        <div className={chatStyles.formContainer}>
-          <div className={chatStyles.formBox}>
-            <form noValidate autoComplete="off" onSubmit={this.sendAnswer}>
-              <TextareaAutosize
-                rowsMax={1}
-                aria-label="maximum height"
-                placeholder="Answerを入力してください。"
-                style={this.useStyles.form}
-                name="textarea"
-                value={this.state.answer}
-                onChange={(e) => {
-                  this.setState({ answer: e.target.value })
-                  this.handleValidation(e)
-                }}
-              />
-              <Button
-                variant="contained"
-                color="primary"
-                style={this.useStyles.button}
-                endIcon={<SendIcon />}
-                type="submit"
-              >
-                Send
-              </Button>
-            </form>
+          <div style={this.errStyle}>{this.state.errorText}</div>
+          <div className={chatStyles.formContainer}>
+            <div className={chatStyles.formBox}>
+              <form noValidate autoComplete="off" onSubmit={this.sendAnswer}>
+                <TextareaAutosize
+                  rowsMax={1}
+                  aria-label="maximum height"
+                  placeholder="Answerを入力してください。"
+                  style={this.useStyles.form}
+                  name="textarea"
+                  value={this.state.answer}
+                  onChange={(e) => {
+                    this.setState({ answer: e.target.value })
+                    this.handleValidation(e)
+                  }}
+                />
+                <Button
+                  variant="contained"
+                  color="primary"
+                  style={this.useStyles.button}
+                  endIcon={<SendIcon />}
+                  type="submit"
+                >
+                  Send
+                </Button>
+              </form>
+            </div>
           </div>
         </div>
-      </div>
+      </>
     )
   }
 
@@ -256,11 +248,7 @@ export default class ChatPage extends React.Component {
       minHeight: "3rem",
       fontSize: "2rem",
     },
-    shareCheck: {
-      margin: "0 0 0 2rem",
-      position: "absolute",
-      right: "2rem",
-    },
+
     button: {
       position: "absolute",
       top: "160%",
