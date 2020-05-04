@@ -265,6 +265,7 @@ export default class ChatPage extends React.Component {
       position: "absolute",
       top: "160%",
       right: "8%",
+      backgroundColor: "#424242",
     },
   }
   errStyle = {
@@ -273,5 +274,6 @@ export default class ChatPage extends React.Component {
     color: "red",
     paddingTop: "1rem",
     textIndent: "4rem",
+    backgroundColor: "#303030",
   }
 }
