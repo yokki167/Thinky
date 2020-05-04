@@ -133,7 +133,16 @@ class App extends React.Component {
               path="/mypage"
               render={() => <UserMypage user={this.state.user} />}
             />
-            <Route exact={true} path="/userEdit" component={UserEdit} />
+            <Route
+              exact={true}
+              path="/userEdit"
+              render={() => (
+                <UserEdit
+                  user={this.state.user}
+                  handleLogin={this.handleLogin}
+                />
+              )}
+            />
             <Route
               exact={true}
               path="/signin"

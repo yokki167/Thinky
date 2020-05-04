@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get 'whies/index'
 
   resources :sessions, only: [:create]
-  resources :registrations, only: [:create]
+  resources :registrations, only: [:create, :edit, :update]
   delete :logout, to: "sessions#logout"
   get :logged_in, to: "sessions#logged_in"
 

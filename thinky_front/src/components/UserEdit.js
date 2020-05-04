@@ -1,5 +1,9 @@
 // Import Packages
-import React from "react"
+import React, { useState, useEffect } from "react"
+import { withRouter, Link } from "react-router-dom"
+import axios from "axios"
+
+// import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom"
 
 // Import Styles
 import { makeStyles } from "@material-ui/core/styles"
@@ -9,7 +13,7 @@ import CssBaseline from "@material-ui/core/CssBaseline"
 import TextField from "@material-ui/core/TextField"
 // import FormControlLabel from "@material-ui/core/FormControlLabel"
 // import Checkbox from "@material-ui/core/Checkbox"
-import Link from "@material-ui/core/Link"
+// import Link from "@material-ui/core/Link"
 import Grid from "@material-ui/core/Grid"
 import Box from "@material-ui/core/Box"
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined"
@@ -18,28 +22,110 @@ import Container from "@material-ui/core/Container"
 
 // Import Components
 
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    marginTop: theme.spacing(8),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(3),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-}))
-
-export default function SignUp() {
+function SignUp(props) {
   const classes = useStyles()
+
+  const [user, setUser] = useState([])
+  const [idd, setId] = useState(0)
+
+  const [username, setName] = useState("")
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState()
+
+  useEffect(() => {
+    getUserData(props.user.id)
+    setId(props.user.id)
+  }, [props])
+
+  console.log(email)
+
+  function handleSuccessfulAuth(data) {
+    props.handleLogin(data)
+    props.history.push("/home")
+  }
+
+  function getUserData(id) {
+    console.log(id)
+    axios
+      .get(`http://localhost:3001/registrations/${id}/edit`)
+      .then((response) => {
+        console.log(response.data)
+        setUser(response.data)
+
+        setName(response.data.username)
+        setEmail(response.data.email)
+
+        // setPassword(response.data)
+      })
+      .catch((err) => {
+        console.error(err)
+      })
+  }
+
+  // function judgePassword() {
+  //   if (password) {
+  //     handleSubmitInPassword
+  //   } else {
+  //     handleSubmitNoPassword
+  //   }
+  // }
+
+  function handleSubmitInPassword(event) {
+    console.log(idd)
+    axios
+      .patch(
+        `http://localhost:3001/registrations/${idd}`,
+        {
+          id: idd,
+          user: {
+            email: email,
+            username: username,
+            password: password,
+          },
+        },
+        { withCredentials: true }
+      )
+      .then((response) => {
+        if (response.data.status === "created") {
+          console.log(response.data.status)
+          console.log(response.data.user)
+
+          handleSuccessfulAuth(response.data)
+        }
+      })
+      .catch((error) => {
+        console.log("registration error", error)
+      })
+    event.preventDefault()
+  }
+
+  function handleSubmitNoPassword(event) {
+    console.log(idd)
+    axios
+      .patch(
+        `http://localhost:3001/registrations/${idd}`,
+        {
+          id: idd,
+          user: {
+            email: email,
+            username: username,
+          },
+        },
+        { withCredentials: true }
+      )
+      .then((response) => {
+        if (response.data.status === "created") {
+          console.log(response.data.status)
+          console.log(response.data.user)
+
+          handleSuccessfulAuth(response.data)
+        }
+      })
+      .catch((error) => {
+        console.log("registration error", error)
+      })
+    event.preventDefault()
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -51,7 +137,16 @@ export default function SignUp() {
         <Typography component="h1" variant="h5">
           Edit
         </Typography>
-        <form className={classes.form} noValidate>
+        <form
+          className={classes.form}
+          noValidate
+          onSubmit={(event) =>
+            password
+              ? handleSubmitInPassword(event)
+              : handleSubmitNoPassword(event)
+          }
+          // onsubmit={handleSubmitInPassword}
+        >
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
@@ -63,6 +158,10 @@ export default function SignUp() {
                 id="Name"
                 label="Name"
                 autoFocus
+                value={username}
+                onChange={(event) => {
+                  setName(event.target.value)
+                }}
               />
             </Grid>
             {/* <Grid item xs={12} sm={6}>
@@ -85,6 +184,10 @@ export default function SignUp() {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
+                value={email}
+                onChange={(event) => {
+                  setEmail(event.target.value)
+                }}
               />
             </Grid>
             <Grid item xs={12}>
@@ -93,10 +196,13 @@ export default function SignUp() {
                 required
                 fullWidth
                 name="password"
-                label="Password"
+                label="New Password"
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                onChange={(event) => {
+                  setPassword(event.target.value)
+                }}
               />
             </Grid>
             <Grid
@@ -128,7 +234,7 @@ export default function SignUp() {
             >
               <Grid xs={6}>
                 <Button
-                  href="#"
+                  href="./home"
                   fullWidth
                   variant="contained"
                   color="primary"
@@ -145,4 +251,25 @@ export default function SignUp() {
   )
 }
 
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    marginTop: theme.spacing(8),
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main,
+  },
+  form: {
+    width: "100%", // Fix IE 11 issue.
+    marginTop: theme.spacing(3),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+}))
+
 // export default UserEdit;
+export default withRouter(SignUp)

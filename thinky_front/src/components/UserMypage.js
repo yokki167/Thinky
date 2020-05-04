@@ -45,7 +45,7 @@ export default function UserMypage(props) {
     <>
       <div className={UserMypageStyle.mypage}>
         <div className={UserMypageStyle.top}>
-          <div className={UserMypageStyle.userName}>Taro</div>
+          <div className={UserMypageStyle.userName}>{props.user.username}</div>
           <Link to="/userEdit" className="linkMypage">
             <SettingsIcon className={classes.EditIcon} />
           </Link>
