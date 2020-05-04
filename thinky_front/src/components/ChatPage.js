@@ -14,6 +14,7 @@ import TextareaAutosize from "@material-ui/core/TextareaAutosize"
 // Import Components
 import ChatHeader from "./ChatHeader"
 import Answer from "./Answer"
+import Like from "./Like"
 
 export default class ChatPage extends React.Component {
   constructor(props) {
@@ -255,6 +256,11 @@ export default class ChatPage extends React.Component {
       top: "160%",
       right: "8%",
       backgroundColor: "#424242",
+    },
+    likeBtn: {
+      float: "right",
+      alignItems: "center",
+      display: "block",
     },
   }
   errStyle = {
