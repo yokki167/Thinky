@@ -108,7 +108,13 @@ class App extends React.Component {
         <Switch>
           <Route
             path="/whies/:id"
-            render={(props) => <ChatPage {...props} user={this.state.user} />}
+            render={(props) => (
+              <ChatPage
+                {...props}
+                user={this.state.user}
+                handleLogoutClick={this.handleLogoutClick}
+              />
+            )}
           />
           <Layout
             handleLogoutClick={this.handleLogoutClick}

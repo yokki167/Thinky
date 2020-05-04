@@ -105,136 +105,177 @@ export default function ChatHeader(props) {
           {isTabletOrLaptop &&
             (props.user.id ? (
               <>
-                <div className={chatStyles.topicSpace}>
-                  <p className={chatStyles.topic}>Why：{props.whyContent}</p>
-                  {props.pv === true && (
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          checked={checkShare}
-                          onChange={(e) => isShare(e, props)}
-                          name="checkShare"
-                          color="primary"
+                <div className={chatStyles.chatHeader}>
+                  <div className={chatStyles.topicSpace}>
+                    <p className={chatStyles.topic}>Why：{props.whyContent}</p>
+                    <div className={chatStyles.subContainer}>
+                      {props.pv === true && (
+                        <FormControlLabel
+                          control={
+                            <Checkbox
+                              checked={checkShare}
+                              onChange={(e) => isShare(e, props)}
+                              name="checkShare"
+                              color="primary"
+                            />
+                          }
+                          label="共有"
+                          styles={classes.shareCheck}
                         />
-                      }
-                      label="この「Why」をみんなに共有する"
-                      styles={classes.shareCheck}
-                    />
-                  )}
+                      )}
+                      <Button color="inherit" className={classes.button}>
+                        {props.user.username ? (
+                          <Link to="/mypage" className={classes.link}>
+                            {props.user.username}
+                          </Link>
+                        ) : (
+                          <Link to="/mypage" className={classes.link}>
+                            No Name
+                          </Link>
+                        )}
+                      </Button>
+                      <Button
+                        color="inherit"
+                        onClick={() => props.handleLogoutClick()}
+                        className={classes.button}
+                      >
+                        Log out
+                      </Button>
+                    </div>
+                  </div>
                 </div>
-                <Button color="inherit" className={classes.button}>
-                  {props.user.username ? (
-                    <Link to="/mypage" className={classes.link}>
-                      {props.user.username}
-                    </Link>
-                  ) : (
-                    <Link to="/mypage" className={classes.link}>
-                      No Name
-                    </Link>
-                  )}
-                </Button>
-                <Button
-                  color="inherit"
-                  onClick={() => props.handleLogoutClick()}
-                  className={classes.button}
-                >
-                  Log out
-                </Button>
               </>
             ) : (
               <>
-                <Button color="inherit" className={classes.button}>
-                  <Link to="/signin" className={classes.link}>
-                    Log in
-                  </Link>
-                </Button>
+                <div className={chatStyles.chatHeader}>
+                  <div className={chatStyles.topicSpace}>
+                    <p className={chatStyles.topic}>Why：{props.whyContent}</p>
+                    <div className={chatStyles.subContainer}>
+                      <Button color="inherit" className={classes.button}>
+                        <Link to="/signin" className={classes.link}>
+                          Log in
+                        </Link>
+                      </Button>
 
-                <Button color="inherit" className={classes.button}>
-                  <Link to="/signup" className={classes.link}>
-                    Sign up
-                  </Link>
-                </Button>
+                      <Button color="inherit" className={classes.button}>
+                        <Link to="/signup" className={classes.link}>
+                          Sign up
+                        </Link>
+                      </Button>
+                    </div>
+                  </div>
+                </div>
               </>
             ))}
 
           {isMobile &&
             (props.user.id ? (
               <>
-                <Button color="inherit" className={classes.button}>
-                  {props.user.username ? (
-                    <Link to="/mypage" className={classes.link}>
-                      {props.user.username}
-                    </Link>
-                  ) : (
-                    <Link to="/mypage" className={classes.link}>
-                      No Name
-                    </Link>
-                  )}
-                </Button>
-                <IconButton
-                  edge="start"
-                  className={classes.menuButton}
-                  color="inherit"
-                  aria-label="menu"
-                  ref={anchorRef}
-                  aria-controls={open ? "menu-list-grow" : undefined}
-                  aria-haspopup="true"
-                  onClick={handleToggle}
-                >
-                  <MenuIcon />
-                </IconButton>
-                <Popper
-                  open={open}
-                  anchorEl={anchorRef.current}
-                  role={undefined}
-                  transition
-                  disablePortal
-                >
-                  {({ TransitionProps, placement }) => (
-                    <Grow
-                      {...TransitionProps}
-                      style={{
-                        transformOrigin:
-                          placement === "bottom"
-                            ? "center top"
-                            : "center bottom",
-                      }}
-                    >
-                      <Paper>
-                        <ClickAwayListener onClickAway={handleClose}>
-                          <MenuList
-                            autoFocusItem={open}
-                            id="menu-list-grow"
-                            onKeyDown={handleListKeyDown}
+                <div className={chatStyles.chatHeader}>
+                  <div className={chatStyles.topicSpace}>
+                    <p className={chatStyles.topic}>Why：{props.whyContent}</p>
+                    <div className={chatStyles.subContainer}>
+                      {props.pv === true && (
+                        <FormControlLabel
+                          control={
+                            <Checkbox
+                              checked={checkShare}
+                              onChange={(e) => isShare(e, props)}
+                              name="checkShare"
+                              color="primary"
+                            />
+                          }
+                          label="共有"
+                          styles={classes.shareCheck}
+                        />
+                      )}
+                      <Button color="inherit" className={classes.button}>
+                        {props.user.username ? (
+                          <Link to="/mypage" className={classes.link}>
+                            {props.user.username}
+                          </Link>
+                        ) : (
+                          <Link to="/mypage" className={classes.link}>
+                            No Name
+                          </Link>
+                        )}
+                      </Button>
+                      <IconButton
+                        edge="start"
+                        className={classes.menuButton}
+                        color="inherit"
+                        aria-label="menu"
+                        ref={anchorRef}
+                        aria-controls={open ? "menu-list-grow" : undefined}
+                        aria-haspopup="true"
+                        onClick={handleToggle}
+                      >
+                        <MenuIcon />
+                      </IconButton>
+                      <Popper
+                        open={open}
+                        anchorEl={anchorRef.current}
+                        role={undefined}
+                        transition
+                        disablePortal
+                      >
+                        {({ TransitionProps, placement }) => (
+                          <Grow
+                            {...TransitionProps}
+                            style={{
+                              transformOrigin:
+                                placement === "bottom"
+                                  ? "center top"
+                                  : "center bottom",
+                            }}
                           >
-                            <MenuItem onClick={handleClose}>
-                              <Link to="/home" className={classes.link}>
-                                home
-                              </Link>
-                            </MenuItem>
-                            <MenuItem onClick={() => props.handleLogoutClick()}>
-                              Log out
-                            </MenuItem>
-                          </MenuList>
-                        </ClickAwayListener>
-                      </Paper>
-                    </Grow>
-                  )}
-                </Popper>
+                            <Paper>
+                              <ClickAwayListener onClickAway={handleClose}>
+                                <MenuList
+                                  autoFocusItem={open}
+                                  id="menu-list-grow"
+                                  onKeyDown={handleListKeyDown}
+                                >
+                                  <MenuItem onClick={handleClose}>
+                                    <Link to="/home" className={classes.link}>
+                                      home
+                                    </Link>
+                                  </MenuItem>
+                                  <MenuItem
+                                    onClick={() => props.handleLogoutClick()}
+                                  >
+                                    Log out
+                                  </MenuItem>
+                                </MenuList>
+                              </ClickAwayListener>
+                            </Paper>
+                          </Grow>
+                        )}
+                      </Popper>
+                    </div>
+                  </div>
+                </div>
               </>
             ) : (
               <>
-                <Button color="inherit" className={classes.button}>
-                  <Link to="/signin" className={classes.link}>
-                    Log in
-                  </Link>
-                </Button>
+                <div className={chatStyles.chatHeader}>
+                  <div className={chatStyles.topicSpace}>
+                    <p className={chatStyles.topic}>Why：{props.whyContent}</p>
+                    <div className={chatStyles.subContainer}>
+                      <Button color="inherit" className={classes.button}>
+                        <Link to="/signin" className={classes.link}>
+                          Log in
+                        </Link>
+                      </Button>
 
-                <Button color="inherit" className={classes.button}>
-                  <Link to="/signup" className={classes.link}>
-                    Sign up
-                  </Link>
-                </Button>
+                      <Button color="inherit" className={classes.button}>
+                        <Link to="/signup" className={classes.link}>
+                          Sign up
+                        </Link>
+                      </Button>
+                    </div>
+                  </div>
+                </div>
               </>
             ))}
         </Toolbar>

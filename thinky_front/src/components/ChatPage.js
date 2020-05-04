@@ -189,6 +189,7 @@ export default class ChatPage extends React.Component {
           whyContent={this.state.whyContent}
           pv={this.props.location.state.pv}
           isShare={this.isShare}
+          handleLogoutClick={this.props.handleLogoutClick}
         />
         <div className={chatStyles.chatBox}>
           <div className={chatStyles.communication}>
