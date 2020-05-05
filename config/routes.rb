@@ -11,6 +11,8 @@ Rails.application.routes.draw do
     member do
       get 'count'
       get 'user'
+      get 'search'
+
     end
   end
   # get 'whies/find'

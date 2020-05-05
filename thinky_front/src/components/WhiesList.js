@@ -11,7 +11,7 @@ function InGenreId(props) {
   return (
     <div className={EveryoneWhyStyle.lists}>
       {props.whiesData
-        .filter((why) => why.question.includes(props.text))
+        // .filter((why) => why.question.includes(props.text))
         .filter((why) => why.genre_id === props.genreId)
         .map((why) => (
           <Question why={why} key={why.id} />
@@ -24,7 +24,7 @@ function OutGenreId(props) {
   return (
     <div className={EveryoneWhyStyle.lists}>
       {props.whiesData
-        .filter((why) => why.question.includes(props.text))
+        // .filter((why) => why.question.includes(props.text))
         .map((why) => (
           <Question why={why} key={why.id} />
         ))}
