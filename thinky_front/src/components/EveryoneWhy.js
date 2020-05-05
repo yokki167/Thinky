@@ -34,8 +34,22 @@ export default function EveryoneWhy(props) {
         setWhies(response.data)
       })
       .catch((error) => {
-        console.log("通信に失敗しました", `Error messgae:${error}`)
+        console.log("通信に失敗しました", `Error message:${error}`)
       })
+  }
+
+  function searchPostsData() {
+    axios
+      .get(`http://localhost:3001/whies/${text}/search`)
+      .then((response) => {
+        console.log(response)
+        setWhies(response.data)
+        console.log(whies)
+      })
+      .catch((error) => {
+        console.log("通信に失敗しました", `Error message:${error}`)
+      })
+    console.log(text)
   }
 
   return (
@@ -71,6 +85,7 @@ export default function EveryoneWhy(props) {
             className={EveryoneWhyStyle.box}
             onChange={(event) => {
               setText(event.target.value)
+              console.log(event.target.value)
             }}
             value={text}
             required
@@ -81,6 +96,10 @@ export default function EveryoneWhy(props) {
               color="primary"
               href="#contained-buttons"
               style={btnStyle}
+              onClick={() => {
+                text ? searchPostsData() : getPostsData()
+                // console.log(event.target.value)
+              }}
             >
               検索
             </Button>
@@ -90,7 +109,6 @@ export default function EveryoneWhy(props) {
       <div className={EveryoneWhyStyle.main}>
         <WhiesList
           whiesData={whies}
-          text={text}
           genreId={genreId}
           user={props.user}
         />
