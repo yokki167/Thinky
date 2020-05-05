@@ -4,10 +4,7 @@ class WhiesController < ApplicationController
   def index
     @whies = Why.where(share: true)
 
-    # @count = @whies.pb_answers.count
-
     render json: @whies
-    # render json: @count
 
   end
 
@@ -44,6 +41,26 @@ class WhiesController < ApplicationController
     @why = Why.find(params[:id])
     @why.update(share: params[:share])
     render json: @why
+  end
+
+  def search
+    split_keyword = params[:id].split(/[[:blank:]]+/).select(&:present?)
+
+    # @whies = [] 
+    # split_keyword.each do |keyword|
+    #   next if keyword == "" 
+    #   @whies += Why.where(share: true).where('question LIKE(?)', "%#{keyword}%")
+    # end 
+
+        # @whies.uniq! #重複した商品を削除する
+
+    @whies=Why
+    split_keyword.each do |keyword|
+      @whies = @whies.where(share: true).where('question LIKE(?)', "%#{keyword}%")
+    end
+
+  
+      render json: @whies
   end
 
   # private
