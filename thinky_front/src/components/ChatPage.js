@@ -275,7 +275,10 @@ export default class ChatPage extends React.Component {
                   // answerUserId={this.state.answerUserId}
                   userId={this.props.user.id}
                   key={answer.id}
-                />)})}
+                />
+              )
+            })}
+          </div>
           <div style={this.useStyles.likeBtn}>
             {/* likeのstateによって条件分岐(もっと短くできるかも？) */}
             {this.state.like ? (
