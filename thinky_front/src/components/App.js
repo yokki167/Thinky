@@ -131,7 +131,6 @@ class App extends React.Component {
                 />
               )}
             />
-            <Route exact={true} path="/share" component={EveryoneWhy} />
             <Route
               exact={true}
               path="/mypage"
@@ -145,6 +144,13 @@ class App extends React.Component {
                   user={this.state.user}
                   handleLogin={this.handleLogin}
                 />
+              )}
+            />
+            <Route
+              exact={true}
+              path="/share"
+              render={(props) => (
+                <EveryoneWhy {...props} user={this.state.user} />
               )}
             />
             <Route

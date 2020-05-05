@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  # include CurrentUserConcern
+  include CurrentUserConcern
   
 
   def create
@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
             .try(:authenticate, params["user"]["password"])
     if user
       session[:user_id] = user.id
-      set_current_user
+      # set_current_user
       render json: {
         status: :created,
         logged_in: true,
@@ -21,11 +21,12 @@ class SessionsController < ApplicationController
   end
 
   def logged_in
-    set_current_user
+    # set_current_user
     if @current_user
       render json: {
         logged_in: true,
-        user: @current_user
+        user: @current_user,
+        session: session
       }
     else
       render json: {

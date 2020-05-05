@@ -20,6 +20,7 @@ export default class ChatPage extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      why: {},
       whyId: 0,
       whyContent: "",
       answer: "",
@@ -42,6 +43,7 @@ export default class ChatPage extends React.Component {
       .get(`http://localhost:3001/whies/${id}`)
       .then((response) => {
         console.log(response.data)
+        this.setState({ why: response.data })
         this.setState({ whyId: response.data.id })
         this.setState({ whyContent: response.data.question })
         this.setState({ checkShare: response.data.share })

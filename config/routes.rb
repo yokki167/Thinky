@@ -11,6 +11,9 @@ Rails.application.routes.draw do
     member do
       get 'count'
       get 'user'
+      post   '/like/:why_id' => 'likes#like',   as: 'like'
+      delete '/like/:why_id' => 'likes#unlike', as: 'unlike'
+      get '/status/:why_id' => 'likes#status'
     end
   end
   # get 'whies/find'
@@ -24,4 +27,6 @@ Rails.application.routes.draw do
   get 'answers/index_pb'
   post 'answers/post_pv'
   post 'answers/post_pb'
+
+  
 end

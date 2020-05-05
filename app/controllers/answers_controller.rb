@@ -1,4 +1,8 @@
 class AnswersController < ApplicationController
+
+  include CurrentUserConcern
+
+
   def index_pv
     @answers = PvAnswer.where(why_id: params[:id])
     render json: @answers

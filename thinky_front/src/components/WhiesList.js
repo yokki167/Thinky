@@ -18,7 +18,7 @@ function InGenreId(props) {
           <>
             <Question why={why} key={why.id} />
             <div className={EveryoneWhyStyle.like}>
-              <Like />
+              <Like why={why} key={why.id} user={props.user} />
             </div>
           </>
         ))}
@@ -35,7 +35,7 @@ function OutGenreId(props) {
           <>
             <Question why={why} key={why.id} />
             <div className={EveryoneWhyStyle.like}>
-              <Like />
+              <Like why={why} key={why.id} user={props.user} />
             </div>
           </>
         ))}
