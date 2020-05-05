@@ -10,6 +10,7 @@ import SendIcon from "@material-ui/icons/Send"
 import FormControlLabel from "@material-ui/core/FormControlLabel"
 import Checkbox from "@material-ui/core/Checkbox"
 import TextareaAutosize from "@material-ui/core/TextareaAutosize"
+import ThumbUpIcon from "@material-ui/icons/ThumbUp"
 
 // Import Components
 import ChatHeader from "./ChatHeader"
@@ -20,7 +21,6 @@ export default class ChatPage extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      why: {},
       whyId: 0,
       whyContent: "",
       answer: "",
@@ -28,6 +28,9 @@ export default class ChatPage extends React.Component {
       answers: [],
       // answerUserId: 0,
       errorText: "",
+      likeStatus: "",
+      likeCount: 0,
+      like: false,
     }
 
     // binding "this"
@@ -35,6 +38,8 @@ export default class ChatPage extends React.Component {
     this.createAnswer = this.createAnswer.bind(this)
     this.getAnswers = this.getAnswers.bind(this)
     this.handleValidation = this.handleValidation.bind(this)
+    this.getLikesData = this.getLikesData.bind(this)
+    this.handleLike = this.handleLike.bind(this)
   }
 
   componentDidMount() {
@@ -43,14 +48,80 @@ export default class ChatPage extends React.Component {
       .get(`http://localhost:3001/whies/${id}`)
       .then((response) => {
         console.log(response.data)
-        this.setState({ why: response.data })
         this.setState({ whyId: response.data.id })
         this.setState({ whyContent: response.data.question })
         this.setState({ checkShare: response.data.share })
+        this.setState({ likeCount: response.data.likes_count })
+        this.getLikesData(response.data.id, this.props.user.id)
         this.getAnswers(response.data.id)
       })
       .catch((err) => {
         console.error(err)
+      })
+  }
+
+  // いいねボタン押したとき
+  handleLike() {
+    console.log("like button pushed")
+    console.log("user_id", userId)
+    const userId = this.props.user.id
+    const whyId = this.state.whyId
+
+    // likeのstateがtrue(押されている)か、false(押されていない)で条件分岐
+    return this.state.like
+      ? axios
+          .delete(
+            `http://localhost:3001/whies/${whyId}/like/${whyId}`,
+            { data: { user_id: userId } },
+            { withCredentials: true }
+          )
+          .then((res) => {
+            console.log(res)
+            this.setState({ like: false })
+            this.setState({ likeCount: this.state.likeCount - 1 })
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+      : axios
+          .post(
+            `http://localhost:3001/whies/${whyId}/like/${whyId}`,
+            { user_id: userId },
+            { withCredentials: true }
+          )
+          .then((res) => {
+            console.log(res)
+            this.setState({ like: true })
+            this.setState({ likeCount: this.state.likeCount + 1 })
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+  }
+
+  // ユーザーがいいねしたかどうか確認する
+  getLikesData(whyId, userId) {
+    console.log("uuuu", whyId)
+    console.log("userId", userId)
+    axios
+      .get(
+        `http://localhost:3001/whies/${whyId}/status/${whyId}`,
+        { params: { user_id: userId } },
+        { withCredentials: true }
+      )
+      .then((res) => {
+        if (res.data.status === "already liked") {
+          console.log("success", res.data)
+          this.setState({ likeStatus: res.data.status })
+          this.setState({ like: true })
+        } else {
+          console.log("success", res.data)
+          this.setState({ likeStatus: res.data.status })
+          this.setState({ like: false })
+        }
+      })
+      .catch((err) => {
+        console.log("error", err)
       })
   }
 
@@ -204,9 +275,26 @@ export default class ChatPage extends React.Component {
                   // answerUserId={this.state.answerUserId}
                   userId={this.props.user.id}
                   key={answer.id}
+                />)})}
+          <div style={this.useStyles.likeBtn}>
+            {/* likeのstateによって条件分岐(もっと短くできるかも？) */}
+            {this.state.like ? (
+              <div>
+                <ThumbUpIcon
+                  style={this.useStyles.like}
+                  onClick={this.handleLike}
                 />
-              )
-            })}
+                <span style={this.useStyles.count}>{this.state.likeCount}</span>
+              </div>
+            ) : (
+              <div>
+                <ThumbUpIcon
+                  style={this.useStyles.unlike}
+                  onClick={this.handleLike}
+                />
+                <span style={this.useStyles.count}>{this.state.likeCount}</span>
+              </div>
+            )}
           </div>
 
           <div style={this.errStyle}>{this.state.errorText}</div>
@@ -263,6 +351,33 @@ export default class ChatPage extends React.Component {
       float: "right",
       alignItems: "center",
       display: "block",
+    },
+    like: {
+      filter: `drop-shadow(0 10px 25px 0 rgba(0, 0, 0, .5))`,
+      zIndex: 1,
+      color: "red",
+      "&:hover": {
+        cursor: "pointer",
+      },
+    },
+    unlike: {
+      zIndex: 1,
+      color: "white",
+      "&:hover": {
+        cursor: "pointer",
+      },
+    },
+    count: {
+      margin: "8px",
+      display: "inline-block",
+      // marginBottom: theme
+    },
+    container: {
+      alignItems: "center",
+      width: "70px",
+      float: "right",
+      position: "relative",
+      top: "-100px",
     },
   }
   errStyle = {

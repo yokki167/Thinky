@@ -14,23 +14,23 @@ function Like(props) {
   const [like, setLike] = useState(false)
   const [count, setCount] = useState(props.why.likes_count)
   const id = props.why.id
-  const user_id = props.user.id
+  const userId = props.user.id
 
   // componentの更新ごとに発火
   useEffect(() => {
     console.log("eee", id)
-    getLikesData(id, user_id)
+    getLikesData(id, userId)
   }, [])
 
   console.log("ooo", id)
 
   // ユーザーがいいねしたかどうか確認する
-  function getLikesData(id, user_id) {
+  function getLikesData(id, userId) {
     console.log("uuuu", id)
     axios
       .get(
         `http://localhost:3001/whies/${id}/status/${id}`,
-        { params: { user_id: user_id } },
+        { params: { user_id: userId } },
         { withCredentials: true }
       )
       .then((res) => {
@@ -50,14 +50,14 @@ function Like(props) {
   // いいねボタン押したとき
   const handleLike = () => {
     console.log("like button pushed")
-    console.log("user_id", user_id)
+    console.log("user_id", userId)
 
     // likeのstateがtrue(押されている)か、false(押されていない)で条件分岐
     return like
       ? axios
           .delete(
             `http://localhost:3001/whies/${id}/like/${id}`,
-            { data: { user_id: user_id } },
+            { data: { user_id: userId } },
             { withCredentials: true }
           )
           .then((res) => {
@@ -71,7 +71,7 @@ function Like(props) {
       : axios
           .post(
             `http://localhost:3001/whies/${id}/like/${id}`,
-            { user_id: user_id },
+            { user_id: userId },
             { withCredentials: true }
           )
           .then((res) => {
