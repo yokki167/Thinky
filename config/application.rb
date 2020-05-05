@@ -32,6 +32,7 @@ module Thinky
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.middleware.use ActionDispatch::Cookies
+    config.middleware.use ActionDispatch::Session::CookieStore
     
     config.api_only = false
     config.middleware.insert_before 0, Rack::Cors do

@@ -6,6 +6,7 @@ import EveryoneWhyStyle from "../styles/EveryoneWhy.module.scss"
 
 // Import Components
 import Question from "./Question"
+import Like from "./Like"
 
 function InGenreId(props) {
   return (
@@ -14,7 +15,12 @@ function InGenreId(props) {
         // .filter((why) => why.question.includes(props.text))
         .filter((why) => why.genre_id === props.genreId)
         .map((why) => (
-          <Question why={why} key={why.id} />
+          <>
+            <Question why={why} key={why.id} />
+            <div className={EveryoneWhyStyle.like}>
+              <Like why={why} key={why.id} user={props.user} />
+            </div>
+          </>
         ))}
     </div>
   )
@@ -26,7 +32,12 @@ function OutGenreId(props) {
       {props.whiesData
         // .filter((why) => why.question.includes(props.text))
         .map((why) => (
-          <Question why={why} key={why.id} />
+          <>
+            <Question why={why} key={why.id} />
+            <div className={EveryoneWhyStyle.like}>
+              <Like why={why} key={why.id} user={props.user} />
+            </div>
+          </>
         ))}
     </div>
   )

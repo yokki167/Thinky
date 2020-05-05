@@ -10,10 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_01_114258) do
+ActiveRecord::Schema.define(version: 2020_05_04_080130) do
 
   create_table "genres", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
     t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "likes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "why_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -53,6 +60,7 @@ ActiveRecord::Schema.define(version: 2020_05_01_114258) do
     t.bigint "genre_id"
     t.boolean "share"
     t.bigint "user_id"
+    t.integer "likes_count"
     t.index ["genre_id"], name: "index_whies_on_genre_id"
     t.index ["user_id"], name: "index_whies_on_user_id"
   end

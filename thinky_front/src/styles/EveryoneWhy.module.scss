@@ -31,6 +31,12 @@
     // display: flex;
     // justify-content: space-between;
     width: 100%;
+    .like {
+      position: relative;
+      top: -100px;
+      width: 70px;
+      float: right;
+    }
     .list {
       margin-top: 40px;
       margin-bottom: 30px;
@@ -48,6 +54,8 @@
         margin: 20px;
         display: flex;
         padding-top: 25px;
+        // position: absolute;
+        // float: right;
         .index {
         }
         .count {

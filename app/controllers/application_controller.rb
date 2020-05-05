@@ -7,11 +7,12 @@ class ApplicationController < ActionController::API
   # before_action :set_current_user
 
 
-  def set_current_user
-    if session[:user_id]
-      @current_user = User.find(session[:user_id])
-    # else
-    #   render json: {message: 'cookie does not hava a user_id'}
-    end
-  end
+
+  # def set_current_user
+  #   if session[:user_id]
+  #     @current_user = User.find(session[:user_id])
+  #   # else
+  #   #   render json: {data: session, message: 'cookie does not hava a user_id'}
+  #   end
+  # end
 end

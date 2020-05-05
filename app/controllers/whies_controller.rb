@@ -1,5 +1,6 @@
 class WhiesController < ApplicationController
   # before_action :set_current_user
+  include CurrentUserConcern
 
   def index
     @whies = Why.where(share: true)

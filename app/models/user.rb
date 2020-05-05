@@ -4,6 +4,9 @@ class User < ApplicationRecord
   has_many :pb_answers
   has_many :pv_answers
 
+  has_many :likes, dependent: :destroy
+  has_many :like_whies, through: :likes, source: :why
+
   validates_presence_of :email
   validates_uniqueness_of :email
 

@@ -15,7 +15,7 @@ import EveryoneWhyStyle from "../styles/EveryoneWhy.module.scss"
 // Import Components
 import WhiesList from "./WhiesList"
 
-export default function EveryoneWhy() {
+export default function EveryoneWhy(props) {
   const classes = useStyles()
   const [genreId, setGenreId] = useState(``)
 
@@ -107,7 +107,11 @@ export default function EveryoneWhy() {
         </div>
       </div>
       <div className={EveryoneWhyStyle.main}>
-        <WhiesList whiesData={whies} genreId={genreId} />
+        <WhiesList
+          whiesData={whies}
+          genreId={genreId}
+          user={props.user}
+        />
       </div>
     </>
   )

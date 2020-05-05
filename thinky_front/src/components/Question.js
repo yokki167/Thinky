@@ -8,6 +8,7 @@ import React, { useState, useEffect } from "react"
 import EveryoneWhyStyle from "../styles/EveryoneWhy.module.scss"
 
 // Import Components
+import Like from "./Like"
 
 function Question(props) {
   const [count, setCount] = useState(0)
