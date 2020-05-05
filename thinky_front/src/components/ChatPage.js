@@ -354,6 +354,7 @@ export default class ChatPage extends React.Component {
       float: "right",
       alignItems: "center",
       display: "block",
+      backgroundColor: "#303030",
     },
     like: {
       filter: `drop-shadow(0 10px 25px 0 rgba(0, 0, 0, .5))`,
