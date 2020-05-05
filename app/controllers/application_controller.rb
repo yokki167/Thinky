@@ -4,7 +4,7 @@ class ApplicationController < ActionController::API
   include ActionController::RequestForgeryProtection
   protect_from_forgery with: :exception
   skip_before_action :verify_authenticity_token
-  before_action :set_current_user
+  # before_action :set_current_user
 
 
   def set_current_user
