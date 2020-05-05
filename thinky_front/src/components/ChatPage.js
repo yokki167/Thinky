@@ -62,7 +62,6 @@ export default class ChatPage extends React.Component {
 
   // いいねボタン押したとき
   handleLike() {
-    console.log("like button pushed")
     const userId = this.props.user.id
     const whyId = this.state.whyId
 
