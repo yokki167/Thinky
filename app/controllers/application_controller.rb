@@ -1,9 +1,10 @@
 class ApplicationController < ActionController::API
   include ActionController::Cookies
+  include CurrentUserConcern
 
-  include ActionController::RequestForgeryProtection
-  protect_from_forgery with: :exception
-  skip_before_action :verify_authenticity_token
+  # include ActionController::RequestForgeryProtection
+  # protect_from_forgery unless: -> { request.format.json? }
+  # skip_before_action :verify_authenticity_token
   # before_action :set_current_user
 
 

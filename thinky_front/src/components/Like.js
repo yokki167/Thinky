@@ -18,15 +18,11 @@ function Like(props) {
 
   // componentの更新ごとに発火
   useEffect(() => {
-    console.log("eee", id)
     getLikesData(id, userId)
   }, [])
 
-  console.log("ooo", id)
-
   // ユーザーがいいねしたかどうか確認する
   function getLikesData(id, userId) {
-    console.log("uuuu", id)
     axios
       .get(
         `http://localhost:3001/whies/${id}/status/${id}`,
@@ -61,7 +57,6 @@ function Like(props) {
             { withCredentials: true }
           )
           .then((res) => {
-            console.log(res)
             setLike(false)
             setCount(count - 1)
           })
@@ -75,7 +70,6 @@ function Like(props) {
             { withCredentials: true }
           )
           .then((res) => {
-            console.log(res)
             setLike(true)
             setCount(count + 1)
           })
