@@ -15,6 +15,7 @@ Rails.application.routes.draw do
       delete '/like/:why_id' => 'likes#unlike', as: 'unlike'
       get '/status/:why_id' => 'likes#status'
       get 'search'
+      get 'like_whies'
     end
   end
   # get 'whies/find'
