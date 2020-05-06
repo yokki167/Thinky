@@ -19,6 +19,7 @@ import MenuItem from "@material-ui/core/MenuItem"
 import MenuList from "@material-ui/core/MenuList"
 import FormControlLabel from "@material-ui/core/FormControlLabel"
 import Checkbox from "@material-ui/core/Checkbox"
+import InputBase from "@material-ui/core/InputBase"
 import chatStyles from "../styles/ChatPage.module.scss"
 
 // Import Components
@@ -40,8 +41,10 @@ const useStyles = makeStyles((theme) => ({
   },
   shareCheck: {
     margin: "0 0 0 2rem",
-    // position: "absolute",
-    // right: "2rem",
+  },
+  input: {
+    fontSize: "2rem",
+    color: "white",
   },
 }))
 
@@ -53,6 +56,8 @@ export default function ChatHeader(props) {
 
   const [open, setOpen] = React.useState(false)
   const [checkShare, setCheckShare] = React.useState(true)
+  const [editing, setEditing] = React.useState(false)
+  const [question, setQuestion] = React.useState(props.whyContent)
   const anchorRef = React.useRef(null)
 
   const handleToggle = () => {
@@ -85,9 +90,11 @@ export default function ChatHeader(props) {
 
   function isShare(e, props) {
     // みんなに共有するかのチェックボックス用
+    const why = question
     const share = checkShare ? false : true
     axios
       .patch(`http://localhost:3001/whies/${props.whyId}`, {
+        why,
         share,
       })
       .then((response) => {
@@ -97,6 +104,30 @@ export default function ChatHeader(props) {
         console.error(err)
       })
     setCheckShare(e.target.checked)
+  }
+
+  function handleEditing(e) {
+    e.preventDefault()
+    setQuestion(e.target.value)
+    setEditing(true)
+  }
+
+  function handleUpdate(e) {
+    e.preventDefault()
+    const why = question
+    const share = checkShare
+    axios
+      .patch(`http://localhost:3001/whies/${props.whyId}`, {
+        why,
+        share,
+      })
+      .then((response) => {
+        console.log(response.data)
+      })
+      .catch((err) => {
+        console.error(err)
+      })
+    setEditing(false)
   }
 
   return (
@@ -109,9 +140,32 @@ export default function ChatHeader(props) {
                 <div className={chatStyles.chatHeader}>
                   <div className={chatStyles.topicSpace}>
                     <div className={chatStyles.topicContainer}>
-                      <p className={chatStyles.topic}>
-                        Why：{props.whyContent}
-                      </p>
+                      <form>
+                        <p className={chatStyles.topic}>
+                          Why：
+                          {editing ? (
+                            <span>
+                              <InputBase
+                                className={classes.input}
+                                placeholder={question}
+                                value={question}
+                                onChange={(e) => handleEditing(e)}
+                              />
+                              <button onClick={(e) => handleUpdate(e)}>
+                                Save
+                              </button>
+                            </span>
+                          ) : (
+                            <span>
+                              <InputBase
+                                className={classes.input}
+                                value={question ? question : props.whyContent}
+                                onChange={(e) => handleEditing(e)}
+                              />
+                            </span>
+                          )}
+                        </p>
+                      </form>
                       <LikeForChatHeader
                         user={props.user}
                         handleLike={props.handleLike}
@@ -119,6 +173,7 @@ export default function ChatHeader(props) {
                         like={props.like}
                       />
                     </div>
+
                     <div className={chatStyles.subContainer}>
                       {props.pv === true && (
                         <FormControlLabel

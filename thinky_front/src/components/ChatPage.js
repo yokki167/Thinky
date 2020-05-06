@@ -26,7 +26,6 @@ export default class ChatPage extends React.Component {
       answer: "",
       checkShare: true,
       answers: [],
-      // answerUserId: 0,
       errorText: "",
       likeStatus: "",
       likeCount: 0,
@@ -142,29 +141,12 @@ export default class ChatPage extends React.Component {
         .then((response) => {
           console.log(response.data)
           this.setState({ answers: response.data })
-          // this.setState({ answerUserId: response.data[0].user_id })
         })
         .catch((err) => {
           console.error(err)
         })
     }
   }
-
-  // isShare(e) {
-  //   // みんなに共有するかのチェックボックス用
-  //   const share = this.state.checkShare ? false : true
-  //   axios
-  //     .patch(`http://localhost:3001/whies/${this.state.whyId}`, {
-  //       share,
-  //     })
-  //     .then((response) => {
-  //       console.log(response.data)
-  //     })
-  //     .catch((err) => {
-  //       console.error(err)
-  //     })
-  //   this.setState({ [e.target.name]: e.target.checked })
-  // }
 
   sendAnswer(e) {
     e.preventDefault()
@@ -272,7 +254,6 @@ export default class ChatPage extends React.Component {
                 <Answer
                   answer={answer}
                   pv={this.props.location.state.pv && true}
-                  // answerUserId={this.state.answerUserId}
                   userId={this.props.user.id}
                   key={answer.id}
                 />
@@ -323,7 +304,6 @@ export default class ChatPage extends React.Component {
       minHeight: "3rem",
       fontSize: "2rem",
     },
-
     button: {
       position: "absolute",
       top: "160%",
