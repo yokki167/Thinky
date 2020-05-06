@@ -35,7 +35,10 @@ const useStyles = makeStyles((theme) => ({
   menuButton: {
     marginRight: theme.spacing(1),
   },
-
+  editButton: {
+    backgroundColor: "#424242",
+    transform: "translateY(-4px)",
+  },
   button: {
     marginRight: theme.spacing(1),
   },
@@ -140,7 +143,7 @@ export default function ChatHeader(props) {
                 <div className={chatStyles.chatHeader}>
                   <div className={chatStyles.topicSpace}>
                     <div className={chatStyles.topicContainer}>
-                      <form>
+                      <form onSubmit={(e) => handleUpdate(e)}>
                         <p className={chatStyles.topic}>
                           Why：
                           {editing ? (
@@ -151,9 +154,13 @@ export default function ChatHeader(props) {
                                 value={question}
                                 onChange={(e) => handleEditing(e)}
                               />
-                              <button onClick={(e) => handleUpdate(e)}>
+                              <Button
+                                variant="contained"
+                                className={classes.editButton}
+                                type="submit"
+                              >
                                 Save
-                              </button>
+                              </Button>
                             </span>
                           ) : (
                             <span>
@@ -173,7 +180,6 @@ export default function ChatHeader(props) {
                         like={props.like}
                       />
                     </div>
-
                     <div className={chatStyles.subContainer}>
                       {props.pv === true && (
                         <FormControlLabel
