@@ -63,7 +63,6 @@ export default class ChatPage extends React.Component {
   // いいねボタン押したとき
   handleLike() {
     console.log("like button pushed")
-    console.log("user_id", userId)
     const userId = this.props.user.id
     const whyId = this.state.whyId
 
@@ -101,8 +100,6 @@ export default class ChatPage extends React.Component {
 
   // ユーザーがいいねしたかどうか確認する
   getLikesData(whyId, userId) {
-    console.log("uuuu", whyId)
-    console.log("userId", userId)
     axios
       .get(
         `http://localhost:3001/whies/${whyId}/status/${whyId}`,
@@ -264,6 +261,10 @@ export default class ChatPage extends React.Component {
           pv={this.props.location.state.pv}
           isShare={this.isShare}
           handleLogoutClick={this.props.handleLogoutClick}
+          why={this.state.why}
+          handleLike={this.handleLike}
+          likeCount={this.state.likeCount}
+          like={this.state.like}
         />
         <div className={chatStyles.chatBox}>
           <div className={chatStyles.communication}>
@@ -278,26 +279,6 @@ export default class ChatPage extends React.Component {
                 />
               )
             })}
-          </div>
-          <div style={this.useStyles.likeBtn}>
-            {/* likeのstateによって条件分岐(もっと短くできるかも？) */}
-            {this.state.like ? (
-              <div>
-                <ThumbUpIcon
-                  style={this.useStyles.like}
-                  onClick={this.handleLike}
-                />
-                <span style={this.useStyles.count}>{this.state.likeCount}</span>
-              </div>
-            ) : (
-              <div>
-                <ThumbUpIcon
-                  style={this.useStyles.unlike}
-                  onClick={this.handleLike}
-                />
-                <span style={this.useStyles.count}>{this.state.likeCount}</span>
-              </div>
-            )}
           </div>
 
           <div style={this.errStyle}>{this.state.errorText}</div>

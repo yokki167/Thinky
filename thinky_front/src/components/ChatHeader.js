@@ -22,6 +22,7 @@ import Checkbox from "@material-ui/core/Checkbox"
 import chatStyles from "../styles/ChatPage.module.scss"
 
 // Import Components
+import LikeForChatHeader from "./LikeForChatHeader"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -107,7 +108,17 @@ export default function ChatHeader(props) {
               <>
                 <div className={chatStyles.chatHeader}>
                   <div className={chatStyles.topicSpace}>
-                    <p className={chatStyles.topic}>Why：{props.whyContent}</p>
+                    <div className={chatStyles.topicContainer}>
+                      <p className={chatStyles.topic}>
+                        Why：{props.whyContent}
+                      </p>
+                      <LikeForChatHeader
+                        user={props.user}
+                        handleLike={props.handleLike}
+                        likeCount={props.likeCount}
+                        like={props.like}
+                      />
+                    </div>
                     <div className={chatStyles.subContainer}>
                       {props.pv === true && (
                         <FormControlLabel
@@ -149,7 +160,17 @@ export default function ChatHeader(props) {
               <>
                 <div className={chatStyles.chatHeader}>
                   <div className={chatStyles.topicSpace}>
-                    <p className={chatStyles.topic}>Why：{props.whyContent}</p>
+                    <div className={chatStyles.topicContainer}>
+                      <p className={chatStyles.topic}>
+                        Why：{props.whyContent}
+                      </p>
+                      <LikeForChatHeader
+                        user={props.user}
+                        handleLike={props.handleLike}
+                        likeCount={props.likeCount}
+                        like={props.like}
+                      />
+                    </div>
                     <div className={chatStyles.subContainer}>
                       <Button color="inherit" className={classes.button}>
                         <Link to="/signin" className={classes.link}>
@@ -173,7 +194,17 @@ export default function ChatHeader(props) {
               <>
                 <div className={chatStyles.chatHeader}>
                   <div className={chatStyles.topicSpace}>
-                    <p className={chatStyles.topic}>Why：{props.whyContent}</p>
+                    <div className={chatStyles.topicContainer}>
+                      <p className={chatStyles.topic}>
+                        Why：{props.whyContent}
+                      </p>
+                      <LikeForChatHeader
+                        user={props.user}
+                        handleLike={props.handleLike}
+                        likeCount={props.likeCount}
+                        like={props.like}
+                      />
+                    </div>
                     <div className={chatStyles.subContainer}>
                       {props.pv === true && (
                         <FormControlLabel
