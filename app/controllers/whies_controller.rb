@@ -64,6 +64,15 @@ class WhiesController < ApplicationController
       render json: @whies
   end
 
+  def like_whies
+    @user = User.find(params[:id])
+    @whies = @user.like_whies
+
+    render json: @whies
+
+
+  end
+
   # private
   # def why_params
   #   params.permit(question: params[:why], genre_id: params[:genre], share: params[:share]).merge(user_id: params[:user_id])

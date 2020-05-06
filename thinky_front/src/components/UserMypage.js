@@ -51,7 +51,7 @@ export default function UserMypage(props) {
           </Link>
         </div>
         <div className={UserMypageStyle.middle}>
-          <WhyTab whies={whies} />
+          <WhyTab whies={whies} userId={props.user.id} />
         </div>
       </div>
     </>
