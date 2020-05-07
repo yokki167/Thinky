@@ -19,24 +19,24 @@ import Box from "@material-ui/core/Box"
 import Copyright from "./Copyright"
 import Validation from "./UserValidation"
 
-const initialState = {
-  email: "",
-  password: "",
-  // passwordCount: 0,
-  password_confirmation: "",
-  registrationErrors: "",
-  emailError: "",
-  passwordError: "",
-  passwordConfirmationError: "",
-}
 class SignUp extends React.Component {
   constructor(props) {
     super(props)
 
-    this.state = initialState
+    this.state = {
+      email: "",
+      password: "",
+      // passwordCount: 0,
+      password_confirmation: "",
+      registrationErrors: "",
+      emailError: "",
+      passwordError: "",
+      passwordConfirmationError: "",
+    }
 
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
+    this.handleSuccessfulAuth = this.handleSuccessfulAuth.bind(this)
     this.validate = this.validate.bind(this)
   }
 
@@ -48,7 +48,8 @@ class SignUp extends React.Component {
   }
 
   validate = () => {
-    const regex = /^[A-Za-z0-9]{1}[A-Za-z0-9_.-]*@{1}[A-Za-z0-9_.-]{1,}\.[A-Za-z0-9]{1,}$/
+    // const regex = /^[A-Za-z0-9]{1}[A-Za-z0-9_.-]*@{1}[A-Za-z0-9_.-]{1,}\.[A-Za-z0-9]{1,}$/
+    const regex = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/
 
     let emailError = ""
     let passwordError = ""
@@ -109,7 +110,6 @@ class SignUp extends React.Component {
         .then((response) => {
           if (response.data.status === "created") {
             console.log(response.data.status)
-            this.setState(initialState)
             this.handleSuccessfulAuth(response.data)
           }
         })

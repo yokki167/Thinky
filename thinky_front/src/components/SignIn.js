@@ -18,35 +18,6 @@ import Container from "@material-ui/core/Container"
 // Import Components
 import Copyright from "./Copyright"
 import Validation from "./UserValidation"
-// const useStyles = makeStyles((theme) => ({
-//   paper: {
-//     marginTop: theme.spacing(8),
-//     display: "flex",
-//     flexDirection: "column",
-//     alignItems: "center",
-//   },
-//   avatar: {
-//     margin: theme.spacing(1),
-//     backgroundColor: theme.palette.secondary.main,
-//   },
-//   form: {
-//     width: "100%", // Fix IE 11 issue.
-//     marginTop: theme.spacing(3),
-//   },
-//   submit: {
-//     margin: theme.spacing(3, 0, 2),
-//   },
-// }))
-
-const initialState = {
-  email: "",
-  password: "",
-  // passwordCount: 0,
-  password_confirmation: "",
-  registrationErrors: "",
-  emailError: "",
-  passwordError: "",
-}
 
 class SignIn extends React.Component {
   // const classes = useStyles()
@@ -54,12 +25,22 @@ class SignIn extends React.Component {
   constructor(props) {
     super(props)
 
+    const initialState = {
+      email: "",
+      password: "",
+      // passwordCount: 0,
+      password_confirmation: "",
+      registrationErrors: "",
+      emailError: "",
+      passwordError: "",
+    }
+
     this.state = initialState
 
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.handleSuccessfulAuth = this.handleSuccessfulAuth.bind(this)
-    // this.validate = this.validate.bind(this)
+    this.validate = this.validate.bind(this)
   }
 
   handleChange(event) {
@@ -73,7 +54,7 @@ class SignIn extends React.Component {
   //   return <Validation {...props} state={this.state} />
   // }
   validate = () => {
-    const regex = /^[A-Za-z0-9]{1}[A-Za-z0-9_.-]*@{1}[A-Za-z0-9_.-]{1,}\.[A-Za-z0-9]{1,}$/
+    const regex = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/
 
     let emailError = ""
     let passwordError = ""
@@ -88,6 +69,7 @@ class SignIn extends React.Component {
         emailError = "メールアドレスを入力してください"
       }
     }
+
     if (!password) {
       passwordError = "パスワードを入力してください"
     }
