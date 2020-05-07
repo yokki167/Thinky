@@ -1,5 +1,5 @@
 // Import Packages
-import React from "react"
+import React, { useState, useEffect, useRef } from "react"
 import { Link } from "react-router-dom"
 import { useMediaQuery } from "react-responsive"
 import axios from "axios"
@@ -57,11 +57,11 @@ export default function ChatHeader(props) {
   const isMobile = useMediaQuery({ query: "(max-width: 767px)" })
   const isTabletOrLaptop = useMediaQuery({ query: "(min-width: 767px)" })
 
-  const [open, setOpen] = React.useState(false)
-  const [checkShare, setCheckShare] = React.useState(true)
-  const [editing, setEditing] = React.useState(false)
-  const [question, setQuestion] = React.useState(props.whyContent)
-  const anchorRef = React.useRef(null)
+  const [open, setOpen] = useState(false)
+  const [checkShare, setCheckShare] = useState(true)
+  const [editing, setEditing] = useState(false)
+  const [question, setQuestion] = useState(props.whyContent)
+  const anchorRef = useRef(null)
 
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen)
@@ -82,8 +82,8 @@ export default function ChatHeader(props) {
     }
   }
 
-  const prevOpen = React.useRef(open)
-  React.useEffect(() => {
+  const prevOpen = useRef(open)
+  useEffect(() => {
     if (prevOpen.current === true && open === false) {
       anchorRef.current.focus()
     }
