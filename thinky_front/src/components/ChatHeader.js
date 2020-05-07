@@ -1,5 +1,5 @@
 // Import Packages
-import React from "react"
+import React, { useState, useEffect, useRef } from "react"
 import { Link } from "react-router-dom"
 import { useMediaQuery } from "react-responsive"
 import axios from "axios"
@@ -19,6 +19,7 @@ import MenuItem from "@material-ui/core/MenuItem"
 import MenuList from "@material-ui/core/MenuList"
 import FormControlLabel from "@material-ui/core/FormControlLabel"
 import Checkbox from "@material-ui/core/Checkbox"
+import InputBase from "@material-ui/core/InputBase"
 import chatStyles from "../styles/ChatPage.module.scss"
 
 // Import Components
@@ -34,14 +35,19 @@ const useStyles = makeStyles((theme) => ({
   menuButton: {
     marginRight: theme.spacing(1),
   },
-
+  editButton: {
+    backgroundColor: "#424242",
+    transform: "translateY(-4px)",
+  },
   button: {
     marginRight: theme.spacing(1),
   },
   shareCheck: {
     margin: "0 0 0 2rem",
-    // position: "absolute",
-    // right: "2rem",
+  },
+  input: {
+    fontSize: "2rem",
+    color: "white",
   },
 }))
 
@@ -51,9 +57,11 @@ export default function ChatHeader(props) {
   const isMobile = useMediaQuery({ query: "(max-width: 767px)" })
   const isTabletOrLaptop = useMediaQuery({ query: "(min-width: 767px)" })
 
-  const [open, setOpen] = React.useState(false)
-  const [checkShare, setCheckShare] = React.useState(true)
-  const anchorRef = React.useRef(null)
+  const [open, setOpen] = useState(false)
+  const [checkShare, setCheckShare] = useState(true)
+  const [editing, setEditing] = useState(false)
+  const [question, setQuestion] = useState(props.whyContent)
+  const anchorRef = useRef(null)
 
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen)
@@ -74,8 +82,8 @@ export default function ChatHeader(props) {
     }
   }
 
-  const prevOpen = React.useRef(open)
-  React.useEffect(() => {
+  const prevOpen = useRef(open)
+  useEffect(() => {
     if (prevOpen.current === true && open === false) {
       anchorRef.current.focus()
     }
@@ -85,9 +93,11 @@ export default function ChatHeader(props) {
 
   function isShare(e, props) {
     // みんなに共有するかのチェックボックス用
+    const why = question
     const share = checkShare ? false : true
     axios
       .patch(`http://localhost:3001/whies/${props.whyId}`, {
+        why,
         share,
       })
       .then((response) => {
@@ -97,6 +107,30 @@ export default function ChatHeader(props) {
         console.error(err)
       })
     setCheckShare(e.target.checked)
+  }
+
+  function handleEditing(e) {
+    e.preventDefault()
+    setQuestion(e.target.value)
+    setEditing(true)
+  }
+
+  function handleUpdate(e) {
+    e.preventDefault()
+    const why = question
+    const share = checkShare
+    axios
+      .patch(`http://localhost:3001/whies/${props.whyId}`, {
+        why,
+        share,
+      })
+      .then((response) => {
+        console.log(response.data)
+      })
+      .catch((err) => {
+        console.error(err)
+      })
+    setEditing(false)
   }
 
   return (
@@ -109,9 +143,36 @@ export default function ChatHeader(props) {
                 <div className={chatStyles.chatHeader}>
                   <div className={chatStyles.topicSpace}>
                     <div className={chatStyles.topicContainer}>
-                      <p className={chatStyles.topic}>
-                        Why：{props.whyContent}
-                      </p>
+                      <form onSubmit={(e) => handleUpdate(e)}>
+                        <p className={chatStyles.topic}>
+                          Why：
+                          {editing ? (
+                            <span>
+                              <InputBase
+                                className={classes.input}
+                                placeholder={question}
+                                value={question}
+                                onChange={(e) => handleEditing(e)}
+                              />
+                              <Button
+                                variant="contained"
+                                className={classes.editButton}
+                                type="submit"
+                              >
+                                Save
+                              </Button>
+                            </span>
+                          ) : (
+                            <span>
+                              <InputBase
+                                className={classes.input}
+                                value={question ? question : props.whyContent}
+                                onChange={(e) => handleEditing(e)}
+                              />
+                            </span>
+                          )}
+                        </p>
+                      </form>
                       <LikeForChatHeader
                         user={props.user}
                         handleLike={props.handleLike}

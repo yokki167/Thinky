@@ -6,12 +6,14 @@ import { makeStyles } from "@material-ui/core/styles"
 const useStyles = makeStyles((theme) => ({
   like: {
     color: "red",
+    transform: "translateY(8px)",
     "&:hover": {
       cursor: "pointer",
     },
   },
   unlike: {
     color: "white",
+    transform: "translateY(8px)",
     "&:hover": {
       cursor: "pointer",
     },
@@ -19,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
   count: {
     margin: theme.spacing(1),
     display: "inline-block",
+    transform: "translateY(3px)",
   },
   container: {
     padding: "1.5rem 0",

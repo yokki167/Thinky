@@ -40,7 +40,16 @@ class WhiesController < ApplicationController
 
   def update
     @why = Why.find(params[:id])
-    @why.update(share: params[:share])
+    if !params[:why]
+      @why.update(share: params[:share])
+    elsif
+      @why.update(question: params[:why], share: params[:share])
+    end
+    # if params[:share] || !params[:share]
+    #   @why.update(share: params[:share])
+    # elsif params[:why]
+    #   @why.update(question: params[:why])
+    # end
     render json: @why
   end
 
