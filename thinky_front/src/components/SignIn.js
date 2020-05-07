@@ -17,6 +17,7 @@ import Container from "@material-ui/core/Container"
 
 // Import Components
 import Copyright from "./Copyright"
+import Validation from "./UserValidation"
 // const useStyles = makeStyles((theme) => ({
 //   paper: {
 //     marginTop: theme.spacing(8),
@@ -37,21 +38,28 @@ import Copyright from "./Copyright"
 //   },
 // }))
 
+const initialState = {
+  email: "",
+  password: "",
+  // passwordCount: 0,
+  password_confirmation: "",
+  registrationErrors: "",
+  emailError: "",
+  passwordError: "",
+}
+
 class SignIn extends React.Component {
   // const classes = useStyles()
 
   constructor(props) {
     super(props)
 
-    this.state = {
-      email: "",
-      password: "",
-      loginErrors: "",
-    }
+    this.state = initialState
 
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.handleSuccessfulAuth = this.handleSuccessfulAuth.bind(this)
+    // this.validate = this.validate.bind(this)
   }
 
   handleChange(event) {
@@ -60,34 +68,79 @@ class SignIn extends React.Component {
     })
   }
 
+  // バリデーション
+  // validate = (props) => {
+  //   return <Validation {...props} state={this.state} />
+  // }
+  validate = () => {
+    const regex = /^[A-Za-z0-9]{1}[A-Za-z0-9_.-]*@{1}[A-Za-z0-9_.-]{1,}\.[A-Za-z0-9]{1,}$/
+
+    let emailError = ""
+    let passwordError = ""
+    let passwordConfirmationError = ""
+    const email = this.state.email
+    const password = this.state.password
+    const confirmation = this.state.password_confirmation
+
+    if (!email.match(regex)) {
+      emailError = "メールアドレスが無効です"
+      if (!email) {
+        emailError = "メールアドレスを入力してください"
+      }
+    }
+    if (!password) {
+      passwordError = "パスワードを入力してください"
+    }
+
+    if (password && password.length < 7) {
+      passwordError = "７文字以上のパスワードを入力してください"
+    }
+
+    if (password !== confirmation) {
+      passwordConfirmationError = "パスワードが一致していません"
+    }
+
+    if (emailError || passwordError) {
+      this.setState({ emailError, passwordError, passwordConfirmationError })
+      return false
+    }
+
+    return true
+  }
+
+  // handleLoginでstateにユーザー情報を保存し、パスも移動
   handleSuccessfulAuth(data) {
     this.props.handleLogin(data)
     this.props.history.push("/home")
   }
 
+  // 新規ユーザー登録メソッド
   handleSubmit(event) {
     const { email, password } = this.state
 
-    axios
-      .post(
-        "http://localhost:3001/sessions",
-        {
-          user: {
-            email: email,
-            password: password,
+    const isValid = this.validate()
+    if (isValid) {
+      axios
+        .post(
+          "http://localhost:3001/sessions",
+          {
+            user: {
+              email: email,
+              password: password,
+            },
           },
-        },
-        { withCredentials: true }
-      )
-      .then((response) => {
-        if (response.data.logged_in) {
-          console.log(response)
-          this.handleSuccessfulAuth(response.data)
-        }
-      })
-      .catch((error) => {
-        console.log("login error", error)
-      })
+          { withCredentials: true }
+        )
+        .then((response) => {
+          if (response.data.logged_in) {
+            console.log(response)
+            this.handleSuccessfulAuth(response.data)
+          }
+        })
+        .catch((error) => {
+          console.log("login error", error)
+        })
+    }
     event.preventDefault()
   }
 
@@ -95,14 +148,18 @@ class SignIn extends React.Component {
     return (
       <Container component="main" maxWidth="xs">
         <CssBaseline />
-        <div>
-          <Avatar>
+        <div style={this.useStyles.paper}>
+          <Avatar style={this.useStyles.avator}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <form noValidate onSubmit={this.handleSubmit}>
+          <form
+            noValidate
+            onSubmit={this.handleSubmit}
+            style={this.useStyles.form}
+          >
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
@@ -116,6 +173,9 @@ class SignIn extends React.Component {
                   value={this.state.email}
                   onChange={this.handleChange}
                 />
+                <div style={{ color: "red", fontSize: "14px" }}>
+                  {this.state.emailError}
+                </div>
               </Grid>
               <Grid item xs={12}>
                 <TextField
@@ -130,6 +190,9 @@ class SignIn extends React.Component {
                   value={this.state.password}
                   onChange={this.handleChange}
                 />
+                <div style={{ color: "red", fontSize: "14px" }}>
+                  {this.state.passwordError}
+                </div>
               </Grid>
               <Grid
                 container
@@ -145,6 +208,7 @@ class SignIn extends React.Component {
                     fullWidth
                     variant="contained"
                     color="primary"
+                    style={this.useStyles.submit}
                   >
                     Sign in
                   </Button>
@@ -167,6 +231,25 @@ class SignIn extends React.Component {
         </div>
       </Container>
     )
+  }
+  useStyles = {
+    paper: {
+      marginTop: "64px",
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+    },
+    avatar: {
+      margin: "8px",
+      // backgroundColor: theme.palette.secondary.main,
+    },
+    form: {
+      width: "100%", // Fix IE 11 issue.
+      marginTop: "24px",
+    },
+    submit: {
+      margin: "24px 0 16px",
+    },
   }
 }
 
