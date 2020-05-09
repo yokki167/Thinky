@@ -19,7 +19,7 @@ function Like(props) {
   // componentの更新ごとに発火
   useEffect(() => {
     getLikesData(id, userId)
-  }, [])
+  }, props)
 
   // ユーザーがいいねしたかどうか確認する
   function getLikesData(id, userId) {

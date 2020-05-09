@@ -51,7 +51,7 @@ export default class ChatPage extends React.Component {
         this.setState({ whyContent: response.data.question })
         this.setState({ checkShare: response.data.share })
         this.setState({ likeCount: response.data.likes_count })
-        this.getLikesData(response.data.id, this.props.user.id)
+        this.getLikesData(response.data.id, response.data.user_id)
         this.getAnswers(response.data.id)
       })
       .catch((err) => {
