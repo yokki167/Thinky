@@ -17,7 +17,6 @@ import Container from "@material-ui/core/Container"
 
 // Import Components
 import Copyright from "./Copyright"
-import Validation from "./UserValidation"
 
 class SignIn extends React.Component {
   // const classes = useStyles()
@@ -135,7 +134,7 @@ class SignIn extends React.Component {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Log in
           </Typography>
           <form
             noValidate
@@ -192,7 +191,7 @@ class SignIn extends React.Component {
                     color="primary"
                     style={this.useStyles.submit}
                   >
-                    Sign in
+                    Log in
                   </Button>
                 </Grid>
               </Grid>

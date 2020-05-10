@@ -44,7 +44,7 @@ function Home(props) {
               <WhyModal user={props.user} />
             </DialogContent>
           </Modal>
-          <Link to="/share" className={home.link}>
+          <Link to={props.user.id ? "/share" : "/signin"} className={home.link}>
             <Button
               variant="contained"
               fullWidth
@@ -64,6 +64,7 @@ function Home(props) {
               マイページ
             </Button>
           </Link>
+          )
         </div>
       </div>
     </div>

@@ -17,7 +17,6 @@ import Box from "@material-ui/core/Box"
 
 // Import Components
 import Copyright from "./Copyright"
-import Validation from "./UserValidation"
 
 class SignUp extends React.Component {
   constructor(props) {

@@ -21,7 +21,7 @@ export default function Layout(props) {
   return (
     <div className={layoutStyles.container}>
       <MuiThemeProvider theme={theme}>
-        <Header handleLogoutClick={props.handleLogoutClick} user={props.user} />
+        <Header handleLogout={props.handleLogout} user={props.user} />
         <div className={layoutStyles.content}>{props.children}</div>
         <Footer />
       </MuiThemeProvider>
