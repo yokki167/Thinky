@@ -220,7 +220,7 @@ function SignUp(props) {
                   color="primary"
                   className={classes.submit}
                 >
-                  Edit
+                  Update
                 </Button>
               </Grid>
             </Grid>
@@ -240,7 +240,7 @@ function SignUp(props) {
                   color="primary"
                   className={classes.submit}
                 >
-                  Cansel
+                  Cancel
                 </Button>
               </Grid>
             </Grid>

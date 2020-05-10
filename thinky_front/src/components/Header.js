@@ -1,7 +1,8 @@
 // Import Packages
 import React from "react"
-import { Link } from "react-router-dom"
+import { Link, withRouter } from "react-router-dom"
 import { useMediaQuery } from "react-responsive"
+import axios from "axios"
 
 // Import Styles
 import { makeStyles } from "@material-ui/core/styles"
@@ -39,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-export default function Header(props) {
+function Header(props) {
   const classes = useStyles()
 
   const isMobile = useMediaQuery({ query: "(max-width: 767px)" })
@@ -58,6 +59,21 @@ export default function Header(props) {
     }
 
     setOpen(false)
+  }
+
+  // ログアウトボタンクリックで発火
+  function handleLogoutClick() {
+    console.log("logout btn pushed")
+    axios
+      .delete("http://localhost:3001/logout", { withCredentials: true })
+      .then((response) => {
+        console.log(response)
+        props.handleLogout()
+        props.history.push("/signin")
+      })
+      .catch((error) => {
+        console.log("logout error", error)
+      })
   }
 
   function handleListKeyDown(event) {
@@ -81,7 +97,7 @@ export default function Header(props) {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
-            <Link to="/home" className={classes.link}>
+            <Link to="/" className={classes.link}>
               Thinky
             </Link>
           </Typography>
@@ -101,7 +117,7 @@ export default function Header(props) {
                 </Button>
                 <Button
                   color="inherit"
-                  onClick={() => props.handleLogoutClick()}
+                  onClick={() => handleLogoutClick()}
                   className={classes.button}
                 >
                   Log out
@@ -178,7 +194,7 @@ export default function Header(props) {
                                 home
                               </Link>
                             </MenuItem>
-                            <MenuItem onClick={() => props.handleLogoutClick()}>
+                            <MenuItem onClick={() => handleLogoutClick()}>
                               Log out
                             </MenuItem>
                           </MenuList>
@@ -208,3 +224,5 @@ export default function Header(props) {
     </div>
   )
 }
+
+export default withRouter(Header)

@@ -2,6 +2,7 @@
 import React from "react"
 import {
   BrowserRouter as Router,
+  Redirect,
   Route,
   Switch,
   withRouter,
@@ -24,14 +25,15 @@ class App extends React.Component {
   constructor() {
     super()
 
-    this.state = {
+    const initialState = {
       loggedInStatus: "NOT_LOGGED_IN",
       user: {},
     }
 
+    this.state = initialState
+
     this.handleLogin = this.handleLogin.bind(this)
     this.handleLogout = this.handleLogout.bind(this)
-    this.handleLogoutClick = this.handleLogoutClick.bind(this)
     this.chekLoginStatus = this.checkLoginStatus.bind(this)
   }
 
@@ -79,20 +81,6 @@ class App extends React.Component {
     })
   }
 
-  // ログアウトボタンクリックで発火
-  handleLogoutClick() {
-    console.log("logout btn pushed")
-    axios
-      .delete("http://localhost:3001/logout", { withCredentials: true })
-      .then((response) => {
-        console.log(response)
-        this.handleLogout()
-      })
-      .catch((error) => {
-        console.log("logout error", error)
-      })
-  }
-
   // ログアウト関数(handleClickLogout)で発火
   handleLogout() {
     console.log("logout started")
@@ -116,10 +104,7 @@ class App extends React.Component {
               />
             )}
           />
-          <Layout
-            handleLogoutClick={this.handleLogoutClick}
-            user={this.state.user}
-          >
+          <Layout handleLogout={this.handleLogout} user={this.state.user}>
             <Route
               exact={true}
               path="/home"
@@ -131,45 +116,60 @@ class App extends React.Component {
                 />
               )}
             />
-            <Route
-              exact={true}
-              path="/mypage"
-              render={() => <UserMypage user={this.state.user} />}
-            />
-            <Route
-              exact={true}
-              path="/userEdit"
-              render={() => (
-                <UserEdit
-                  user={this.state.user}
-                  handleLogin={this.handleLogin}
+            {this.state.user.id ? (
+              <>
+                <Route
+                  exact={true}
+                  path="/mypage"
+                  render={() => <UserMypage user={this.state.user} />}
                 />
-              )}
-            />
-            <Route
-              exact={true}
-              path="/share"
-              render={(props) => (
-                <EveryoneWhy {...props} user={this.state.user} />
-              )}
-            />
+                <Route
+                  exact={true}
+                  path="/userEdit"
+                  render={() => (
+                    <UserEdit
+                      user={this.state.user}
+                      handleLogin={this.handleLogin}
+                    />
+                  )}
+                />
+                <Route
+                  exact={true}
+                  path="/share"
+                  render={(props) => (
+                    <EveryoneWhy {...props} user={this.state.user} />
+                  )}
+                />
+              </>
+            ) : (
+              <Redirect to="/signin" />
+            )}
+
             <Route
               exact={true}
               path="/signin"
-              render={(props) => (
-                <SignIn
-                  {...props}
-                  handleLogin={this.handleLogin}
-                  loggedInStatus={this.state.loggedInStatus}
-                />
-              )}
+              render={(props) =>
+                this.state.user.id ? (
+                  <Redirect to="/home" />
+                ) : (
+                  <SignIn
+                    {...props}
+                    handleLogin={this.handleLogin}
+                    loggedInStatus={this.state.loggedInStatus}
+                  />
+                )
+              }
             />
             <Route
               exact={true}
               path="/signup"
-              render={(props) => (
-                <SignUp {...props} handleLogin={this.handleLogin} />
-              )}
+              render={(props) =>
+                this.state.user.id ? (
+                  <Redirect to="/home" />
+                ) : (
+                  <SignUp {...props} handleLogin={this.handleLogin} />
+                )
+              }
             />
           </Layout>
         </Switch>
