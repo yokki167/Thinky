@@ -119,7 +119,7 @@ class App extends React.Component {
                 />
               )}
             />
-            {this.state.user.id ? (
+            {this.state.user ? (
               <>
                 <Route
                   exact={true}

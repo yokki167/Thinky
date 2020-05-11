@@ -217,7 +217,7 @@ function SignUp(props) {
                   type="submit"
                   fullWidth
                   variant="contained"
-                  color="primary"
+                  color="secondary"
                   className={classes.submit}
                 >
                   Update
@@ -237,7 +237,7 @@ function SignUp(props) {
                   href="./home"
                   fullWidth
                   variant="contained"
-                  color="primary"
+                  color="danger"
                   className={classes.submit}
                 >
                   Cancel
