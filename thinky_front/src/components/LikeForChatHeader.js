@@ -5,7 +5,7 @@ import { makeStyles } from "@material-ui/core/styles"
 
 const useStyles = makeStyles((theme) => ({
   like: {
-    color: "red",
+    color: "#3F51B5",
     transform: "translateY(8px)",
     "&:hover": {
       cursor: "pointer",
@@ -33,7 +33,7 @@ export default function LikeForChatHeader(props) {
   const useStyle = useStyles()
 
   return (
-    <div className={useStyle.container}>
+    <span className={useStyle.container}>
       {/* likeのstateによって条件分岐(もっと短くできるかも？) */}
       {props.like ? (
         <>
@@ -56,6 +56,6 @@ export default function LikeForChatHeader(props) {
           <span className={useStyle.count}>{props.likeCount}</span>
         </>
       )}
-    </div>
+    </span>
   )
 }

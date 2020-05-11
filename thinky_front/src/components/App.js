@@ -12,7 +12,8 @@ import axios from "axios"
 // Import Styles
 
 // Import Components
-import Home from "./Home.js"
+import Top from "../Top"
+import Home from "./Home"
 import Layout from "./Layout"
 import SignUp from "./SignUp"
 import SignIn from "./SignIn"
@@ -94,6 +95,7 @@ class App extends React.Component {
     return (
       <Router>
         <Switch>
+          <Route exact={true} path="/" component={Top} />
           <Route
             path="/whies/:id"
             render={(props) => (

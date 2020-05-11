@@ -25,7 +25,7 @@ export default class WhyModal extends React.Component {
   render() {
     return (
       <div className={modalStyles.modalBox}>
-        <div className={modalStyles.title}>「Why?」を深掘りしよう！</div>
+        <div className={modalStyles.title}>「Why?」を決めよう！</div>
         <div className={modalStyles.subBox}>
           <div>
             <FormControl variant="outlined">
@@ -58,6 +58,7 @@ export default class WhyModal extends React.Component {
                 }}
                 name="checkShare"
                 color="primary"
+                style={this.checkStyle}
               />
             }
             label="この「Why」をみんなに共有する"
@@ -71,6 +72,10 @@ export default class WhyModal extends React.Component {
         />
       </div>
     )
+  }
+
+  checkStyle = {
+    color: "#3F51B5",
   }
 
   genreStyle = {
