@@ -22,9 +22,9 @@ export default class ChatPage extends React.Component {
     super(props)
     this.state = {
       whyId: 0,
-      whyContent: "",
+      whyContent: this.props.location.state.why,
       answer: "",
-      checkShare: true,
+      checkShare: this.props.location.state.share,
       answers: [],
       errorText: "",
       likeStatus: "",
@@ -240,7 +240,7 @@ export default class ChatPage extends React.Component {
           whyId={this.state.whyId}
           whyContent={this.state.whyContent}
           pv={this.props.location.state.pv}
-          isShare={this.isShare}
+          checkShare={this.state.checkShare}
           handleLogoutClick={this.props.handleLogoutClick}
           why={this.state.why}
           handleLike={this.handleLike}
@@ -308,7 +308,7 @@ export default class ChatPage extends React.Component {
       position: "absolute",
       top: "160%",
       right: "8%",
-      backgroundColor: "#424242",
+      backgroundColor: "#3F51B5",
     },
     likeBtn: {
       float: "right",
@@ -350,6 +350,6 @@ export default class ChatPage extends React.Component {
     color: "red",
     paddingTop: "1rem",
     textIndent: "4rem",
-    backgroundColor: "#303030",
+    backgroundColor: "#424242",
   }
 }

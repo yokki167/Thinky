@@ -58,6 +58,7 @@ class WhyForm extends React.Component {
                 why: response.data.question,
                 whyId: response.data.id,
                 pv: true,
+                share: this.props.checkShare,
               },
             })
           })
@@ -122,6 +123,7 @@ class WhyForm extends React.Component {
     height: "50px",
     width: "100px",
     transform: "translate(8px, -43px)",
+    backgroundColor: "#3F51B5",
   }
 
   errStyle = {

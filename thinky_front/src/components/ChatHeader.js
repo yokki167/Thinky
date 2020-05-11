@@ -30,14 +30,18 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   header: {
-    backgroundColor: "#303030",
+    backgroundColor: "#424242",
   },
   menuButton: {
     marginRight: theme.spacing(1),
   },
   editButton: {
-    backgroundColor: "#424242",
+    backgroundColor: "#3F51B5",
     transform: "translateY(-4px)",
+  },
+  link: {
+    textDecoration: "none",
+    color: "white",
   },
   button: {
     marginRight: theme.spacing(1),
@@ -48,6 +52,7 @@ const useStyles = makeStyles((theme) => ({
   input: {
     fontSize: "2rem",
     color: "white",
+    width: "60vw",
   },
 }))
 
@@ -60,7 +65,7 @@ export default function ChatHeader(props) {
   const [open, setOpen] = useState(false)
   const [checkShare, setCheckShare] = useState(true)
   const [editing, setEditing] = useState(false)
-  const [question, setQuestion] = useState(props.whyContent)
+  const [question, setQuestion] = useState("")
   const anchorRef = useRef(null)
 
   const handleToggle = () => {
@@ -83,6 +88,12 @@ export default function ChatHeader(props) {
   }
 
   const prevOpen = useRef(open)
+
+  useEffect(() => {
+    setQuestion(props.whyContent)
+    setCheckShare(props.checkShare)
+  }, [])
+
   useEffect(() => {
     if (prevOpen.current === true && open === false) {
       anchorRef.current.focus()
@@ -173,14 +184,14 @@ export default function ChatHeader(props) {
                           )}
                         </p>
                       </form>
+                    </div>
+                    <div className={chatStyles.subContainer}>
                       <LikeForChatHeader
                         user={props.user}
                         handleLike={props.handleLike}
                         likeCount={props.likeCount}
                         like={props.like}
                       />
-                    </div>
-                    <div className={chatStyles.subContainer}>
                       {props.pv === true && (
                         <FormControlLabel
                           control={
@@ -259,14 +270,14 @@ export default function ChatHeader(props) {
                       <p className={chatStyles.topic}>
                         Why：{props.whyContent}
                       </p>
+                    </div>
+                    <div className={chatStyles.subContainer}>
                       <LikeForChatHeader
                         user={props.user}
                         handleLike={props.handleLike}
                         likeCount={props.likeCount}
                         like={props.like}
                       />
-                    </div>
-                    <div className={chatStyles.subContainer}>
                       {props.pv === true && (
                         <FormControlLabel
                           control={
