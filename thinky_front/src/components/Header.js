@@ -34,9 +34,11 @@ const useStyles = makeStyles((theme) => ({
   link: {
     textDecoration: "none",
     color: "white",
+    textTransform: "none",
   },
   button: {
     marginRight: theme.spacing(1),
+    textTransform: "none",
   },
 }))
 
@@ -97,7 +99,7 @@ function Header(props) {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
-            <Link to="/" className={classes.link}>
+            <Link to="/home" className={classes.link}>
               Thinky
             </Link>
           </Typography>

@@ -24,7 +24,7 @@ function Home(props) {
           <Button
             fullWidth
             variant="contained"
-            color="primary"
+            color="secondary"
             className={home.btn}
             onClick={() => {
               setIsOpen(true)
@@ -45,22 +45,12 @@ function Home(props) {
             </DialogContent>
           </Modal>
           <Link to={props.user.id ? "/share" : "/signin"} className={home.link}>
-            <Button
-              variant="contained"
-              fullWidth
-              color="primary"
-              className={home.btn}
-            >
-              みんなの"Y"を考える
+            <Button variant="contained" fullWidth className={home.btn}>
+              みんなの"Why"を考える
             </Button>
           </Link>
           <Link to="/mypage" className={home.link}>
-            <Button
-              variant="contained"
-              fullWidth
-              color="primary"
-              className={home.btn}
-            >
+            <Button variant="contained" fullWidth className={home.btn}>
               マイページ
             </Button>
           </Link>
@@ -79,7 +69,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   home: {
-    backgroundColor: "#9D9B9B",
+    backgroundColor: "#787878",
     height: "100vh",
   },
 
@@ -104,8 +94,10 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: "auto",
     marginRight: "auto",
     padding: "20px",
-    backgroundColor: theme.palette.primary.dark,
-    hover: "#3195F1",
+    backgroundColor: "#3E51B5",
+    "&:hover": { backgroundColor: "#3195F1" },
+    textTransform: "none",
+    color: "white",
   },
 
   link: {

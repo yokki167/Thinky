@@ -14,6 +14,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined"
 import Typography from "@material-ui/core/Typography"
 import { makeStyles } from "@material-ui/core/styles"
 import Container from "@material-ui/core/Container"
+import layoutStyles from "../styles/Layout.module.scss"
 
 // Import Components
 import Copyright from "./Copyright"
@@ -130,7 +131,7 @@ class SignIn extends React.Component {
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div style={this.useStyles.paper}>
-          <Avatar style={this.useStyles.avator}>
+          <Avatar style={this.useStyles.avatar}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
@@ -190,6 +191,7 @@ class SignIn extends React.Component {
                     variant="contained"
                     color="primary"
                     style={this.useStyles.submit}
+                    className={layoutStyles.userBtn}
                   >
                     Log in
                   </Button>
@@ -197,12 +199,20 @@ class SignIn extends React.Component {
               </Grid>
               <Grid container>
                 <Grid item xs>
-                  <Link to="#" variant="body2">
+                  <Link
+                    to="#"
+                    variant="body2"
+                    style={{ color: "white", opacity: 0.7 }}
+                  >
                     Forgot password?
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link to="/signup" variant="body2">
+                  <Link
+                    to="/signup"
+                    variant="body2"
+                    style={{ color: "white", opacity: 0.7 }}
+                  >
                     {"Don't have an account? Sign Up"}
                   </Link>
                 </Grid>
@@ -222,6 +232,8 @@ class SignIn extends React.Component {
     },
     avatar: {
       margin: "8px",
+      backgroundColor: "#3E51B5",
+      color: "white",
       // backgroundColor: theme.palette.secondary.main,
     },
     form: {
@@ -230,6 +242,8 @@ class SignIn extends React.Component {
     },
     submit: {
       margin: "24px 0 16px",
+      backgroundColor: "#3E51B5",
+      ":hover": { backgroundColor: "#3195F1" },
     },
   }
 }
