@@ -14,6 +14,7 @@ import Typography from "@material-ui/core/Typography"
 import { makeStyles } from "@material-ui/core/styles"
 import Container from "@material-ui/core/Container"
 import Box from "@material-ui/core/Box"
+import layoutStyles from "../styles/Layout.module.scss"
 
 // Import Components
 import Copyright from "./Copyright"
@@ -124,7 +125,7 @@ class SignUp extends React.Component {
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div style={this.useStyles.paper}>
-          <Avatar style={this.useStyles.avator}>
+          <Avatar style={this.useStyles.avatar}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
@@ -207,7 +208,11 @@ class SignUp extends React.Component {
             </Grid>
             <Grid container>
               <Grid item style={{ margin: "0 auto" }}>
-                <Link to="/signin" variant="body2">
+                <Link
+                  to="/signin"
+                  variant="body2"
+                  style={{ color: "white", opacity: 0.7 }}
+                >
                   {"Already have an account? Sign In"}
                 </Link>
               </Grid>
@@ -226,7 +231,8 @@ class SignUp extends React.Component {
     },
     avatar: {
       margin: "8px",
-      // backgroundColor: theme.palette.secondary.main,
+      backgroundColor: "#3E51B5",
+      color: "white",
     },
     form: {
       width: "100%", // Fix IE 11 issue.
@@ -234,6 +240,8 @@ class SignUp extends React.Component {
     },
     submit: {
       margin: "24px 0 16px",
+      backgroundColor: "#3E51B5",
+      "&:hover": { backgroundColor: "#3195F1" },
     },
   }
 }

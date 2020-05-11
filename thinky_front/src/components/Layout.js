@@ -15,13 +15,9 @@ const theme = createMuiTheme({
     type: "dark",
     primary: { light: grey[300], main: grey[800], dark: grey[700] },
     secondary: { main: "#3195F1" },
-    danger: { main: "red" },
-    action: { hover: "#3195F1" },
-    typography: {
-      button: {
-        textTransform: "none",
-      },
-    },
+    backgroundColor: "#787878",
+    // danger: { main: "red" },
+    // action: { hover: "#3195F1" },
   },
 })
 
