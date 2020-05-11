@@ -14,6 +14,14 @@ const theme = createMuiTheme({
   palette: {
     type: "dark",
     primary: { light: grey[300], main: grey[800], dark: grey[700] },
+    secondary: { main: "#3195F1" },
+    danger: { main: "red" },
+    action: { hover: "#3195F1" },
+    typography: {
+      button: {
+        textTransform: "none",
+      },
+    },
   },
 })
 

@@ -64,7 +64,6 @@ function Home(props) {
               マイページ
             </Button>
           </Link>
-          )
         </div>
       </div>
     </div>
@@ -80,9 +79,8 @@ const useStyles = makeStyles((theme) => ({
   },
 
   home: {
-    backgroundColor: "gray",
+    backgroundColor: "#9D9B9B",
     height: "100vh",
-    // padding: "100px",
   },
 
   container: {
@@ -106,6 +104,8 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: "auto",
     marginRight: "auto",
     padding: "20px",
+    backgroundColor: theme.palette.primary.dark,
+    hover: "#3195F1",
   },
 
   link: {
