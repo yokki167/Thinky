@@ -64,7 +64,6 @@ function Home(props) {
               マイページ
             </Button>
           </Link>
-          )
         </div>
       </div>
     </div>
