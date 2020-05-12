@@ -65,9 +65,10 @@ export default function ChatHeader(props) {
   const [open, setOpen] = useState(false)
   const [checkShare, setCheckShare] = useState(true)
   const [editing, setEditing] = useState(false)
-  const [question, setQuestion] = useState("")
+  const [question, setQuestion] = useState("f")
   const anchorRef = useRef(null)
-
+  console.log(question)
+  console.log(checkShare)
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen)
   }
@@ -90,6 +91,7 @@ export default function ChatHeader(props) {
   const prevOpen = useRef(open)
 
   useEffect(() => {
+    console.log("aaaaaaaa")
     setQuestion(props.whyContent)
     setCheckShare(props.checkShare)
   }, [])

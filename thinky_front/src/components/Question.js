@@ -30,6 +30,7 @@ function Question(props) {
             why: response.data.question,
             whyId: response.data.id,
             pb: true,
+            share: true,
           },
         })
       })
