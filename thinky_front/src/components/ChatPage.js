@@ -59,6 +59,21 @@ export default class ChatPage extends React.Component {
       })
   }
 
+  // ログアウト
+  // handleLogoutClick(props) {
+  //   console.log("logout btn pushed")
+  //   axios
+  //     .delete("http://localhost:3001/logout", { withCredentials: true })
+  //     .then((response) => {
+  //       console.log(response)
+  //       this.props.handleLogout()
+  //       this.props.history.push("/signin")
+  //     })
+  //     .catch((error) => {
+  //       console.log("logout error", error)
+  //     })
+  // }
+
   // いいねボタン押したとき
   handleLike() {
     const userId = this.props.user.id
@@ -241,7 +256,8 @@ export default class ChatPage extends React.Component {
           whyContent={this.state.whyContent}
           pv={this.props.location.state.pv}
           checkShare={this.state.checkShare}
-          handleLogoutClick={this.props.handleLogoutClick}
+          handleLogoutClick={this.handleLogoutClick}
+          handleLogout={this.props.handleLogout}
           why={this.state.why}
           handleLike={this.handleLike}
           likeCount={this.state.likeCount}
