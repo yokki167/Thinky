@@ -91,8 +91,8 @@ export default function ChatHeader(props) {
   const prevOpen = useRef(open)
 
   useEffect(() => {
-    console.log("aaaaaaaa")
-    setQuestion(props.whyContent)
+    const question = props.whyContent
+    setQuestion(question)
     setCheckShare(props.checkShare)
   }, [])
 
@@ -106,6 +106,7 @@ export default function ChatHeader(props) {
 
   function isShare(e, props) {
     // みんなに共有するかのチェックボックス用
+    !question && setQuestion(props.whyContent)
     const why = question
     const share = checkShare ? false : true
     axios

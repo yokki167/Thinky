@@ -1,29 +1,81 @@
-.modalBox {
-  width: 75vw;
-  height: 75vh;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #747574;
-  text-align: center;
-  box-shadow: 0 0 10px;
-  .title {
-    font-size: 4rem;
+@media screen and (max-width: 767px) {
+  .modalBox {
+    width: 75vw;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #747574;
     text-align: center;
-    margin-top: 1rem;
-  }
-  .subBox {
-    margin: 5rem 0;
-    display: flex;
-    justify-content: space-around;
-    .shareCheck {
-      transform: translateY(2px);
-      display: inline-block;
+    box-shadow: 0 0 10px;
+    .title {
+      font-size: 1.5rem;
+      text-align: center;
+      margin-top: 1rem;
+    }
+    .subBox {
+      margin: 5rem 0;
+      display: flex;
+      justify-content: space-around;
+      .genreBox label {
+        z-index: 1;
+        transform: translate(13px, 23px) scale(1);
+        pointer-events: none;
+        font-size: 0.2rem;
+      }
+      .shareCheck span {
+        font-size: 0.4rem;
+      }
+    }
+    .form {
+      margin-bottom: 24px;
+      width: 60%;
+      min-height: 3rem;
+      font-size: 1rem;
+      height: 48px;
+    }
+    .button {
+      font-size: 2rem;
+      transform: translate(5px, 5px);
     }
   }
-  .button {
-    font-size: 2rem;
-    transform: translate(5px, 5px);
+}
+
+@media screen and (min-width: 767px) {
+  .modalBox {
+    width: 75vw;
+    height: 75vh;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #747574;
+    text-align: center;
+    box-shadow: 0 0 10px;
+    .title {
+      font-size: 4rem;
+      text-align: center;
+      margin-top: 1rem;
+    }
+    .subBox {
+      margin: 5rem 0;
+      display: flex;
+      justify-content: space-around;
+      .shareCheck {
+        transform: translateY(2px);
+        display: inline-block;
+      }
+    }
+    .form {
+      margin-bottom: 24px;
+      width: 70%;
+      min-height: 3rem;
+      font-size: 2rem;
+      height: 48px;
+    }
+    .button {
+      font-size: 2rem;
+      transform: translate(5px, 5px);
+    }
   }
 }
