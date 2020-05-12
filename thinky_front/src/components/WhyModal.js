@@ -28,7 +28,7 @@ export default class WhyModal extends React.Component {
         <div className={modalStyles.title}>「Why?」を決めよう！</div>
         <div className={modalStyles.subBox}>
           <div>
-            <FormControl variant="outlined">
+            <FormControl className={modalStyles.genreBox} variant="outlined">
               <InputLabel id="demo-simple-select-outlined-label">
                 ジャンルを選択
               </InputLabel>
@@ -61,6 +61,7 @@ export default class WhyModal extends React.Component {
                 style={this.checkStyle}
               />
             }
+            className={modalStyles.shareCheck}
             label="この「Why」をみんなに共有する"
           />
         </div>

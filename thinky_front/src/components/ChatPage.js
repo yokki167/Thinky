@@ -269,7 +269,7 @@ export default class ChatPage extends React.Component {
                   rowsMax={1}
                   aria-label="maximum height"
                   placeholder="Answerを入力してください。"
-                  style={this.useStyles.form}
+                  className={chatStyles.form}
                   name="textarea"
                   value={this.state.answer}
                   onChange={(e) => {
@@ -295,15 +295,6 @@ export default class ChatPage extends React.Component {
   }
 
   useStyles = {
-    form: {
-      margin: "24px 0",
-      position: "absolute",
-      top: "50%",
-      left: "8%",
-      width: "70%",
-      minHeight: "3rem",
-      fontSize: "2rem",
-    },
     button: {
       position: "absolute",
       top: "160%",

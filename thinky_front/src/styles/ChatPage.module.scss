@@ -1,124 +1,272 @@
 * {
   margin: 0;
 }
-.chatHeader {
-  width: 100%;
-  .topicSpace {
-    height: 10%;
-    display: flex;
-    justify-content: space-between;
-    background-color: #424242;
-    color: white;
-    .topicContainer {
+
+@media screen and (max-width: 767px) {
+  .chatHeader {
+    width: 100%;
+    .topicSpace {
+      height: 10%;
       display: flex;
-      .topic {
-        font-size: 1.5rem;
-        margin-left: 3rem;
-        padding: 1.5rem 0;
-        display: inline-block;
+      justify-content: space-between;
+      background-color: #424242;
+      color: white;
+      .topicContainer {
+        display: flex;
+        .topic {
+          font-size: 1.1rem;
+          padding: 1.5rem 0;
+          display: inline-block;
+        }
+        .topicLike {
+          display: inline-block;
+        }
       }
-      .topicLike {
-        display: inline-block;
+      .subContainer {
+        line-height: 72px;
+        .hamburgerMenu {
+          background-color: rgb(66, 66, 66);
+          color: white;
+        }
       }
     }
-    .subContainer {
-      line-height: 72px;
+  }
+  .chatBox {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    min-height: 100vh;
+    position: relative;
+    box-sizing: border-box;
+    padding-bottom: 20vh;
+    overflow-y: scroll;
+    .communication {
+      width: 100%;
+      min-height: 70%;
+      background-color: #787878;
+      flex-grow: 1;
+      overflow-y: scroll;
+      padding-bottom: 3rem;
+      z-index: -1;
+      .chatSpace {
+        padding: 20px 0;
+        .chatLeft {
+          position: relative;
+          margin-left: 80px;
+          padding: 10px;
+          border-radius: 10px;
+          background: #666869;
+          margin-right: 12%;
+          float: left;
+        }
+        .chatRight {
+          position: relative;
+          margin-right: 80px;
+          padding: 10px;
+          border-radius: 10px;
+          background-color: #424242;
+          margin-left: 12%;
+          float: right;
+        }
+        p.chatText {
+          margin: 0 0 20px;
+          color: white;
+        }
+        p.chatText:last-child {
+          margin-bottom: 0;
+          color: white;
+        }
+        .chatLeft:before {
+          position: absolute;
+          content: "";
+          border: 10px solid transparent;
+          top: 15px;
+          left: -20px;
+        }
+        .chatLeft:after {
+          position: absolute;
+          content: "";
+          border: 10px solid transparent;
+          border-right: 10px solid #666869;
+          top: 15px;
+          left: -19px;
+        }
+        .chatRight:before {
+          position: absolute;
+          content: "";
+          border: 10px solid transparent;
+          top: 15px;
+          right: -20px;
+        }
+        .chatRight:after {
+          position: absolute;
+          content: "";
+          border: 10px solid transparent;
+          border-left: 10px solid #424242;
+          top: 15px;
+          right: -19px;
+        }
+      }
+      .chatSpace:after,
+      .chatSpace:before {
+        clear: both;
+        content: "";
+        display: block;
+      }
+    }
+    .formContainer {
+      width: 100%;
+      height: 20vh;
+      position: absolute;
+      bottom: 0;
+      background-color: #424242;
+      .formBox {
+        width: 100%;
+        height: 20%;
+        display: flex;
+        position: relative;
+        .form {
+          position: absolute;
+          top: 130%;
+          left: 8%;
+          width: 60%;
+          min-height: 3rem;
+          font-size: 1rem;
+        }
+      }
     }
   }
 }
-.chatBox {
-  display: flex;
-  flex-direction: column;
-  width: 100vw;
-  min-height: 100vh;
-  position: relative;
-  box-sizing: border-box;
-  padding-bottom: 20vh;
-  overflow-y: scroll;
-  .communication {
+
+@media screen and (min-width: 767px) {
+  .chatHeader {
     width: 100%;
-    min-height: 70%;
-    background-color: #787878;
-    flex-grow: 1;
-    overflow-y: scroll;
-    padding-bottom: 3rem;
-    .chatSpace {
-      padding: 20px 0;
-      .chatLeft {
-        position: relative;
-        margin-left: 80px;
-        padding: 10px;
-        border-radius: 10px;
-        background: #666869;
-        margin-right: 12%;
-        float: left;
+    .topicSpace {
+      height: 10%;
+      display: flex;
+      justify-content: space-between;
+      background-color: #424242;
+      color: white;
+      .topicContainer {
+        display: flex;
+        .topic {
+          font-size: 1.5rem;
+          margin-left: 3rem;
+          padding: 1.5rem 0;
+          display: inline-block;
+        }
+        .topicLike {
+          display: inline-block;
+        }
       }
-      .chatRight {
-        position: relative;
-        margin-right: 80px;
-        padding: 10px;
-        border-radius: 10px;
-        background-color: #424242;
-        margin-left: 12%;
-        float: right;
+      .subContainer {
+        line-height: 72px;
       }
-      p.chatText {
-        margin: 0 0 20px;
-        color: white;
-      }
-      p.chatText:last-child {
-        margin-bottom: 0;
-        color: white;
-      }
-      .chatLeft:before {
-        position: absolute;
-        content: "";
-        border: 10px solid transparent;
-        top: 15px;
-        left: -20px;
-      }
-      .chatLeft:after {
-        position: absolute;
-        content: "";
-        border: 10px solid transparent;
-        border-right: 10px solid #666869;
-        top: 15px;
-        left: -19px;
-      }
-      .chatRight:before {
-        position: absolute;
-        content: "";
-        border: 10px solid transparent;
-        top: 15px;
-        right: -20px;
-      }
-      .chatRight:after {
-        position: absolute;
-        content: "";
-        border: 10px solid transparent;
-        border-left: 10px solid #424242;
-        top: 15px;
-        right: -19px;
-      }
-    }
-    .chatSpace:after,
-    .chatSpace:before {
-      clear: both;
-      content: "";
-      display: block;
     }
   }
-  .formContainer {
-    width: 100%;
-    height: 20vh;
-    position: absolute;
-    bottom: 0;
-    background-color: #424242;
-    .formBox {
+  .chatBox {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    min-height: 100vh;
+    position: relative;
+    box-sizing: border-box;
+    padding-bottom: 20vh;
+    overflow-y: scroll;
+    .communication {
       width: 100%;
-      height: 20%;
-      display: flex;
-      position: relative;
+      min-height: 70%;
+      background-color: #787878;
+      flex-grow: 1;
+      overflow-y: scroll;
+      padding-bottom: 3rem;
+      .chatSpace {
+        padding: 20px 0;
+        .chatLeft {
+          position: relative;
+          margin-left: 80px;
+          padding: 10px;
+          border-radius: 10px;
+          background: #666869;
+          margin-right: 12%;
+          float: left;
+        }
+        .chatRight {
+          position: relative;
+          margin-right: 80px;
+          padding: 10px;
+          border-radius: 10px;
+          background-color: #424242;
+          margin-left: 12%;
+          float: right;
+        }
+        p.chatText {
+          margin: 0 0 20px;
+          color: white;
+        }
+        p.chatText:last-child {
+          margin-bottom: 0;
+          color: white;
+        }
+        .chatLeft:before {
+          position: absolute;
+          content: "";
+          border: 10px solid transparent;
+          top: 15px;
+          left: -20px;
+        }
+        .chatLeft:after {
+          position: absolute;
+          content: "";
+          border: 10px solid transparent;
+          border-right: 10px solid #666869;
+          top: 15px;
+          left: -19px;
+        }
+        .chatRight:before {
+          position: absolute;
+          content: "";
+          border: 10px solid transparent;
+          top: 15px;
+          right: -20px;
+        }
+        .chatRight:after {
+          position: absolute;
+          content: "";
+          border: 10px solid transparent;
+          border-left: 10px solid #424242;
+          top: 15px;
+          right: -19px;
+        }
+      }
+      .chatSpace:after,
+      .chatSpace:before {
+        clear: both;
+        content: "";
+        display: block;
+      }
+    }
+    .formContainer {
+      width: 100%;
+      height: 20vh;
+      position: absolute;
+      bottom: 0;
+      background-color: #424242;
+      .formBox {
+        width: 100%;
+        height: 20%;
+        display: flex;
+        position: relative;
+        .form {
+          margin: 24px 0;
+          position: absolute;
+          top: 50%;
+          left: 8%;
+          width: 70%;
+          min-height: 3rem;
+          font-size: 2rem;
+        }
+      }
     }
   }
 }

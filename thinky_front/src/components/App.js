@@ -10,6 +10,7 @@ import {
 import axios from "axios"
 
 // Import Styles
+import "../styles/App.scss"
 
 // Import Components
 import Top from "../Top"

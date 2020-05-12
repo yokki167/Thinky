@@ -65,9 +65,10 @@ export default function ChatHeader(props) {
   const [open, setOpen] = useState(false)
   const [checkShare, setCheckShare] = useState(true)
   const [editing, setEditing] = useState(false)
-  const [question, setQuestion] = useState("")
+  const [question, setQuestion] = useState("f")
   const anchorRef = useRef(null)
-
+  console.log(question)
+  console.log(checkShare)
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen)
   }
@@ -90,7 +91,8 @@ export default function ChatHeader(props) {
   const prevOpen = useRef(open)
 
   useEffect(() => {
-    setQuestion(props.whyContent)
+    const question = props.whyContent
+    setQuestion(question)
     setCheckShare(props.checkShare)
   }, [])
 
@@ -104,6 +106,7 @@ export default function ChatHeader(props) {
 
   function isShare(e, props) {
     // みんなに共有するかのチェックボックス用
+    !question && setQuestion(props.whyContent)
     const why = question
     const share = checkShare ? false : true
     axios
@@ -332,7 +335,7 @@ export default function ChatHeader(props) {
                                   : "center bottom",
                             }}
                           >
-                            <Paper>
+                            <Paper className={chatStyles.hamburgerMenu}>
                               <ClickAwayListener onClickAway={handleClose}>
                                 <MenuList
                                   autoFocusItem={open}
