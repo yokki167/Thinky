@@ -335,7 +335,7 @@ export default function ChatHeader(props) {
                                   : "center bottom",
                             }}
                           >
-                            <Paper>
+                            <Paper className={chatStyles.hamburgerMenu}>
                               <ClickAwayListener onClickAway={handleClose}>
                                 <MenuList
                                   autoFocusItem={open}

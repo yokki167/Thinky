@@ -19,13 +19,12 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   count: {
-    margin: theme.spacing(1),
+    margin: "0 8px",
     display: "inline-block",
     transform: "translateY(3px)",
   },
   container: {
     padding: "1.5rem 0",
-    marginLeft: theme.spacing(2),
   },
 }))
 

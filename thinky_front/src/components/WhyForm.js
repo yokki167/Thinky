@@ -4,6 +4,7 @@ import axios from "axios"
 import { withRouter } from "react-router-dom"
 
 // Import Styles
+import modalStyles from "../styles/WhyModal.module.scss"
 import TextareaAutosize from "@material-ui/core/TextareaAutosize"
 import Button from "@material-ui/core/Button"
 
@@ -94,7 +95,7 @@ class WhyForm extends React.Component {
           placeholder="「Why」を入力する"
           name="formWhy"
           value={this.state.formWhy}
-          style={this.formStyle}
+          className={modalStyles.form}
           onChange={(e) => {
             this.setState({ formWhy: e.target.value })
             this.handleValidation(e)
@@ -112,12 +113,12 @@ class WhyForm extends React.Component {
     )
   }
 
-  formStyle = {
-    marginBottom: "24px",
-    width: "70%",
-    minHeight: "3rem",
-    fontSize: "2rem",
-  }
+  // formStyle = {
+  //   marginBottom: "24px",
+  //   width: "70%",
+  //   minHeight: "3rem",
+  //   fontSize: "2rem",
+  // }
 
   btnStyle = {
     height: "50px",
