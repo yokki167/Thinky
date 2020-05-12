@@ -18,7 +18,6 @@ function Home(props) {
 
   return (
     <div className={home.home}>
-      <h2 className={home.head}>What do you want to think?</h2>
       <div className={home.container}>
         <div className={home.btnWrapper}>
           <Button
@@ -27,7 +26,7 @@ function Home(props) {
             color="secondary"
             className={home.btn}
             onClick={() => {
-              setIsOpen(true)
+              props.user.id ? setIsOpen(true) : props.history.push("/signin")
             }}
           >
             "Why"を考える
@@ -50,7 +49,7 @@ function Home(props) {
             </Button>
           </Link>
           <Link to="/mypage" className={home.link}>
-            <Button variant="contained" fullWidth className={home.btn}>
+            <Button variant="contained" className={home.btn}>
               マイページ
             </Button>
           </Link>
@@ -61,16 +60,10 @@ function Home(props) {
 }
 
 const useStyles = makeStyles((theme) => ({
-  head: {
-    color: "white",
-    paddingTop: theme.spacing(7),
-    paddingLeft: theme.spacing(7),
-    margin: "0 auto",
-  },
-
   home: {
     backgroundColor: "#787878",
     height: "100vh",
+    fontSize: "50px",
   },
 
   container: {
@@ -86,9 +79,11 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     margin: "0 auto",
     display: "block",
+    width: "100%",
   },
 
   btn: {
+    width: "75%",
     display: "block",
     marginTop: "60px",
     marginLeft: "auto",
@@ -98,6 +93,8 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": { backgroundColor: "#3195F1" },
     textTransform: "none",
     color: "white",
+    fontSize: "0.55em",
+    fontWeight: "bold",
   },
 
   link: {
