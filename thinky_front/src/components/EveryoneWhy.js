@@ -11,6 +11,7 @@ import FormControl from "@material-ui/core/FormControl"
 import Select from "@material-ui/core/Select"
 import Button from "@material-ui/core/Button"
 import EveryoneWhyStyle from "../styles/EveryoneWhy.module.scss"
+import TextField from "@material-ui/core/TextField"
 
 // Import Components
 import WhiesList from "./WhiesList"
@@ -53,7 +54,7 @@ export default function EveryoneWhy(props) {
   }
 
   return (
-    <>
+    <div className={EveryoneWhyStyle.wrapper}>
       <div className={EveryoneWhyStyle.top}>
         <div>
           <FormControl variant="outlined" className={classes.formControl}>
@@ -81,7 +82,7 @@ export default function EveryoneWhy(props) {
           </FormControl>
         </div>
         <div className={EveryoneWhyStyle.search}>
-          <input
+          {/* <input
             className={EveryoneWhyStyle.box}
             onChange={(event) => {
               setText(event.target.value)
@@ -89,7 +90,21 @@ export default function EveryoneWhy(props) {
             }}
             value={text}
             required
-          ></input>
+          ></input> */}
+          <TextField
+            className={EveryoneWhyStyle.box}
+            id="outlined-search"
+            label="Search field"
+            type="search"
+            variant="outlined"
+            onChange={(event) => {
+              setText(event.target.value)
+              console.log(event.target.value)
+            }}
+            value={text}
+            required
+          />
+
           <div className={EveryoneWhyStyle.btn}>
             <Button
               variant="contained"
@@ -107,13 +122,9 @@ export default function EveryoneWhy(props) {
         </div>
       </div>
       <div className={EveryoneWhyStyle.main}>
-        <WhiesList
-          whiesData={whies}
-          genreId={genreId}
-          user={props.user}
-        />
+        <WhiesList whiesData={whies} genreId={genreId} user={props.user} />
       </div>
-    </>
+    </div>
   )
 }
 
@@ -131,4 +142,5 @@ const selectStyle = {
 const btnStyle = {
   height: "50px",
   width: "100px",
+  backgroundColor: "#4051B5",
 }
