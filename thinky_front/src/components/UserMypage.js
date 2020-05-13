@@ -10,6 +10,7 @@ import UserMypageStyle from "../styles/UserMypage.module.scss"
 import { makeStyles } from "@material-ui/styles"
 import "react-tabs/style/react-tabs.css"
 import axios from "axios"
+import AccountCircleIcon from "@material-ui/icons/AccountCircle"
 
 // Import Components
 import WhyTab from "./WhyTab"
@@ -42,27 +43,37 @@ export default function UserMypage(props) {
   }
 
   return (
-    <>
+    <div className={UserMypageStyle.wrapper}>
       <div className={UserMypageStyle.mypage}>
         <div className={UserMypageStyle.top}>
           <div className={UserMypageStyle.userName}>{props.user.username}</div>
-          <Link to="/userEdit" className="linkMypage">
-            <SettingsIcon className={classes.EditIcon} />
-          </Link>
+          <div className={UserMypageStyle.edit}>
+            <Link to="/userEdit" className="linkMypage">
+              <div className={UserMypageStyle.iconName}>ユーザー編集</div>
+
+              <AccountCircleIcon className={classes.EditIcon} />
+              {/* <SettingsIcon className={classes.Edit2Icon} /> */}
+            </Link>
+          </div>
         </div>
         <div className={UserMypageStyle.middle}>
           <WhyTab whies={whies} userId={props.user.id} />
         </div>
       </div>
-    </>
+    </div>
   )
 }
 
 const useStyles = makeStyles({
   EditIcon: {
     color: "black",
-    fontSize: "40px",
+    fontSize: "70px",
   },
+  // Edit2Icon: {
+  //   color: "black",
+  //   fontSize: "30px",
+  // },
+
   Tab: {
     width: "48%",
   },

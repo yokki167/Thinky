@@ -89,24 +89,24 @@ function WhyTab(props) {
         </TabList>
         <TabPanel>
           <div className={UserMypageStyle.whyListsLeft}>
-            <div className={UserMypageStyle.list}>
-              {props.whies.map((why) => (
-                // <div>{why.question}</div>
-                <div
-                  className={EveryoneWhyStyle.list}
-                  onClick={() => {
-                    getPvWhy(why.id)
-                    console.log(why.id)
-                  }}
-                >
-                  <div className={EveryoneWhyStyle.title}>{why.question}</div>
-                  {/* <div className={EveryoneWhyStyle.answer}>
+            {/* <div className={UserMypageStyle.list}> */}
+            {props.whies.map((why) => (
+              // <div>{why.question}</div>
+              <div
+                className={UserMypageStyle.list}
+                onClick={() => {
+                  getPvWhy(why.id)
+                  console.log(why.id)
+                }}
+              >
+                <div className={UserMypageStyle.title}>{why.question}</div>
+                {/* <div className={EveryoneWhyStyle.answer}>
                     <div className={EveryoneWhyStyle.index}>Answer:</div>
                     {/* <div className={EveryoneWhyStyle.count}>{count}</div> */}
-                  {/* </div>  */}
-                </div>
-              ))}
-            </div>
+                {/* </div>  */}
+              </div>
+            ))}
+            {/* </div> */}
           </div>
         </TabPanel>
         <TabPanel>
@@ -114,13 +114,13 @@ function WhyTab(props) {
             {likeWhies.map((why) => (
               // <div>{why.question}</div>
               <div
-                className={EveryoneWhyStyle.list}
+                className={UserMypageStyle.list}
                 onClick={() => {
                   getPbWhy(why.id)
                   console.log(why.id)
                 }}
               >
-                <div className={EveryoneWhyStyle.title}>{why.question}</div>
+                <div className={UserMypageStyle.title}>{why.question}</div>
                 {/* <div className={EveryoneWhyStyle.answer}>
                   <div className={EveryoneWhyStyle.index}>Answer:</div>
                   {/* <div className={EveryoneWhyStyle.count}>{count}</div> */}
