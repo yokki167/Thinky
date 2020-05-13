@@ -18,16 +18,15 @@ function Home(props) {
 
   return (
     <div className={home.home}>
-      <h2 className={home.head}>What do you want to think?</h2>
       <div className={home.container}>
         <div className={home.btnWrapper}>
           <Button
             fullWidth
             variant="contained"
-            color="primary"
+            color="secondary"
             className={home.btn}
             onClick={() => {
-              setIsOpen(true)
+              props.user.id ? setIsOpen(true) : props.history.push("/signin")
             }}
           >
             "Why"を考える
@@ -45,22 +44,12 @@ function Home(props) {
             </DialogContent>
           </Modal>
           <Link to={props.user.id ? "/share" : "/signin"} className={home.link}>
-            <Button
-              variant="contained"
-              fullWidth
-              color="primary"
-              className={home.btn}
-            >
-              みんなの"Y"を考える
+            <Button variant="contained" fullWidth className={home.btn}>
+              みんなの"Why"を考える
             </Button>
           </Link>
           <Link to="/mypage" className={home.link}>
-            <Button
-              variant="contained"
-              fullWidth
-              color="primary"
-              className={home.btn}
-            >
+            <Button variant="contained" className={home.btn}>
               マイページ
             </Button>
           </Link>
@@ -71,17 +60,10 @@ function Home(props) {
 }
 
 const useStyles = makeStyles((theme) => ({
-  head: {
-    color: "white",
-    paddingTop: theme.spacing(7),
-    paddingLeft: theme.spacing(7),
-    margin: "0 auto",
-  },
-
   home: {
-    backgroundColor: "gray",
+    backgroundColor: "#787878",
     height: "100vh",
-    // padding: "100px",
+    fontSize: "50px",
   },
 
   container: {
@@ -97,14 +79,22 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     margin: "0 auto",
     display: "block",
+    width: "100%",
   },
 
   btn: {
+    width: "75%",
     display: "block",
     marginTop: "60px",
     marginLeft: "auto",
     marginRight: "auto",
     padding: "20px",
+    backgroundColor: "#3E51B5",
+    "&:hover": { backgroundColor: "#3195F1" },
+    textTransform: "none",
+    color: "white",
+    fontSize: "0.55em",
+    fontWeight: "bold",
   },
 
   link: {

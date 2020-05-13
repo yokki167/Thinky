@@ -104,6 +104,7 @@ class App extends React.Component {
                 {...props}
                 user={this.state.user}
                 handleLogoutClick={this.handleLogoutClick}
+                handleLogout={this.handleLogout}
               />
             )}
           />
@@ -119,7 +120,7 @@ class App extends React.Component {
                 />
               )}
             />
-            {this.state.user.id ? (
+            {this.state.user ? (
               <>
                 <Route
                   exact={true}
