@@ -1,69 +1,154 @@
-.wrapper {
-  background-color: #787878;
-  height: 100vh;
-  padding-top: 80px;
-}
-.top {
-  display: flex;
-  justify-content: space-between;
-  width: 70vw;
-  margin: 0 auto;
-
-  padding: 40px 0px;
-  border-bottom: solid;
-  .search {
+@media screen and (min-width: 767px) {
+  .wrapper {
+    background-color: #787878;
+    height: 100vh;
+    padding-top: 80px;
+  }
+  .top {
     display: flex;
-    width: 70%;
+    justify-content: space-between;
+    width: 70vw;
+    margin: 0 auto;
 
-    .box {
-      height: 50px;
-      width: 70vh;
-      margin: 8px;
+    padding: 40px 0px;
+    border-bottom: solid;
+    .search {
+      display: flex;
+      width: 70%;
+
+      .box {
+        height: 50px;
+        width: 70vh;
+        margin: 8px;
+      }
+      .btn {
+        margin: 8px;
+      }
     }
-    .btn {
-      margin: 8px;
+  }
+  .main {
+    width: 70vw;
+    margin: 0 auto;
+    overflow: scroll;
+    height: 63vh;
+    .lists {
+      // background-color: rgb(184, 184, 184);
+      margin-top: 40px;
+      margin-bottom: 30px;
+      // display: flex;
+      // justify-content: space-between;
+      width: 100%;
+      .like {
+        position: relative;
+        top: -100px;
+        width: 70px;
+        float: right;
+      }
+      .list {
+        margin-top: 40px;
+        margin-bottom: 30px;
+
+        background-color: #424242;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+
+        .title {
+          margin: 20px;
+          font-size: 2em;
+        }
+        .answer {
+          margin: 20px;
+          display: flex;
+          padding-top: 25px;
+          // position: absolute;
+          // float: right;
+          .index {
+          }
+          .count {
+          }
+        }
+      }
     }
   }
 }
-.main {
-  width: 70vw;
-  margin: 0 auto;
 
-  .lists {
-    // background-color: rgb(184, 184, 184);
-    margin-top: 40px;
-    margin-bottom: 30px;
-    // display: flex;
-    // justify-content: space-between;
-    width: 100%;
-    .like {
-      position: relative;
-      top: -100px;
-      width: 70px;
-      float: right;
+@media screen and (max-width: 767px) {
+  .wrapper {
+    background-color: #787878;
+    height: 100vh;
+    padding-top: 80px;
+  }
+  .top {
+    display: flex;
+    justify-content: space-between;
+    width: 70vw;
+    margin: 0 auto;
+    flex-wrap: wrap;
+
+    // padding: 40px 0px;
+    padding-bottom: 21px;
+    border-bottom: solid;
+    .search {
+      display: flex;
+      width: 100%;
+
+      .box {
+        height: 50px;
+        width: 70vh;
+        margin: 8px;
+      }
+      .btn {
+        margin: 8px;
+        width: 12%;
+      }
     }
-    .list {
+  }
+  .main {
+    width: 70vw;
+    margin: 0 auto;
+    overflow: scroll;
+    height: 49vh;
+    .lists {
+      // background-color: rgb(184, 184, 184);
       margin-top: 40px;
       margin-bottom: 30px;
-
-      background-color: #424242;
+      // display: flex;
+      // justify-content: space-between;
       width: 100%;
-      display: flex;
-      justify-content: space-between;
-
-      .title {
-        margin: 20px;
-        font-size: 2em;
+      .like {
+        position: relative;
+        top: -100px;
+        width: 70px;
+        float: right;
       }
-      .answer {
-        margin: 20px;
+      .list {
+        // margin-top: 40px;
+        margin-bottom: 30px;
+
+        background-color: #424242;
+        width: 100%;
         display: flex;
-        padding-top: 25px;
-        // position: absolute;
-        // float: right;
-        .index {
+        justify-content: space-between;
+
+        .title {
+          // margin: 20px;
+          font-size: 1.2em;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-left: 10px;
         }
-        .count {
+        .answer {
+          margin: 20px;
+          display: flex;
+          padding-top: 25px;
+          // position: absolute;
+          // float: right;
+          .index {
+          }
+          .count {
+          }
         }
       }
     }

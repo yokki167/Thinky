@@ -141,6 +141,6 @@ const selectStyle = {
 
 const btnStyle = {
   height: "50px",
-  width: "100px",
+  // width: "100px",
   backgroundColor: "#4051B5",
 }

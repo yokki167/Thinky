@@ -1,118 +1,253 @@
-.wrapper {
-  background-color: #787878;
-  height: 100vh;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  padding-top: 100px;
-  // width: 70%;
-}
-.mypage {
-  width: 80vw;
-  text-align: center;
-  .top {
+@media screen and (min-width: 767px) {
+  .wrapper {
+    background-color: #787878;
+    height: 100vh;
+    text-align: center;
     display: flex;
-    width: 100%;
-    // margin-top: 40px;
-    // margin-bottom: 40px;
-    justify-content: space-between;
-    margin-bottom: 20px;
-    .userName {
-      font-size: 40px;
-      // font-family: "Montserrat", "游ゴシック", YuGothic, "ヒラギノ角ゴ ProN W3",
-      //   "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, sans-serif;
-      font-family: cursive;
+    justify-content: center;
+    padding-top: 100px;
+    // width: 70%;
+  }
+  .mypage {
+    width: 80vw;
+    text-align: center;
+    .top {
+      display: flex;
+      width: 100%;
+      // margin-top: 40px;
+      // margin-bottom: 40px;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      .userName {
+        font-size: 40px;
+        // font-family: "Montserrat", "游ゴシック", YuGothic, "ヒラギノ角ゴ ProN W3",
+        //   "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, sans-serif;
+        font-family: cursive;
+      }
+      .edit {
+        // display: flex;
+        .iconName {
+          color: white;
+          text-decoration: none;
+        }
+      }
     }
-    .edit {
+    .middle {
+      .myWhy {
+        display: flex;
+        justify-content: space-between;
+        .leftWhy {
+          font-size: 1em;
+          // font-weight: 100000;
+        }
+        .count {
+          .tabIcon {
+          }
+          .number {
+            text-align: center;
+          }
+        }
+      }
+      .likeWhy {
+        display: flex;
+        justify-content: space-between;
+
+        .leftWhy {
+        }
+        .count {
+          .tabIcon {
+          }
+          .number {
+            text-align: center;
+          }
+        }
+      }
+    }
+    .whyListsLeft {
+      margin-top: 40px;
+      margin-bottom: 30px;
+      overflow: scroll;
+      height: 620px;
       // display: flex;
-      .iconName {
-        color: white;
-        text-decoration: none;
-      }
-    }
-  }
-  .middle {
-    .myWhy {
-      display: flex;
-      justify-content: space-between;
-      .leftWhy {
-        font-size: 1em;
-        // font-weight: 100000;
-      }
-      .count {
-        .tabIcon {
-        }
-        .number {
-          text-align: center;
-        }
-      }
-    }
-    .likeWhy {
-      display: flex;
-      justify-content: space-between;
+      // justify-content: space-between;
+      width: 100%;
 
-      .leftWhy {
-      }
-      .count {
-        .tabIcon {
-        }
-        .number {
-          text-align: center;
+      width: 70vw;
+      margin: 0 auto;
+      overflow: scroll;
+      height: 63vh;
+
+      .list {
+        margin-top: 40px;
+        margin-bottom: 30px;
+
+        background-color: #424242;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+
+        .title {
+          margin: 20px;
+          font-size: 2em;
         }
       }
     }
-  }
-  .whyListsLeft {
-    margin-top: 40px;
-    margin-bottom: 30px;
-    // display: flex;
-    // justify-content: space-between;
-    width: 100%;
-
-    width: 70vw;
-    margin: 0 auto;
-
-    .list {
+    .whyListsRight {
       margin-top: 40px;
       margin-bottom: 30px;
-
-      background-color: #424242;
+      // display: flex;
+      // justify-content: space-between;
       width: 100%;
-      display: flex;
-      justify-content: space-between;
 
-      .title {
-        margin: 20px;
-        font-size: 2em;
+      width: 70vw;
+      margin: 0 auto;
+      overflow: scroll;
+      height: 63vh;
+
+      .list {
+        margin-top: 40px;
+        margin-bottom: 30px;
+
+        background-color: #424242;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+
+        .title {
+          margin: 20px;
+          font-size: 2em;
+        }
       }
     }
   }
-  .whyListsRight {
-    margin-top: 40px;
-    margin-bottom: 30px;
-    // display: flex;
-    // justify-content: space-between;
-    width: 100%;
-
-    width: 70vw;
-    margin: 0 auto;
-
-    .list {
-      margin-top: 40px;
-      margin-bottom: 30px;
-
-      background-color: #424242;
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-
-      .title {
-        margin: 20px;
-        font-size: 2em;
-      }
-    }
+  a {
+    text-decoration: none;
   }
 }
-a {
-  text-decoration: none;
+
+@media screen and (max-width: 767px) {
+  .wrapper {
+    background-color: #787878;
+    height: 100vh;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    padding-top: 68px;
+    // width: 70%;
+  }
+  .mypage {
+    width: 80vw;
+    text-align: center;
+    .top {
+      display: flex;
+      width: 100%;
+      // margin-top: 40px;
+      // margin-bottom: 40px;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      .userName {
+        font-size: 40px;
+        // font-family: "Montserrat", "游ゴシック", YuGothic, "ヒラギノ角ゴ ProN W3",
+        //   "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, sans-serif;
+        font-family: cursive;
+      }
+      .edit {
+        // display: flex;
+        .iconName {
+          color: white;
+          text-decoration: none;
+        }
+      }
+    }
+    .middle {
+      .myWhy {
+        display: flex;
+        justify-content: space-between;
+        .leftWhy {
+          font-size: 1em;
+          // font-weight: 100000;
+        }
+        .count {
+          .tabIcon {
+          }
+          .number {
+            text-align: center;
+          }
+        }
+      }
+      .likeWhy {
+        display: flex;
+        justify-content: space-between;
+
+        .leftWhy {
+        }
+        .count {
+          .tabIcon {
+          }
+          .number {
+            text-align: center;
+          }
+        }
+      }
+    }
+    .whyListsLeft {
+      margin-top: 40px;
+      margin-bottom: 30px;
+      overflow: scroll;
+      height: 620px;
+      // display: flex;
+      // justify-content: space-between;
+      width: 100%;
+
+      width: 70vw;
+      margin: 0 auto;
+      overflow: scroll;
+      height: 55vh;
+
+      .list {
+        margin-top: 40px;
+        margin-bottom: 30px;
+
+        background-color: #424242;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+
+        .title {
+          margin: 20px;
+          font-size: 1.2em;
+        }
+      }
+    }
+    .whyListsRight {
+      margin-top: 40px;
+      margin-bottom: 30px;
+      // display: flex;
+      // justify-content: space-between;
+      width: 100%;
+
+      width: 70vw;
+      margin: 0 auto;
+      overflow: scroll;
+      height: 49vh;
+
+      .list {
+        margin-top: 40px;
+        margin-bottom: 30px;
+
+        background-color: #424242;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+
+        .title {
+          margin: 20px;
+          font-size: 1.2em;
+        }
+      }
+    }
+  }
+  a {
+    text-decoration: none;
+  }
 }
