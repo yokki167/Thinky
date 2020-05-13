@@ -35,7 +35,7 @@ export default function Top() {
               color="primary"
               href="/signup"
             >
-              Explore（Thinkyを使ってみる）
+              Explore
             </Button>
           </div>
         </div>
