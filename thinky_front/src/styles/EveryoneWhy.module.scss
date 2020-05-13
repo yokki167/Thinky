@@ -1,6 +1,7 @@
 .wrapper {
   background-color: #787878;
   height: 100vh;
+  padding-top: 80px;
 }
 .top {
   display: flex;
@@ -10,9 +11,9 @@
 
   padding: 40px 0px;
   border-bottom: solid;
-
   .search {
     display: flex;
+    width: 70%;
 
     .box {
       height: 50px;

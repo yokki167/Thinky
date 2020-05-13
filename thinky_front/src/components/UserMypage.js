@@ -11,6 +11,9 @@ import { makeStyles } from "@material-ui/styles"
 import "react-tabs/style/react-tabs.css"
 import axios from "axios"
 import AccountCircleIcon from "@material-ui/icons/AccountCircle"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faCoffee } from "@fortawesome/free-solid-svg-icons"
+import { faUserCog } from "@fortawesome/free-solid-svg-icons"
 
 // Import Components
 import WhyTab from "./WhyTab"
@@ -49,10 +52,10 @@ export default function UserMypage(props) {
           <div className={UserMypageStyle.userName}>{props.user.username}</div>
           <div className={UserMypageStyle.edit}>
             <Link to="/userEdit" className="linkMypage">
-              <div className={UserMypageStyle.iconName}>ユーザー編集</div>
+              {/* <div className={UserMypageStyle.iconName}>ユーザー編集</div> */}
 
-              <AccountCircleIcon className={classes.EditIcon} />
-              {/* <SettingsIcon className={classes.Edit2Icon} /> */}
+              {/* <AccountCircleIcon className={classes.EditIcon} /> */}
+              <FontAwesomeIcon icon={faUserCog} className={classes.EditIcon} />
             </Link>
           </div>
         </div>
@@ -67,7 +70,7 @@ export default function UserMypage(props) {
 const useStyles = makeStyles({
   EditIcon: {
     color: "black",
-    fontSize: "70px",
+    fontSize: "50px",
   },
   // Edit2Icon: {
   //   color: "black",

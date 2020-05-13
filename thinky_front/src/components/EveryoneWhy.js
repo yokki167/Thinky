@@ -56,7 +56,7 @@ export default function EveryoneWhy(props) {
   return (
     <div className={EveryoneWhyStyle.wrapper}>
       <div className={EveryoneWhyStyle.top}>
-        <div>
+        <div className={EveryoneWhyStyle.select}>
           <FormControl variant="outlined" className={classes.formControl}>
             <InputLabel id="demo-simple-select-outlined-label">
               ジャンルを選択
