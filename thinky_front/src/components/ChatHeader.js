@@ -1,6 +1,6 @@
 // Import Packages
 import React, { useState, useEffect, useRef } from "react"
-import { Link } from "react-router-dom"
+import { Link, withRouter } from "react-router-dom"
 import { useMediaQuery } from "react-responsive"
 import axios from "axios"
 
@@ -56,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-export default function ChatHeader(props) {
+function ChatHeader(props) {
   const classes = useStyles()
 
   const isMobile = useMediaQuery({ query: "(max-width: 767px)" })
@@ -147,6 +147,20 @@ export default function ChatHeader(props) {
     setEditing(false)
   }
 
+  function handleLogoutClick() {
+    console.log("logout btn pushed")
+    axios
+      .delete("http://localhost:3001/logout", { withCredentials: true })
+      .then((response) => {
+        console.log(response)
+        props.handleLogout()
+        props.history.push("/signin")
+      })
+      .catch((error) => {
+        console.log("logout error", error)
+      })
+  }
+
   return (
     <div className={classes.root}>
       <AppBar position="static" className={classes.header}>
@@ -222,7 +236,7 @@ export default function ChatHeader(props) {
                       </Button>
                       <Button
                         color="inherit"
-                        onClick={() => props.handleLogoutClick()}
+                        onClick={() => handleLogoutClick()}
                         className={classes.button}
                       >
                         Log out
@@ -347,9 +361,7 @@ export default function ChatHeader(props) {
                                       home
                                     </Link>
                                   </MenuItem>
-                                  <MenuItem
-                                    onClick={() => props.handleLogoutClick()}
-                                  >
+                                  <MenuItem onClick={() => handleLogoutClick()}>
                                     Log out
                                   </MenuItem>
                                 </MenuList>
@@ -389,3 +401,5 @@ export default function ChatHeader(props) {
     </div>
   )
 }
+
+export default withRouter(ChatHeader)

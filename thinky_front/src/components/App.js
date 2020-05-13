@@ -104,6 +104,7 @@ class App extends React.Component {
                 {...props}
                 user={this.state.user}
                 handleLogoutClick={this.handleLogoutClick}
+                handleLogout={this.handleLogout}
               />
             )}
           />

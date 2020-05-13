@@ -100,7 +100,7 @@ const useStyles = makeStyles((theme) => ({
   like: {
     filter: `drop-shadow(0 10px 25px 0 rgba(0, 0, 0, .5))`,
     zIndex: 1,
-    color: "#4051B5",
+    color: "#3E51B5",
     "&:hover": {
       cursor: "pointer",
     },

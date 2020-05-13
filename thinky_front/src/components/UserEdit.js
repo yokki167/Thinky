@@ -217,7 +217,6 @@ function SignUp(props) {
                   type="submit"
                   fullWidth
                   variant="contained"
-                  color="primary"
                   className={classes.submit}
                 >
                   Update
@@ -237,8 +236,7 @@ function SignUp(props) {
                   href="./home"
                   fullWidth
                   variant="contained"
-                  color="primary"
-                  className={classes.submit}
+                  className={classes.cancel}
                 >
                   Cancel
                 </Button>
@@ -260,7 +258,8 @@ const useStyles = makeStyles((theme) => ({
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: "#3E51B5",
+    color: "white",
   },
   form: {
     width: "100%", // Fix IE 11 issue.
@@ -268,6 +267,15 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
+    backgroundColor: "#3E51B5",
+    "&:hover": { backgroundColor: "rgb(62, 81, 181, 0.7)" },
+    color: "white",
+  },
+  cancel: {
+    margin: theme.spacing(3, 0, 2),
+    backgroundColor: "rgb(181,45,57)",
+    "&:hover": { backgroundColor: "rgb(181,45,57, 0.7)" },
+    color: "white",
   },
 }))
 

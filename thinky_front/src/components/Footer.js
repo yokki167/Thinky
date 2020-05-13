@@ -11,6 +11,9 @@ import Copyright from "./Copyright"
 
 const useStyles = makeStyles((theme) => ({
   footer: {
+    position: "fixed",
+    bottom: 0,
+    width: "100%",
     padding: theme.spacing(3, 2),
     marginTop: "auto",
     backgroundColor:
