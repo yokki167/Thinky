@@ -3,8 +3,9 @@ import axios from "axios"
 import React, { useState, useEffect } from "react"
 
 // Import Styles
-import ThumbUpIcon from "@material-ui/icons/ThumbUp"
 import { makeStyles } from "@material-ui/core/styles"
+import { faThumbsUp } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 // Import Components
 
@@ -83,12 +84,20 @@ function Like(props) {
       {/* likeのstateによって条件分岐(もっと短くできるかも？) */}
       {like ? (
         <div>
-          <ThumbUpIcon className={classes.like} onClick={handleLike} />
+          <FontAwesomeIcon
+            icon={faThumbsUp}
+            className={classes.like}
+            onClick={handleLike}
+          />
           <span className={classes.count}>{count}</span>
         </div>
       ) : (
         <div>
-          <ThumbUpIcon className={classes.unlike} onClick={handleLike} />
+          <FontAwesomeIcon
+            icon={faThumbsUp}
+            className={classes.unlike}
+            onClick={handleLike}
+          />
           <span className={classes.count}>{count}</span>
         </div>
       )}
@@ -104,6 +113,7 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": {
       cursor: "pointer",
     },
+    fontSize: "1.7em",
   },
   unlike: {
     zIndex: 1,
@@ -111,6 +121,7 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": {
       cursor: "pointer",
     },
+    fontSize: "1.7em",
   },
   count: {
     margin: theme.spacing(1),
