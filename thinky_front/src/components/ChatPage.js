@@ -276,33 +276,34 @@ export default class ChatPage extends React.Component {
               )
             })}
           </div>
-
-          <div style={this.errStyle}>{this.state.errorText}</div>
-          <div className={chatStyles.formContainer}>
-            <div className={chatStyles.formBox}>
-              <form noValidate autoComplete="off" onSubmit={this.sendAnswer}>
-                <TextareaAutosize
-                  rowsMax={1}
-                  aria-label="maximum height"
-                  placeholder="Answerを入力してください。"
-                  className={chatStyles.form}
-                  name="textarea"
-                  value={this.state.answer}
-                  onChange={(e) => {
-                    this.setState({ answer: e.target.value })
-                    this.handleValidation(e)
-                  }}
-                />
-                <Button
-                  variant="contained"
-                  color="primary"
-                  style={this.useStyles.button}
-                  endIcon={<SendIcon />}
-                  type="submit"
-                >
-                  Send
-                </Button>
-              </form>
+          <div className={chatStyles.messageBox}>
+            <div className={chatStyles.errMessage}>{this.state.errorText}</div>
+            <div className={chatStyles.formContainer}>
+              <div className={chatStyles.formBox}>
+                <form noValidate autoComplete="off" onSubmit={this.sendAnswer}>
+                  <TextareaAutosize
+                    rowsMax={1}
+                    aria-label="maximum height"
+                    placeholder="Answerを入力してください。"
+                    className={chatStyles.form}
+                    name="textarea"
+                    value={this.state.answer}
+                    onChange={(e) => {
+                      this.setState({ answer: e.target.value })
+                      this.handleValidation(e)
+                    }}
+                  />
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    style={this.useStyles.button}
+                    endIcon={<SendIcon />}
+                    type="submit"
+                  >
+                    Send
+                  </Button>
+                </form>
+              </div>
             </div>
           </div>
         </div>
@@ -350,13 +351,5 @@ export default class ChatPage extends React.Component {
       position: "relative",
       top: "-100px",
     },
-  }
-  errStyle = {
-    height: "20px",
-    textAlign: "left",
-    color: "red",
-    paddingTop: "1rem",
-    textIndent: "4rem",
-    backgroundColor: "#424242",
   }
 }
